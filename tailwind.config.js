@@ -22,10 +22,12 @@ module.exports = {
     },
     extend: {
       colors: {
+        main:"#311D4A",
+        submain:"#FCFAFA",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "#EBDFD7",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
