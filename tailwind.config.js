@@ -25,7 +25,7 @@ module.exports = {
         main:"#311D4A",
         submain:"#FCFAFA",
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: "#F0F0F0",
         ring: "hsl(var(--ring))",
         background: "#EBDFD7",
         foreground: "hsl(var(--foreground))",

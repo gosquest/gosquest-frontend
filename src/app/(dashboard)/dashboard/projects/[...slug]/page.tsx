@@ -203,8 +203,8 @@ const Page: React.FC = () => {
          <div className="fixed bg-background rounded-full top-4 left-4 z-30 p-4 sm:hidden">
             <ArrowLeft />
          </div>
-         <div className="pt-[200px] md:pt-[300px] xl:pt-[400px]">
-            <div className="fixed left-0 w-full top-0">
+         <div className=" w-full">
+            <div className="mb-6">
                <Image
                   src={navigo}
                   alt="project"

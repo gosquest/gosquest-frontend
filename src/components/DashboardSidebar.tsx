@@ -53,14 +53,7 @@ export default function DashboardSidebar() {
         {!isCollapsed && <h4 className="text-center">RCA Rating System</h4>}
       </div>
 
-      <Button
-        className={`bg-white rounded-full text-main gap-2 p-1 hover:text-white transition-all duration-300 ${
-          isCollapsed && "mt-12"
-        }`}
-      >
-        <Image src={add} alt="create" />
-        {!isCollapsed && "Create new project"}
-      </Button>
+     
 
       <Nav
             isCollapsed={isCollapsed}
