@@ -1,15 +1,17 @@
-"use client"
+"use client";
 
-import Image from 'next/image'
-import React from 'react'
-import welcome from "../../../../public/svg/welcome.svg"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
- 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import welcome from "../../../../public/svg/welcome.svg";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsDown } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useMutation, useQuery } from 'react-query'; 
+import { useRouter } from 'next/navigation';
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -17,7 +19,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Form,
   FormControl,
@@ -25,65 +27,93 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Input } from '@/components/ui/input'
+} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
+import flow from "../../../../public/svg/flow.svg";
+import { loginUser ,getAllUsers} from "@/lib/api";
 
-const languages = [
-  { label: "English", value: "en" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
-] as const
 
 const FormSchema = z.object({
-  language: z.string({
-    required_error: "Please select a language.",
+  name: z.string({
+    required_error: "Please select a name.",
   }),
   passcode: z.string().min(6, "Passcode must be at least 6 characters"),
-})
+});
 
-const page = () => {
+
+const Page = () => {
+  const [names, setNames] = useState([]); 
+  const router = useRouter(); 
+
+ 
+  const { data, isLoading } = useQuery('userNames', fetchUserNames, {
+    onSuccess: (data) => {
+   
+      setNames(data.map((user: { fullName: any; id: any; }) => ({ label: user.fullName, value: user.id }))); 
+    },
+  });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-  })
- 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
+  });
+
+  const mutation = useMutation(loginUser, {
+    onSuccess: (data) => {
+      router.push("/dashboard");
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    mutation.mutate({ fullName: data.name, code: data.passcode });
+  };
+
+
+  async function fetchUserNames() {
+    const response = await getAllUsers()
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
   }
 
   return (
-    <div className='flex items-center min-h-[60vh] justify-center gap-6 flex-col'>
-      <Image src={welcome} alt='welcome' width={200}/>
-      <h2 className='text-center'>Welcome to Rwanda Coding Academy Hackathon</h2>
-      <div>
-        {/* select */} 
-         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col gap-4 items-center">
+    <div className="relative flex items-center min-h-screen justify-center gap-6 flex-col bg-main text-white">
+      <Image
+        src={flow}
+        alt="flowers"
+        fill
+        style={{ objectFit: "cover" }}
+        className="absolute top-0 left-0 z-0"
+      />
+      <Image src={welcome} alt="welcome" width={300} className="relative z-10" />
+      <h2 className="text-center relative z-10 md:w-3/4 lg:w-[50%]">
+        Welcome to Rwanda Coding Academy Hackathon
+      </h2>
+      <div className="relative z-10">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 flex flex-col gap-4 items-center"
+          >
             <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
-                name="language"
+                name="name"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Please select your name from here!</FormLabel>
+                    <FormLabel>Please select your Name</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -91,42 +121,43 @@ const page = () => {
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "w-[300px] justify-between px-6 py-4 text-lg",
+                              "w-[400px] justify-between px-6 py-4 text-lg bg-white",
                               !field.value && "text-muted-foreground"
                             )}
                           >
                             {field.value
-                              ? languages.find(
-                                  (language) => language.value === field.value
-                                )?.label
-                              : "Select language"}
-                            <ChevronsUpDown className="ml-2 h-5 w-5 shrink-0 opacity-50" />
+                              ? names.find((name) => name.value === field.value)?.label
+                              : "Select name"}
+                            <ChevronsDown className="ml-2 h-5 w-5 shrink-0 opacity-50" />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-[300px] p-0">
+                      <PopoverContent className="w-[400px] max-h-[200px] overflow-auto p-0">
                         <Command>
-                          <CommandInput placeholder="Search language..." />
+                          <CommandInput
+                            placeholder="Search name..."
+                            className="bg-white"
+                          />
                           <CommandList>
-                            <CommandEmpty>No language found.</CommandEmpty>
+                            <CommandEmpty>No name found.</CommandEmpty>
                             <CommandGroup>
-                              {languages.map((language) => (
+                              {names.map((name) => (
                                 <CommandItem
-                                  value={language.label}
-                                  key={language.value}
+                                  value={name.label}
+                                  key={name.value}
                                   onSelect={() => {
-                                    form.setValue("language", language.value)
+                                    form.setValue("name", name.value);
                                   }}
                                 >
                                   <Check
                                     className={cn(
                                       "mr-2 h-5 w-5",
-                                      language.value === field.value
+                                      name.value === field.value
                                         ? "opacity-100"
                                         : "opacity-0"
                                     )}
                                   />
-                                  {language.label}
+                                  {name.label}
                                 </CommandItem>
                               ))}
                             </CommandGroup>
@@ -144,22 +175,27 @@ const page = () => {
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Please Enter your passcode</FormLabel>
-                    <Input 
-                      {...field} 
-                      placeholder='xxxxxx' 
-                      className="w-[300px] px-6 py-4 text-lg h-[50px]" 
+                    <Input
+                      {...field}
+                      placeholder="Enter passcode"
+                      className="w-[400px] px-6 py-4 text-lg h-[50px] bg-white"
                     />
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <Button type="submit" className="w-full max-w-[300px] px-6 py-4 text-lg">Login</Button>
+            <Button
+              type="submit"
+              className="w-full max-w-[400px] p-6 text-lg bg-white text-main"
+            >
+              Login
+            </Button>
           </form>
         </Form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

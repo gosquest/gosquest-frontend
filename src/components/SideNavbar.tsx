@@ -1,67 +1,69 @@
 "use client";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { Button } from "./ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
 import qn from "../../public/icons/qn.png";
-import add from "../../public/icons/add.png"
-
+import add from "../../public/icons/add.png";
 import {
-   ShoppingCart,
-   LayoutDashboard,
-   UsersRound,
-   Settings,
-   ChevronRight,
-   Box,
-   List,
-   BarChart,
-   GitBranchIcon,
-   UsersIcon,
+  ChevronRight,
+  LayoutDashboard,
+  Box,
+  List,
+  BarChart,
+  GitBranchIcon,
+  UsersIcon,
+  Settings,
 } from "lucide-react";
-import { Button } from "./ui/button";
-import { useWindowWidth } from "@react-hook/window-size";
-import Image from "next/image";
+import { useSidebarState } from "@/hooks/useSidebarState";
+import DashboardNavbar from "./DashbboardNavbar";
+
 
 export default function SideNavbar() {
-   const [isCollapsed, setIsCollapsed] = useState(false);
-   const [isClient, setIsClient] = useState(false);
-   const onlyWidth = useWindowWidth();
-   const mobileWidth = onlyWidth < 768;
+  const { isCollapsed, mobileWidth, isClient, toggleSidebar } =
+    useSidebarState();
 
-   useEffect(() => {
-      setIsClient(true);
-   }, []);
+  if (!isClient) {
+    return null;
+  }
 
-   function toggleSidebar() {
-      setIsCollapsed(!isCollapsed);
-   }
+  return (
+    <div
+      className={`relative min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
+         ${mobileWidth ? "hidden" : isCollapsed ? "w-[80px]" : "w-[240px]"}`}
+    >
+      {!mobileWidth && (
+        <div className="absolute right-[-20px] top-7">
+          <Button
+            onClick={toggleSidebar}
+            variant="secondary"
+            className="rounded-full p-2"
+          >
+            <ChevronRight className={`${isCollapsed ? "rotate-180" : ""}`} />
+          </Button>
+        </div>
+      )}
 
-   if (!isClient) {
-      return null;
-   }
+      <div
+        className={`flex items-center justify-center flex-col gap-2 transition-all duration-300 ${
+          isCollapsed ? "hidden" : "block"
+        }`}
+      >
+        <Image src={Logo} alt="logo" />
+        {!isCollapsed && <h4 className="text-center">RCA Rating System</h4>}
+      </div>
 
-   return (
-      <div className="relative min-w-[80px] border-r px-3 pb-10 pt-6 bg-main flex justify-between flex-col z-40 text-white">
-         {!mobileWidth && (
-            <div className="absolute right-[-20px] top-7">
-               <Button
-                  onClick={toggleSidebar}
-                  variant="secondary"
-                  className="rounded-full p-2"
-               >
-                  <ChevronRight />
-               </Button>
-            </div>
-         )}
-         <div className="flex items-center justify-center flex-col gap-2">
-            <Image
-               src={Logo}
-               alt="logo"
-            />
-            <h4 className="text-center">RCA Rating System</h4>
-         </div>
-         <Button className="bg-white rounded-full text-main gap-2 p-6 hover:text-white"><Image src={add} alt="create"/>Create new project</Button>
-         <Nav
-            isCollapsed={mobileWidth ? true : isCollapsed}
+      <Button
+        className={`bg-white rounded-full text-main gap-2 p-1 hover:text-white transition-all duration-300 ${
+          isCollapsed && "mt-12"
+        }`}
+      >
+        <Image src={add} alt="create" />
+        {!isCollapsed && "Create new project"}
+      </Button>
+
+      <Nav
+            isCollapsed={isCollapsed}
             links={[
                {
                   title: "Dashboard",
@@ -113,20 +115,34 @@ export default function SideNavbar() {
                },
             ]}
          />
-         <div className="">
-            <div className="flex rounded-full p-2 bg-white mb-4 gap-2 items-center">
-               <div className="bg-gray-400 text-main rounded-full w-6 h-6 flex items-center justify-center">I</div>
-               <p className="text-main">Mukarusine Liliane</p>
-            </div>
-            <div>
-               <div className="flex items-center justify-center rounded-full p-2 bg-white w-10 h-10">
-                  <Image
-                     src={qn}
-                     alt="qn"
-                  />
-               </div>
-            </div>
-         </div>
+
+      <div className="flex flex-col gap-4">
+        <div
+          className={`flex items-center gap-2 bg-white p-2 rounded-full transition-all duration-300 ${
+            isCollapsed ? "justify-center" : ""
+          }`}
+        >
+          <div className="bg-gray-400 text-main rounded-full w-6 h-6 flex items-center justify-center">
+            I
+          </div>
+
+          <p
+            className={`text-main transition-all duration-300 ${
+              isCollapsed ? "hidden" : "block"
+            }`}
+          >
+            Mukarusine Liliane
+          </p>
+        </div>
+
+        <div
+          className={`flex items-center justify-center rounded-full p-2 bg-white w-8 h-8 ${
+            isCollapsed ? "ml-2" : ""
+          }`}
+        >
+          <Image src={qn} alt="qn" />
+        </div>
       </div>
-   );
+    </div>
+  );
 }
