@@ -13,7 +13,7 @@ const DashboardNavbar = () => {
    }
    return (
       <div
-         className={`w-full flex flex-wrap items-center gap-6 justify-between py-4 fixed top-0 bg-white z-30 transition-all duration-300
+         className={`w-full flex flex-wrap items-center gap-6 justify-between shadow py-4 fixed top-0 bg-white z-30 transition-all duration-300
          ${
             mobileWidth ? "hidden" : isCollapsed ? "pl-[100px]" : "pl-[260px]"
          } pr-8`}

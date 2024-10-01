@@ -46,9 +46,8 @@ export function Nav({ links, isCollapsed }: NavProps) {
                         variant: link.href === pathName ? "default" : "ghost",
                         size: "icon"
                       }),
-                      "h-9 w-9",
-                      link.variant === "default" &&
-                        "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
+                      "h-9 w-9 rounded-full",
+                      link.href === pathName ? "bg-white text-black" : ""
                     )}
                   >
                     <link.icon className="h-4 w-4" />
@@ -76,21 +75,14 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     variant: link.href === pathName ? "default" : "ghost",
                     size: "sm"
                   }),
-                  link.variant === "default" &&
-                    "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-                  "justify-start"
+                  "justify-start rounded-full",
+                  link.href === pathName ? "bg-white text-black" : ""
                 )}
               >
                 <link.icon className="mr-2 h-4 w-4" />
                 {link.title}
                 {link.label && (
-                  <span
-                    className={cn(
-                      "ml-auto",
-                      link.variant === "default" &&
-                        "text-background dark:text-white"
-                    )}
-                  >
+                  <span className="ml-auto">
                     {link.label}
                   </span>
                 )}

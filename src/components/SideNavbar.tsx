@@ -97,7 +97,7 @@ export default function SideNavbar() {
                },
                {
                   title: "Resource mgnt",
-                  href: "/admin/resource-mgnt",
+                  href: "/admin/resource-management",
                   icon: GitBranchIcon,
                   variant: "ghost",
                },
@@ -131,7 +131,7 @@ export default function SideNavbar() {
               isCollapsed ? "hidden" : "block"
             }`}
           >
-            Mukarusine Liliane
+            Mukarusine 
           </p>
         </div>
 

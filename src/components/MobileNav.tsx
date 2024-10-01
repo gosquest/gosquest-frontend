@@ -10,7 +10,7 @@ const MobileNav = () => {
                <h3>Hello👋</h3>
                <small>Mrs.Mukarusine</small>
             </div>
-            <div className="bg-main flex items-center justify-center p-2 rounded-full w-8 h-8 sm:w-10 sm:h-10 border-white">
+            <div className="bg-main flex items-center justify-center p-2 rounded-full w-8 h-8 sm:w-10 sm:h-10 border border-white">
                <BellDot className="text-white w-5 h-5" />
             </div>
          </div>
