@@ -1,110 +1,92 @@
 "use client";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
-import qn from "../../public/icons/qn.png";
-import {
-  ChevronRight,
-  Box,
-  List,
-  BarChart,
-  LayoutDashboardIcon,
-} from "lucide-react";
+import add from "../../public/icons/add.png";
+import { ChevronRight, LayoutDashboard, Box, List, UsersIcon, Settings, LogOutIcon, FolderKanban, FolderOpenDot } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
+import { Cookies } from "react-cookie";
 import Link from "next/link";
 
+const cookies = new Cookies()
 
-export default function DashboardSidebar() {
-  const { isCollapsed, mobileWidth, isClient, toggleSidebar } =
-    useSidebarState();
+export default function DashbboardNavbar() {
+   const { isCollapsed, mobileWidth, isClient, toggleSidebar } = useSidebarState();
+   const router = useRouter();
+   const [isDialogOpen, setDialogOpen] = useState(false);
+   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
-  if (!isClient) {
-    return null;
-  }
+   if (!isClient) {
+      return null;
+   }
 
-  return (
-    <div
-     className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
-         ${mobileWidth ? "hidden" : isCollapsed ? "w-[80px]" : "w-[240px]"}`}
-    >
-      {!mobileWidth && (
-        <div className="absolute right-[-20px] top-7">
-          <Button
-            onClick={toggleSidebar}
-            variant="secondary"
-            className="rounded-full p-2"
-          >
-            <ChevronRight className={`${isCollapsed ? "rotate-180" : ""}`} />
-          </Button>
-        </div>
-      )}
+   const handleLogout = () => {
+      setIsLoggingOut(true)
+      cookies.remove('token')
+      router.push("/");
+      setIsLoggingOut(false)
+   };
 
+   return (
       <div
-        className={`flex items-center justify-center flex-col gap-2 transition-all duration-300 ${
-          isCollapsed ? "hidden" : "block"
-        }`}
+         className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
+         ${mobileWidth ? "hidden" : isCollapsed ? "w-[120px]" : "w-[270px]"}`}
       >
-        <Image src={Logo} alt="logo" />
-        {!isCollapsed && <h4 className="text-center">RCA Rating System</h4>}
-      </div>
+         {!mobileWidth && (
+            <div className="absolute right-[-20px] top-7">
+               <Button
+                  onClick={toggleSidebar}
+                  variant="secondary"
+                  className={`rounded-full bg-white hover:bg-white/90 p-2 ${isCollapsed ? "bg-main text-white hover:bg-main/90" : ""}`}
+               >
+                  <ChevronRight className={`${isCollapsed ? "rotate-180" : ""}`} />
+               </Button>
+            </div>
+         )}
 
-      <Button
-        className={`bg-white rounded-full text-main gap-4 p-1 hover:text-white transition-all duration-300  ${
-          isCollapsed && "mt-12"
-        }`}
-      >
-        <Link href="/dashboard" className="flex  items-center gap-4">
-        <LayoutDashboardIcon/>
-        {!isCollapsed && "Dashboard"}
-        </Link>
-      </Button>
-
-      <Nav
+         <div className={`flex items-center justify-center flex-col gap-2 transition-all duration-300`}>
+            <Image src={Logo} alt="logo" className="rounded" />
+            {!isCollapsed && <h4 className="text-center text-sm">RCA Rating System</h4>}
+         </div>
+         <Nav
             isCollapsed={isCollapsed}
             links={[
-               {
-                  title: "Unrated Projects",
-                  href: "/dashboard/projects",
-                  icon: Box,
-                  variant: "ghost",
-               },
-               {
-                  title: "Rated Projects",
-                  href: "/dashboard/rating",
-                  icon: List,
-                  variant: "ghost",
-               }
+               { title: "Unrated Projects", href: "/dashboard", icon: FolderKanban, variant: "ghost" },
+               { title: "Rated projects", href: "/dashboard/rated-projects", icon: FolderOpenDot, variant: "ghost" },
             ]}
          />
 
-      <div className="flex flex-col gap-4">
-        <div
-          className={`flex items-center gap-2 bg-white p-2 rounded-full transition-all duration-300 ${
-            isCollapsed ? "justify-center" : ""
-          }`}
-        >
-          <div className="bg-gray-400 text-main rounded-full w-6 h-6 flex items-center justify-center">
-            I
-          </div>
+         <div className="flex flex-col gap-4">
+            <Dialog>
+               <DialogTrigger asChild>
+                  <Button variant="secondary" className="flex items-center gap-2">
+                     <LogOutIcon className="w-5 h-5" />
+                     <span>Logout</span>
+                  </Button>
+               </DialogTrigger>
 
-          <p
-            className={`text-main transition-all duration-300 ${
-              isCollapsed ? "hidden" : "block"
-            }`}
-          >
-            Mukarusine 
-          </p>
-        </div>
-
-        <div
-          className={`flex items-center justify-center rounded-full p-2 bg-white w-8 h-8 ${
-            isCollapsed ? "ml-2" : ""
-          }`}
-        >
-          <Image src={qn} alt="qn" />
-        </div>
+               <DialogContent className="sm:max-w-[425px] bg-white">
+                  <DialogHeader>
+                     <DialogTitle>Confirm Logout</DialogTitle>
+                     <DialogDescription>
+                        Are you sure you want to log out? This action will end your session.
+                     </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                     <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                     <Button onClick={handleLogout} className="ml-2" disabled={isLoggingOut}>
+                        {
+                           isLoggingOut ? 'loggin out....' : 'Logout'
+                        }
+                     </Button>
+                  </DialogFooter>
+               </DialogContent>
+            </Dialog>
+         </div>
       </div>
-    </div>
-  );
+   );
 }

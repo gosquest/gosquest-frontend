@@ -10,8 +10,6 @@ const DashboardNavbar = () => {
    const { isCollapsed, mobileWidth, isClient, toggleSidebar } =
       useSidebarState();
    const { user } = useAuthStore()
-   console.log(user);
-
 
    if (!isClient) {
       return null;

@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React, { useState } from "react";
-import navigo from "../../../../../public/uploads/headers/navigo.png";
-import thanks from "../../../../../public/images/thank.png";
+
 import {
    Dialog,
    DialogContent,
@@ -182,8 +180,8 @@ const RateUsDialog: React.FC = () => {
                </>
             ) : (
                <div className="p-4 flex flex-col gap-4 text-center items-center bg-main">
-                  <Image
-                     src={thanks}
+                  <img
+                     src={"/images/thank.png"}
                      alt="thanks"
                   />
                   <Button
@@ -212,8 +210,8 @@ const Page: React.FC = () => {
          </div>
          <div className="w-full">
             <div className="mb-6 sm:mt-40 md:mt-10">
-               <Image
-                  src={navigo}
+               <img
+                  src={'/uploads/headers/navigo.png'}
                   alt="project"
                   className="w-full h-[30vh] sm:h-full"
                />

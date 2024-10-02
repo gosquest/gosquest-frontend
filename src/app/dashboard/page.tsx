@@ -28,8 +28,8 @@ const ProjectsPage = () => {
   return (
     <div>
       <MobileNav />
-      <h2 className="mt-20 sm:mt-[180px] md:mt-40">Projects</h2>
-      <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 p-14">
+      <h3 className="">Projects</h3>
+      <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         {projects.map((project) => (
           <CardContent
             key={project.name}

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
-import qn from "../../public/icons/qn.png";
 import add from "../../public/icons/add.png";
 import { ChevronRight, LayoutDashboard, Box, List, UsersIcon, Settings, LogOutIcon } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -11,6 +10,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { Cookies } from "react-cookie";
+import Link from "next/link";
 
 const cookies = new Cookies()
 
@@ -53,12 +53,11 @@ export default function SideNavbar() {
             {!isCollapsed && <h4 className="text-center text-sm">RCA Rating System</h4>}
          </div>
 
-         <Button
-            className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-2"}`}
+         <Link href={'/admin/create-project'} className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 py-2.5 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-2"}`}
          >
             <Image src={add} alt="create" className={`w-[20px] ${isCollapsed && ''}`} />
             <p className="text-sm">{!isCollapsed && "Create new project"}</p>
-         </Button>
+         </Link>
 
          <Nav
             isCollapsed={isCollapsed}

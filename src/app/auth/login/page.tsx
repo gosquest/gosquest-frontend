@@ -46,6 +46,7 @@ const Page = () => {
         storeData("userId", response.data.userId);
         cookies.set("token", response.token, { path: "/" });
         window.location.replace("/dashboard");
+        toast.error(response.message)
       } else {
         toast.error(response.message);
       }
