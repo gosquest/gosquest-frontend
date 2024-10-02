@@ -4,20 +4,14 @@ import { Button } from "./ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
 import qn from "../../public/icons/qn.png";
-import add from "../../public/icons/add.png";
 import {
   ChevronRight,
-  LayoutDashboard,
   Box,
   List,
   BarChart,
-  GitBranchIcon,
-  UsersIcon,
-  Settings,
   LayoutDashboardIcon,
 } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
-import DashboardNavbar from "./DashbboardNavbar";
 import Link from "next/link";
 
 
@@ -80,19 +74,7 @@ export default function DashboardSidebar() {
                   href: "/dashboard/rating",
                   icon: List,
                   variant: "ghost",
-               },
-               {
-                  title: "Favorite Projects",
-                  href: "/dashboard/favorite-projects",
-                  icon: BarChart,
-                  variant: "ghost",
-               },
-               {
-                  title: "Time log",
-                  href: "/dashboard/time-log",
-                  icon: BarChart,
-                  variant: "ghost",
-               },
+               }
             ]}
          />
 

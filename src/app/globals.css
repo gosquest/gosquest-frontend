@@ -70,3 +70,9 @@
       @apply text-[16px] md:text-[16px];
    }
 }
+
+*::-webkit-scrollbar {
+   display: none; 
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+ }
