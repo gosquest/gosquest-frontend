@@ -29,7 +29,7 @@ export default function DashboardSidebar() {
 
   return (
     <div
-      className={`relative min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
+     className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
          ${mobileWidth ? "hidden" : isCollapsed ? "w-[80px]" : "w-[240px]"}`}
     >
       {!mobileWidth && (
@@ -53,7 +53,14 @@ export default function DashboardSidebar() {
         {!isCollapsed && <h4 className="text-center">RCA Rating System</h4>}
       </div>
 
-     
+      <Button
+        className={`bg-white rounded-full text-main gap-2 p-1 hover:text-white transition-all duration-300 ${
+          isCollapsed && "mt-12"
+        }`}
+      >
+        <Image src={add} alt="create" />
+        {!isCollapsed && "Create new project"}
+      </Button>
 
       <Nav
             isCollapsed={isCollapsed}

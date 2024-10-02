@@ -13,13 +13,13 @@ import congs from "../../../../../public/icons/congs.png";
 import { steps } from "@/components/Schemas";
 import StepForm from "@/components/StepForm";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function CreateProjectPage() {
    const [currentStep, setCurrentStep] = useState(0);
    const [formValues, setFormValues] = useState<any>({});
    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-   // Initialize form using useForm
    const formMethods = useForm({
       defaultValues: formValues,
       mode: "onChange",
@@ -43,7 +43,6 @@ export default function CreateProjectPage() {
       <div className="w-full p-8">
          <h3>Create Project</h3>
          <div className="flex flex-col items-center gap-6 mt-6 bg-white p-6">
-            {/* Step Indicator */}
             <div className="flex items-center w-full justify-between relative">
                {steps.map((step, index) => (
                   <div
@@ -75,7 +74,6 @@ export default function CreateProjectPage() {
                ))}
             </div>
 
-            {/* Render StepForm */}
             <div className="w-full max-w-lg p-6 rounded-lg shadow min-h-[40vh] flex flex-col justify-between">
                <FormProvider {...formMethods}>
                   <StepForm
@@ -87,7 +85,6 @@ export default function CreateProjectPage() {
                </FormProvider>
             </div>
 
-            {/* Dialog */}
             <Dialog
                open={isDialogOpen}
                onOpenChange={setIsDialogOpen}
@@ -105,7 +102,9 @@ export default function CreateProjectPage() {
                         created.
                      </p>
                   </div>
-                  <Button className="bg-main p-6">Back to Dashboard</Button>
+                  <Button className="bg-main p-6">
+                     <Link href="/admin">Back to Dashboard</Link>
+                  </Button>
                </DialogContent>
             </Dialog>
          </div>

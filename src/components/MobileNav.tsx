@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 const MobileNav = () => {
    return (
-      <div className="bg-main -ml-10 -mt-[100px] -mr-10 mb-10 p-10 text-white md:hidden">
+      <div className="bg-main  mb-10 p-10 text-white md:hidden">
          <div className="flex justify-between mb-3">
             <div>
                <h3>Hello👋</h3>

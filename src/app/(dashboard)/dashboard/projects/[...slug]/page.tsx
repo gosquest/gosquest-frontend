@@ -103,7 +103,7 @@ const RateUsDialog: React.FC = () => {
             </Button>
          </DialogTrigger>
          <DialogContent
-            className={`border border-main w-[95%] md:w-[80%] xl:w-[60%] p-6 overflow-y-auto max-h-[90vh] ${
+            className={`border border-main w-[95%] md:w-[80%] xl:w-[70%] p-6 overflow-y-auto max-h-[90vh] ${
                !submitted ? "bg-white" : "bg-main"
             }`}
          >
@@ -200,7 +200,7 @@ const RateUsDialog: React.FC = () => {
 const Page: React.FC = () => {
    return (
       <>
-         <div className="fixed bg-background rounded-full top-4 left-4 z-30 p-4 sm:hidden">
+         <div className="fixed bg-background rounded-full top-4 left-4 z-30 p-3 sm:hidden">
             <ArrowLeft />
          </div>
          <div className=" w-full">
@@ -211,21 +211,23 @@ const Page: React.FC = () => {
                   className="w-full h-[30vh] sm:h-full"
                />
             </div>
-            <h3 className="text-main">Description</h3>
-            <p className="mt-3">
-               NaviGo is an innovative AI-driven company dedicated to solving
-               transportation challenges. We specialize in traffic management
-               and efficient transport services, collaborating with industry
-               leaders to enhance mobility. Harnessing AI's power, we're
-               transforming the future of transportation.
-            </p>
-            <div className="mt-4">
-               <p>
-                  For more visit:{" "}
-                  <span className="text-main ml-4">navigo.rw</span>
+            <div className="p-8">
+               <h3 className="text-main">Description</h3>
+               <p className="mt-3">
+                  NaviGo is an innovative AI-driven company dedicated to solving
+                  transportation challenges. We specialize in traffic management
+                  and efficient transport services, collaborating with industry
+                  leaders to enhance mobility. Harnessing AI's power, we're
+                  transforming the future of transportation.
                </p>
-               <div className="flex items-center justify-center mt-4">
-                  <RateUsDialog />
+               <div className="mt-4">
+                  <p>
+                     For more visit:{" "}
+                     <span className="text-main ml-4">navigo.rw</span>
+                  </p>
+                  <div className="flex items-center justify-center mt-4">
+                     <RateUsDialog />
+                  </div>
                </div>
             </div>
          </div>

@@ -1,26 +1,16 @@
-"use client";
-
 import DashboardNavbar from "@/components/DashbboardNavbar";
+import DashboardSidebar from "@/components/DashboardSidebar";
 import SideNavbar from "@/components/SideNavbar";
-import { useSidebarState } from "@/hooks/useSidebarState";
 import React from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { isCollapsed } = useSidebarState();
-
-  return (
-    <div className="min-h-screen w-full bg-background text-black flex">
-      <SideNavbar />
-      <div
-        className={`transition-all duration-300 ${
-          isCollapsed ? "ml-[80px]" : "ml-[240px]"
-        } w-full`}
-      >
-        <DashboardNavbar />
-        <div className="p-8 pt-[100px]">{children}</div>
+const layout = ({ children }: { children: React.ReactNode }) => {
+   return (
+      <div className="min-h-screen w-full bg-white text-black flex ">
+         <SideNavbar/>
+         <DashboardNavbar />
+         <div className="p-8 w-full">{children}</div>
       </div>
-    </div>
-  );
+   );
 };
 
-export default Layout;
+export default layout;
