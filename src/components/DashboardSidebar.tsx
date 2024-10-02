@@ -14,9 +14,11 @@ import {
   GitBranchIcon,
   UsersIcon,
   Settings,
+  LayoutDashboardIcon,
 } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import DashboardNavbar from "./DashbboardNavbar";
+import Link from "next/link";
 
 
 export default function DashboardSidebar() {
@@ -54,23 +56,19 @@ export default function DashboardSidebar() {
       </div>
 
       <Button
-        className={`bg-white rounded-full text-main gap-2 p-1 hover:text-white transition-all duration-300 ${
+        className={`bg-white rounded-full text-main gap-4 p-1 hover:text-white transition-all duration-300  ${
           isCollapsed && "mt-12"
         }`}
       >
-        <Image src={add} alt="create" />
-        {!isCollapsed && "Create new project"}
+        <Link href="/dashboard" className="flex  items-center gap-4">
+        <LayoutDashboardIcon/>
+        {!isCollapsed && "Dashboard"}
+        </Link>
       </Button>
 
       <Nav
             isCollapsed={isCollapsed}
             links={[
-               {
-                  title: "Dashboard",
-                  href: "/dashboard",
-                  icon: LayoutDashboard,
-                  variant: "default",
-               },
                {
                   title: "Unrated Projects",
                   href: "/dashboard/projects",
@@ -91,7 +89,7 @@ export default function DashboardSidebar() {
                },
                {
                   title: "Time log",
-                  href: "/admin/time-log",
+                  href: "/dashboard/time-log",
                   icon: BarChart,
                   variant: "ghost",
                },
