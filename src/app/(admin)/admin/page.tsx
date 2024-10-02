@@ -1,5 +1,4 @@
 /** @format */
-
 import PageTitle from "@/components/PageTitle";
 import Image from "next/image";
 import Card, { CardContent, CardProps } from "@/components/Card";
@@ -8,6 +7,7 @@ import SalesCard, { SalesProps } from "@/components/SalesCard";
 import proj from "../../../../public/icons/proj.png";
 import rates from "../../../../public/icons/rates.png";
 import feedbacks from "../../../../public/icons/feedbacks.png";
+import RatingsTable from "@/components/RatingsTable";
 
 const cardData: CardProps[] = [
    {
@@ -32,33 +32,6 @@ const cardData: CardProps[] = [
    },
 ];
 
-const userSalesData: SalesProps[] = [
-   {
-      name: "Olivia Martin",
-      email: "olivia.martin@email.com",
-      saleAmount: "+$1,999.00",
-   },
-   {
-      name: "Jackson Lee",
-      email: "isabella.nguyen@email.com",
-      saleAmount: "+$1,999.00",
-   },
-   {
-      name: "Isabella Nguyen",
-      email: "isabella.nguyen@email.com",
-      saleAmount: "+$39.00",
-   },
-   {
-      name: "William Kim",
-      email: "will@email.com",
-      saleAmount: "+$299.00",
-   },
-   {
-      name: "Sofia Davis",
-      email: "sofia.davis@email.com",
-      saleAmount: "+$39.00",
-   },
-];
 
 export default function Home() {
    return (
@@ -77,19 +50,9 @@ export default function Home() {
          <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-2">
             <CardContent className="flex justify-between gap-4">
                <section>
-                  <p>Recent Sales</p>
-                  <p className="text-sm text-gray-400">
-                     You made 265 sales this month.
-                  </p>
+                  <p>Project Summary</p>
+                  <RatingsTable/>
                </section>
-               {userSalesData.map((d, i) => (
-                  <SalesCard
-                     key={i}
-                     email={d.email}
-                     name={d.name}
-                     saleAmount={d.saleAmount}
-                  />
-               ))}
             </CardContent>
             <CardContent>
                <p className="p-4 font-semibold">Overview</p>
