@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ratings = [1, 2, 3, 4, 5];
 
@@ -188,7 +190,7 @@ const RateUsDialog: React.FC = () => {
                      onClick={() => setOpen(false)}
                      className="w-fit"
                   >
-                     Close
+                     <Link href="/dashboard"> Back To Dashboard</Link>
                   </Button>
                </div>
             )}
@@ -198,13 +200,18 @@ const RateUsDialog: React.FC = () => {
 };
 
 const Page: React.FC = () => {
+   const router = useRouter();
+
    return (
       <>
-         <div className="fixed bg-background rounded-full top-4 left-4 z-30 p-3 sm:hidden">
+         <div
+            className="fixed bg-background rounded-full top-4 left-4 z-30 p-3 sm:hidden cursor-pointer"
+            onClick={() => router.push("/dashboard/projects")}
+         >
             <ArrowLeft />
          </div>
-         <div className=" w-full">
-            <div className="mb-6">
+         <div className="w-full">
+            <div className="mb-6 sm:mt-40 md:mt-10">
                <Image
                   src={navigo}
                   alt="project"
