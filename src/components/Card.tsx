@@ -14,7 +14,7 @@ export default function Card({ icon, desc, title }: CardProps) {
   return (
     <CardContent>
       <section className="flex flex-col gap-4">
-        <Image src={icon} alt="project" width={50} height={50}/>
+        <Image height={24} width={24} src={icon} alt="project" />
         <p>{desc}</p>
         <h4 className="text-main">{title}</h4>
       </section>

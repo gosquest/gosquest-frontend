@@ -175,6 +175,7 @@ const Page = () => {
               type="submit"
               className="w-full max-w-[400px] p-6 text-lg bg-white text-main hover:text-white"
               disabled={isSubmitting}
+              variant={'secondary'}
             >
               {isSubmitting ? (
                 <Loader className="animate-spin h-5 w-5 mr-2" />

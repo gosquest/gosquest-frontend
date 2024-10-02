@@ -28,7 +28,7 @@ const page = () => {
                Welcome to Rwanda Coding Academy Hackathon 😊
             </h1>
             <Button className="mt-6 rounded-full p-6">
-               <Link href="/login">Login to continue</Link>
+               <Link href="/auth/login">Login to continue</Link>
             </Button>
          </div>
       </div>
