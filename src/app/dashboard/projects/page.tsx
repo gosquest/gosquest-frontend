@@ -1,7 +1,7 @@
 import { CardContent } from "@/components/Card";
 import Image from "next/image";
 import React from "react";
-import fishot from "../../../../../public/uploads/fishot.png";
+import fishot from "../../../../public/uploads/fishot.png";
 import MobileNav from "@/components/MobileNav";
 
 const Projects = () => {

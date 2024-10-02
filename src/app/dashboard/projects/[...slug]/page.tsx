@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useState } from "react";
-import navigo from "../../../../../../public/uploads/headers/navigo.png";
-import thanks from "../../../../../../public/images/thank.png";
+import navigo from "../../../../../public/uploads/headers/navigo.png";
+import thanks from "../../../../../public/images/thank.png";
 import {
    Dialog,
    DialogContent,
