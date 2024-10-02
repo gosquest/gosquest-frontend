@@ -1,11 +1,11 @@
 /** @format */
 
 import React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export type CardProps = {
-  icon: StaticImageData;
+  icon: string;
   desc: string;
   title: string;
 };

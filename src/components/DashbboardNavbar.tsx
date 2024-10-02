@@ -3,10 +3,14 @@ import React from "react";
 import { Input } from "./ui/input";
 import { BellDot, Blocks, Search } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const DashboardNavbar = () => {
    const { isCollapsed, mobileWidth, isClient, toggleSidebar } =
       useSidebarState();
+   const { user } = useAuthStore()
+   console.log(user);
+
 
    if (!isClient) {
       return null;
@@ -14,13 +18,12 @@ const DashboardNavbar = () => {
    return (
       <div
          className={`w-full flex flex-wrap items-center gap-6 justify-between shadow py-4  fixed top-0 bg-white z-30 transition-all duration-300 
-         ${
-            mobileWidth ? "hidden" : isCollapsed ? "pl-[100px]" : "pl-[260px]"
-         } pr-8`}
+         ${mobileWidth ? "hidden" : isCollapsed ? "pl-[100px]" : "pl-[260px]"
+            } pr-8`}
       >
          <div className="flex flex-col items-start">
             <h3 className="text-lg font-semibold">Welcome back 👋,</h3>
-            <small className="text-sm">Mrs. Mukarusine</small>
+            <small className="text-sm">{user && user.fullName}</small>
          </div>
 
          <div className="flex gap-4 items-center justify-center">

@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@react-hook/window-size": "^3.1.1",
+    "@tanstack/react-query": "^5.59.0",
     "@tanstack/react-table": "^8.11.3",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
@@ -24,15 +25,17 @@
     "lucide-react": "^0.306.0",
     "next": "14.0.4",
     "react": "^18",
+    "react-cookie": "^7.2.0",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.53.0",
-    "react-query": "^3.39.3",
+    "react-toastify": "^10.0.5",
     "recharts": "^2.10.3",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "window-size": "^1.1.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "^20",

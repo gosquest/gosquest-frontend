@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import navigo from "../../../../../../public/images/navigo.png"
 
 const Feedback = () => {
    return (
@@ -10,7 +9,7 @@ const Feedback = () => {
             <div className="flex justify-between">
             <div className="flex gap-4">
                <Image
-                  src={navigo}
+                  src={'/images/navigo.png'}
                   alt="project"
                />
                <div>

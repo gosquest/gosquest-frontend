@@ -34,7 +34,7 @@ const ProjectsPage = () => {
           <CardContent
             key={project.name}
             className="flex items-center justify-center bg-white md:h-40 cursor-pointer"
-            onClick={() => handleNavigation(project.name)} // Add navigation handler
+            onClick={() => handleNavigation(project.name)}
           >
             <Image src={project.image} alt={project.name} />
           </CardContent>

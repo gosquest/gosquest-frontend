@@ -1,32 +1,28 @@
 /** @format */
 
 import PageTitle from "@/components/PageTitle";
-import Image from "next/image";
 import Card, { CardContent, CardProps } from "@/components/Card";
 import BarChart from "@/components/BarChart";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
-import proj from "../../../../public/icons/proj.png";
-import rates from "../../../../public/icons/rates.png";
-import feedbacks from "../../../../public/icons/feedbacks.png";
 
 const cardData: CardProps[] = [
    {
-      icon: proj,
+      icon: "/icons/proj.png",
       desc: "Total Project in Hackathon",
       title: "15 Projects",
    },
    {
-      icon: rates,
+      icon: "/icons/rates.png",
       desc: "Overall Projects Rating",
       title: "15 Ratings",
    },
    {
-      icon: feedbacks,
+      icon: "/icons/feedbacks.png",
       desc: "Overall Project Feedback",
       title: "4 Feedbacks",
    },
    {
-      icon: feedbacks,
+      icon: "/icons/feedbacks.png",
       desc: "Overall Project Feedbacks",
       title: "15 Projects",
    },

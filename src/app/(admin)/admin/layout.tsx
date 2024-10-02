@@ -1,5 +1,4 @@
 import DashboardNavbar from "@/components/DashbboardNavbar";
-import DashboardSidebar from "@/components/DashboardSidebar";
 import SideNavbar from "@/components/SideNavbar";
 import React from "react";
 

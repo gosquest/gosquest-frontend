@@ -3,13 +3,9 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import {
    Dialog,
-   DialogContent,
-   DialogHeader,
-   DialogTitle,
-   DialogFooter,
+   DialogContent
 } from "@/components/ui/dialog";
 import Image from "next/image";
-import congs from "../../../../../public/icons/congs.png";
 import { steps } from "@/components/Schemas";
 import StepForm from "@/components/StepForm";
 import { Button } from "@/components/ui/button";
@@ -92,7 +88,7 @@ export default function CreateProjectPage() {
                <DialogContent className="bg-white">
                   <div className="flex flex-col items-center gap-4 min-h-[40vh]">
                      <Image
-                        src={congs}
+                        src={"/icons/congs.png"}
                         alt="thank you"
                         width={250}
                         height={250}

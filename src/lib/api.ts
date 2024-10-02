@@ -1,36 +1,36 @@
+import axios, { AxiosInstance } from "axios";
+import { Cookies } from 'react-cookie';
 
-import axios from 'axios';
+const cookies = new Cookies();
 
-const API_URL = 'http://localhost:4000/api/v1'; 
+const API_URL = "http://localhost:4000/api/v1"
 
-// Function to register a user
-export const registerUser = async (userData: { fullName: string; roleId: string }) => {
-  const response = await axios.post(`${API_URL}/users/register`, userData);
-  return response.data;
+const commonHeaders = {
+    'Content-Type': 'application/json',
 };
 
+const unauthorizedAxiosInstance: AxiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: commonHeaders,
+});
 
-export const loginUser = async (credentials: { fullName: string; code: string }) => {
-  const response = await axios.post(`${API_URL}/users/login`, credentials);
-  return response.data;
-};
+const authorizedAxiosInstance: AxiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: commonHeaders,
+});
 
+authorizedAxiosInstance.interceptors.request.use(
+    async (config) => {
+        const token = await cookies.get('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
-export const getAllUsers = async () => {
-  const response = await axios.get(`${API_URL}/users/all`);
-  return response.data;
-};
-
-
-export const updateUser = async (userId: string, userData: { fullName: string; status: string }) => {
-  const response = await axios.put(`${API_URL}/update/${userId}`, userData);
-  return response.data;
-};
-
-
-export default {
-  registerUser,
-  loginUser,
-  getAllUsers,
-  updateUser,
-};
+export const unauthorizedAPI = unauthorizedAxiosInstance;
+export const authorizedAPI = authorizedAxiosInstance;
