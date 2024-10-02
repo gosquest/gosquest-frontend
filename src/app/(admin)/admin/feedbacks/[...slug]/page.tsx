@@ -11,6 +11,7 @@ const Feedback = () => {
                <Image
                   src={'/images/navigo.png'}
                   alt="project"
+                  fill
                />
                <div>
                   <p className="text-main">Navigo</p>
