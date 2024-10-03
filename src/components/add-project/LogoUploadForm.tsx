@@ -9,7 +9,7 @@ import { uploadFile } from "@/utils/upload";
 
 export default function LogoUploadForm() {
   const { control, setValue, watch } = useFormContext();
-  const logo = watch("logo", null); // Watching the logo field value
+  const logo = watch("logo");
   const [isUploading, setIsUploading] = useState(false);
 
   const handleDrop = async (acceptedFiles: File[]) => {

@@ -9,7 +9,7 @@ import { uploadFile } from "@/utils/upload";
 
 export default function CoverImageUploadForm() {
   const { control, setValue, watch } = useFormContext();
-  const cover_image = watch("cover_image", null);
+  const cover_image = watch("cover_image");
   const [isUploading, setIsUploading] = useState(false);
 
   const handleDrop = async (acceptedFiles: File[]) => {
@@ -58,7 +58,7 @@ export default function CoverImageUploadForm() {
             >
               {cover_image ? (
                 // Display uploaded cover image if available
-                <img src={cover_image} alt="Uploaded cover image" className="w-40 h-40 object-cover" />
+                <img src={cover_image} alt="Uploaded cover image" className="w-full h-40 object-cover" />
               ) : (
                 <>
                   <Image src={upload} alt="upload" />

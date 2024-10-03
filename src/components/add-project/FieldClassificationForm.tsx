@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Trash2 } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
 export default function FieldClassificationForm() {
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext();
   const [fields, setFields] = useState<string[]>([]);
   const [fieldValue, setFieldValue] = useState("");
+  const data  = getValues()
+
+  useEffect(()=>{
+    if(data.fields){
+      setFields(data.fields)
+    }
+  },[])
 
   const addField = () => {
     if (fieldValue.trim() !== "") {
@@ -26,7 +33,7 @@ export default function FieldClassificationForm() {
 
   return (
     <div className="w-full">
-      <h4 className="self-start">Fields</h4>
+      <h6 className="self-start">Fields</h6>
       <div className="w-full flex items-end gap-4 border p-4 rounded">
         <Input
           value={fieldValue}
@@ -49,6 +56,7 @@ export default function FieldClassificationForm() {
                 variant="ghost"
                 className="text-red-500 hover:text-red-900"
                 onClick={() => removeField(index)}
+                type="button"
               >
                 <Trash2 className="w-5 h-5" />
               </Button>

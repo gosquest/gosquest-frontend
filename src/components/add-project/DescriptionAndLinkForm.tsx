@@ -19,6 +19,7 @@ export default function DescriptionAndLinkForm() {
                 {...field}
                 placeholder="Detailed info about your project"
                 className="focus:!ring-0 !ring-offset-0"
+                rows={6}
               />
             </FormControl>
             <FormMessage />

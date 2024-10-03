@@ -22,7 +22,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (response.status === 200) {
           const userData = response.data;
           setUser(userData.user);
-          setRoles(userData.roles);
+          setRoles(userData.userRole);
         } else {
           redirectToLogin();
         }
