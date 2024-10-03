@@ -17,7 +17,7 @@ import { useDropzone } from "react-dropzone";
 import { z } from "zod";
 import upload from "../../public/icons/upload.png";
 
-// Define the form schema using zod
+
 const createProjectSchema = z.object({
   projectName: z.string().min(1, "Project name is required"),
   fields: z.array(z.string().min(1, "Field cannot be empty")).min(1, "At least one field is required"),
@@ -49,7 +49,7 @@ export default function CreateProjectForm() {
     if (fieldValue.trim() !== "") {
       const updatedFields = [...fields, fieldValue.trim()];
       setFields(updatedFields);
-      formMethods.setValue("fields", updatedFields); // Update the form state
+      formMethods.setValue("fields", updatedFields); 
       setFieldValue("");
     }
   };
@@ -57,7 +57,7 @@ export default function CreateProjectForm() {
   const removeField = (index: number) => {
     const updatedFields = fields.filter((_, i) => i !== index);
     setFields(updatedFields);
-    formMethods.setValue("fields", updatedFields); // Update the form state
+    formMethods.setValue("fields", updatedFields); 
   };
 
   const onDrop = (acceptedFiles: any) => {
