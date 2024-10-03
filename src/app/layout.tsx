@@ -6,6 +6,7 @@ import { cn } from "../lib/utils";
 import ReactQueryProvider from "@/providers/react.query.provider";
 import AuthProvider from "@/providers/auth.provider";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
