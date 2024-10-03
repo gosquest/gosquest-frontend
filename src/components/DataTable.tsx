@@ -27,8 +27,9 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data
+  data = [] // Default to an empty array
 }: DataTableProps<TData, TValue>) {
+  // Ensure the table is initialized with data, even if data is an empty array.
   const table = useReactTable({
     data,
     columns,
@@ -59,7 +60,8 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {/* Safely access table rows */}
+            {table.getRowModel()?.rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}

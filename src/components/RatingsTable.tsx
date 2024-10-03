@@ -1,28 +1,33 @@
-"use client"
+"use client";
 
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { DataTable } from './DataTable';
-import clsx from 'clsx'; 
+import clsx from 'clsx';
 
-type Rating = {
+type Project = {
+  id: string;
   name: string;
-  projectLeader: string;
-  field: string;
-  status: string;
-  rating: number;
+  team_leader: string;
+  fields: string[];
+  rating: {
+    relevance: number;
+    impact_to_society: number;
+    performance: number;
+    progress: number;
+    feedback: string | null;
+  } | null;
 };
 
-
-const getStatus = (rating: number) => {
+const getStatus = (rating: number | null) => {
+  if (rating === null) return 'No Rating';
   if (rating > 80) return 'Excellent';
   if (rating > 60) return 'Very Good';
   if (rating > 50) return 'Good';
   return 'Bad';
 };
-
 
 const getStatusStyles = (status: string) => {
   switch (status) {
@@ -34,37 +39,46 @@ const getStatusStyles = (status: string) => {
       return { textColor: 'text-orange-800', bgColor: 'bg-orange-100' };
     case 'Bad':
       return { textColor: 'text-red-800', bgColor: 'bg-red-100' };
+    case 'No Rating':
+      return { textColor: 'text-gray-800', bgColor: 'bg-gray-100' };
     default:
       return { textColor: 'text-gray-800', bgColor: 'bg-gray-100' };
   }
 };
 
-
-const getProgressBarColor = (rating: number) => {
-  if (rating > 80) return '#4caf50'; 
-  if (rating > 60) return '#ffeb3b';
-  if (rating > 50) return '#ff9800'; 
-  return '#f44336'; 
+const getAverageRating = (rating: Project['rating']) => {
+  if (!rating) return null;
+  const { relevance, impact_to_society, performance, progress } = rating;
+  const total = relevance + impact_to_society + performance + progress;
+  return Math.round((total / 4) * 20);
 };
 
-const columns: ColumnDef<Rating>[] = [
+const getProgressBarColor = (rating: number) => {
+  if (rating > 80) return '#4caf50';
+  if (rating > 60) return '#ffeb3b';
+  if (rating > 50) return '#ff9800';
+  return '#f44336';
+};
+
+const columns: ColumnDef<Project>[] = [
   {
     accessorKey: 'name',
     header: 'Project Name',
   },
   {
-    accessorKey: 'projectLeader',
-    header: 'Project Leader',
+    accessorKey: 'team_leader',
+    header: 'Team Leader',
   },
   {
-    accessorKey: 'field',
-    header: 'Field',
+    accessorKey: 'fields',
+    header: 'Fields',
+    cell: ({ row }) => row.original.fields.join(', '),
   },
   {
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const rating = row.original.rating;
+      const rating = getAverageRating(row.original.rating);
       const status = getStatus(rating);
       const { textColor, bgColor } = getStatusStyles(status);
       return (
@@ -76,9 +90,12 @@ const columns: ColumnDef<Rating>[] = [
   },
   {
     accessorKey: 'rating',
-    header: 'Rating',
+    header: 'Average Rating',
     cell: ({ row }) => {
-      const rating = row.original.rating;
+      const rating = getAverageRating(row.original.rating);
+      if (rating === null) {
+        return <span>No Rating</span>;
+      }
       const color = getProgressBarColor(rating);
       return (
         <div style={{ width: 50, height: 50, margin: '0 auto' }}>
@@ -97,48 +114,15 @@ const columns: ColumnDef<Rating>[] = [
   },
 ];
 
-const data: Rating[] = [
-  {
-    name: 'Project Alpha',
-    projectLeader: 'John Doe',
-    field: 'Artificial Intelligence',
-    status: 'Excellent',
-    rating: 85,
-  },
-  {
-    name: 'Project Beta',
-    projectLeader: 'Jane Smith',
-    field: 'Healthcare',
-    status: 'Very Good',
-    rating: 75,
-  },
-  {
-    name: 'Project Gamma',
-    projectLeader: 'Alice Johnson',
-    field: 'Education',
-    status: 'Good',
-    rating: 65,
-  },
-  {
-    name: 'Project Delta',
-    projectLeader: 'Bob Lee',
-    field: 'Environment',
-    status: 'Bad',
-    rating: 45,
-  },
-  {
-    name: 'Project Epsilon',
-    projectLeader: 'Charlie Brown',
-    field: 'Blockchain',
-    status: 'Excellent',
-    rating: 90,
-  },
-];
+type RatingsTableProps = {
+  projects: Project[];
+};
 
-const RatingsTable = () => {
+const RatingsTable: React.FC<RatingsTableProps> = ({ projects }) => {
+  
   return (
     <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={projects} />
     </div>
   );
 };
