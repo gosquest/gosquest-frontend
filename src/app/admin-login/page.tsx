@@ -6,18 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsDown, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-
-import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { Cookies } from "react-cookie";
 import { storeData } from "@/utils/storage";
+import { useGetAllAdmins, useLogin } from "@/hooks/useAuth";
 
 const FormSchema = z.object({
   fullName: z.string({
@@ -29,8 +27,8 @@ const FormSchema = z.object({
 const cookies = new Cookies();
 
 const AdminLogin = () => {
-  const { data: userData, isPending: isUserPending } = useGetAllUsers();
-  const loginMutation = useLogin();
+  const { data: userData, isPending: isUserPending } = useGetAllAdmins();
+  const loginMutation = useLogin()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -45,7 +43,7 @@ const AdminLogin = () => {
       if (response?.success === true) {
         storeData("userId", response.data.userId);
         cookies.set("token", response.token, { path: "/" });
-        window.location.replace("/dashboard");
+        window.location.replace("/admin");
         toast.error(response.message)
       } else {
         toast.error(response.message);
@@ -163,6 +161,7 @@ const AdminLogin = () => {
                     <FormLabel>Enter your passcode</FormLabel>
                     <Input
                       {...field}
+                      type="password"
                       placeholder="Enter passcode"
                       className="w-[400px] px-6 py-4 text-lg h-[50px] bg-white text-main"
                       disabled={isSubmitting}
