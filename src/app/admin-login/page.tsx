@@ -9,9 +9,27 @@ import { z } from "zod";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 
 import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
@@ -28,15 +46,20 @@ const FormSchema = z.object({
 
 const cookies = new Cookies();
 
-const AdminLogin = () => {
+const Page = () => {
   const { data: userData, isPending: isUserPending } = useGetAllUsers();
   const loginMutation = useLogin();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      fullName: "",
+      code: "",
+    },
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setIsSubmitting(true);
@@ -46,9 +69,9 @@ const AdminLogin = () => {
         storeData("userId", response.data.userId);
         cookies.set("token", response.token, { path: "/" });
         window.location.replace("/dashboard");
-        toast.error(response.message)
+        toast.error(response.error.msg);
       } else {
-        toast.error(response.message);
+        toast.error(response.error.msg);
       }
     } catch (error) {
       toast.error("Login failed. Please try again.");
@@ -89,7 +112,10 @@ const AdminLogin = () => {
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Select your Name</FormLabel>
-                    <Popover>
+                    <Popover
+                      open={popoverOpen}
+                      onOpenChange={setPopoverOpen}
+                    >
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
@@ -100,6 +126,7 @@ const AdminLogin = () => {
                               !field.value && "text-muted-foreground"
                             )}
                             disabled={isSubmitting}
+                            onClick={() => setPopoverOpen(!popoverOpen)}
                           >
                             {field.value
                               ? userData?.data.find(
@@ -131,6 +158,7 @@ const AdminLogin = () => {
                                       key={user.id}
                                       onSelect={() => {
                                         form.setValue("fullName", user.fullName);
+                                        setPopoverOpen(false); // Close popover after selection
                                       }}
                                     >
                                       <Check
@@ -163,6 +191,7 @@ const AdminLogin = () => {
                     <FormLabel>Enter your passcode</FormLabel>
                     <Input
                       {...field}
+                      type="password" 
                       placeholder="Enter passcode"
                       className="w-[400px] px-6 py-4 text-lg h-[50px] bg-white text-main"
                       disabled={isSubmitting}
@@ -176,7 +205,7 @@ const AdminLogin = () => {
               type="submit"
               className="w-full max-w-[400px] p-6 text-lg bg-white text-main hover:text-white"
               disabled={isSubmitting}
-              variant={'secondary'}
+              variant="secondary"
             >
               {isSubmitting ? (
                 <Loader className="animate-spin h-5 w-5 mr-2" />
@@ -191,4 +220,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default Page;
