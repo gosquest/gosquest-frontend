@@ -53,7 +53,7 @@ export default function SideNavbar() {
             {!isCollapsed && <h4 className="text-center text-sm">RCA Rating System</h4>}
          </div>
 
-         <Link href={'/admin/create-project'} className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 py-2.5 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-2"}`}
+         <Link href={'/admin/add-project'} className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 py-2.5 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-2"}`}
          >
             <Image src={add} alt="create" className={`w-[20px] ${isCollapsed && ''}`} />
             <p className="text-sm">{!isCollapsed && "Create new project"}</p>
