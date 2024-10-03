@@ -6,10 +6,12 @@ import MobileNav from "@/components/MobileNav";
 import { useGetRatedProjects } from "@/hooks/useProject";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const { user } = useAuthStore()
    const { data, isLoading, isError } = useGetRatedProjects(user.id)
+   const router = useRouter()
 
    if (isLoading) {
       return <p className="text-center">Fetching projects...</p>
@@ -37,6 +39,7 @@ const page = () => {
                      return (
                         <CardContent
                            className="flex items-center bg-input justify-center md:h-40 cursor-pointer"
+                           onClick={() => router.push(`/dashboard/rated-projects/${project.id}`)}
                         >
                            <img
                               src={project.logo}
