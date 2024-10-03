@@ -34,7 +34,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     const redirectToLogin = () => {
-      if (!['/auth/login', '/'].includes(pathName)) {
+      if (!['/auth/login', '/', '/admin-login'].includes(pathName)) {
         window.location.replace('/auth/login')
       }
     };

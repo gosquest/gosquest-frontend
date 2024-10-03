@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsDown, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,11 +30,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-
-import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { Cookies } from "react-cookie";
 import { storeData } from "@/utils/storage";
+import { useGetAllAdmins, useLogin } from "@/hooks/useAuth";
 
 const FormSchema = z.object({
   fullName: z.string({
@@ -46,9 +44,9 @@ const FormSchema = z.object({
 
 const cookies = new Cookies();
 
-const Page = () => {
-  const { data: userData, isPending: isUserPending } = useGetAllUsers();
-  const loginMutation = useLogin();
+const AdminLogin = () => {
+  const { data: userData, isPending: isUserPending } = useGetAllAdmins();
+  const loginMutation = useLogin()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -68,8 +66,8 @@ const Page = () => {
       if (response?.success === true) {
         storeData("userId", response.data.userId);
         cookies.set("token", response.token, { path: "/" });
-        window.location.replace("/dashboard");
-        toast.error(response.error.msg);
+        window.location.replace("/admin");
+        toast.error(response.message)
       } else {
         toast.error(response.error.msg);
       }
@@ -220,4 +218,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default AdminLogin;
