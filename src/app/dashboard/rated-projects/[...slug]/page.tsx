@@ -2,7 +2,6 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
-import RateUsDialog from '@/components/rating/RateUsDialog';
 import { useGetProjectById } from '@/hooks/useProject';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -50,9 +49,6 @@ const Page: React.FC = () => {
                </p>
                <div className="mt-4">
                   <p>For more visit: <Link href={data.project.link} className="text-main ml-2 hover:text-blue-500 hover:underline">{data.project.name}</Link></p>
-                  <div className="flex items-center justify-center mt-4">
-                     <RateUsDialog projectName={data.project.name} />
-                  </div>
                </div>
             </div>
          </div>

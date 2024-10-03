@@ -13,7 +13,7 @@ import {
    TableHeader,
    TableRow,
 } from "@/components/ui/table";
-import { Edit, Trash2 } from "lucide-react"; // Importing icons
+import { Edit, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 const page = () => {
