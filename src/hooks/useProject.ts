@@ -19,6 +19,16 @@ const getProjectById = ({ queryKey }: any): Promise<any> => {
     return handleApiRequest(() => authorizedAPI.get(`/projects/${_id}`));
 };
 
+const getUnratedProjects = ({ queryKey }: any): Promise<any> => {
+    const [_, _id] = queryKey;
+    return handleApiRequest(() => authorizedAPI.get(`/projects/unrated/${_id}`));
+};
+
+const getRatedProjects = ({ queryKey }: any): Promise<any> => {
+    const [_, _id] = queryKey;
+    return handleApiRequest(() => authorizedAPI.get(`/projects/rated/${_id}`));
+};
+
 export const useGetAllProjects = () =>
     useQuery<any, Error>({ queryKey: ["projects"], queryFn: getAllProjects });
 
@@ -34,4 +44,8 @@ export const useUpdateProject = () => {
     })
 }
 
-export const useGetProjectById = (_id: string) => useQuery<any, Error, any>({ queryKey: ['user-roles', _id], queryFn: getProjectById });
+export const useGetProjectById = (_id: string) => useQuery<any, Error, any>({ queryKey: ['project', _id], queryFn: getProjectById });
+
+export const useGetRatedProjects = (_id: string) => useQuery<any, Error, any>({ queryKey: ['rated-projects', _id], queryFn: getRatedProjects });
+
+export const useGetUnRatedProjects = (_id: string) => useQuery<any, Error, any>({ queryKey: ['unrated-projects', _id], queryFn: getUnratedProjects });

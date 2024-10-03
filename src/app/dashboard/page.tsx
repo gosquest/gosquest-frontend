@@ -1,47 +1,59 @@
 "use client"
+
 import { CardContent } from "@/components/Card";
-import Image from "next/image";
 import React from "react";
-import { useRouter } from "next/navigation"; 
-import fishot from "../../../public/uploads/fishot.png";
 import MobileNav from "@/components/MobileNav";
+import { useGetUnRatedProjects } from "@/hooks/useProject";
+import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useRouter } from "next/navigation";
 
-const projects = [
-  { name: "nova", image: fishot },
-  { name: "fishot", image: fishot },
-  { name: "orion", image: fishot },
-  { name: "altair", image: fishot },
-  { name: "vega", image: fishot },
-  { name: "sirius", image: fishot },
-  { name: "proxima", image: fishot },
-  { name: "rigel", image: fishot },
-  { name: "aldebaran", image: fishot },
-];
+const page = () => {
+  const { user } = useAuthStore()
+   const { data, isLoading, isError } = useGetUnRatedProjects(user.id)
+   const router = useRouter()
 
-const ProjectsPage = () => {
-  const router = useRouter();
+   if (isLoading) {
+      return <p className="text-center">Fetching projects...</p>
+   }
 
-  const handleNavigation = (projectName: string) => {
-    router.push(`/dashboard/projects/${projectName}`);
-  };
+   if (isError) {
+      return (
+         <main className="flex flex-col justify-center">
+            <p className="text-center text-red-500 mb-3">Failed to fetch projects</p>
+            <Button variant={'secondary'} onClick={() => location.reload()}>
+               Reload
+            </Button>
+         </main>
+      )
+   }
 
-  return (
-    <div>
-      <MobileNav />
-      <h3 className="">Projects</h3>
-      <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-        {projects.map((project) => (
-          <CardContent
-            key={project.name}
-            className="flex items-center justify-center bg-white md:h-40 cursor-pointer"
-            onClick={() => handleNavigation(project.name)}
-          >
-            <Image src={project.image} alt={project.name} />
-          </CardContent>
-        ))}
-      </div>
-    </div>
-  );
+   return (
+      <>
+         <MobileNav />
+         <div>
+            <h3>Projects</h3>
+            <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+               {
+                  data.data.map((project: any) => {
+                     return (
+                        <CardContent
+                           className="flex items-center bg-input justify-center md:h-40 cursor-pointer"
+                           onClick={() => router.push(`/dashboard/projects/${project.id}`)}
+                        >
+                           <img
+                              src={project.logo}
+                              alt={project.name}
+                              className="max-h-40"
+                           />
+                        </CardContent>
+                     )
+                  })
+               }
+            </div>
+         </div>
+      </>
+   );
 };
 
-export default ProjectsPage;
+export default page;
