@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';

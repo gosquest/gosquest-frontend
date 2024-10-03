@@ -8,10 +8,9 @@ const Feedback = () => {
          <div className="flex flex-col gap-6 bg-white p-6">
             <div className="flex justify-between">
             <div className="flex gap-4">
-               <Image
+               <img
                   src={'/images/navigo.png'}
                   alt="project"
-                  fill
                />
                <div>
                   <p className="text-main">Navigo</p>
