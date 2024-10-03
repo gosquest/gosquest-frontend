@@ -1,156 +1,97 @@
-/**
- * eslint-disable @next/next/no-img-element
- *
- * @format
- */
-
-/** @format */
 "use client";
 
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsDown, Loader, PenBox, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import React from "react";
-import PageTitle from "@/components/PageTitle";
+import { toast } from "react-toastify";
+import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
 
-type Props = {};
-type Payment = {
+type User = {
   name: string;
-  email: string;
-  lastOrder: string;
-  method: string;
+  passcode: string;
+  role: string;
 };
 
-const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
+  },
+  {
+    accessorKey: "passcode",
+    header: "Passcode",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+  },
+  {
+    header: "Actions",
     cell: ({ row }) => {
+      const user = row.original;
       return (
-        <div className="flex gap-2 items-center">
-          <img
-            className="h-10 w-10"
-            src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${row.getValue(
-              "name"
-            )}`}
-            alt="user-image"
-          />
-          <p>{row.getValue("name")} </p>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={() => handleEdit(user)}>
+            <PenBox/>
+          </Button>
+          <Button variant="destructive" size="sm" onClick={() => handleDisable(user)}>
+            <X/>
+          </Button>
         </div>
       );
-    }
+    },
   },
-  {
-    accessorKey: "email",
-    header: "Email"
-  },
-  {
-    accessorKey: "lastOrder",
-    header: "Last Order"
-  },
-  {
-    accessorKey: "method",
-    header: "Method"
-  }
 ];
 
-const data: Payment[] = [
-  {
-    name: "John Doe",
-    email: "john@example.com",
-    lastOrder: "2023-01-01",
-    method: "Credit Card"
-  },
-  {
-    name: "Alice Smith",
-    email: "alice@example.com",
-    lastOrder: "2023-02-15",
-    method: "PayPal"
-  },
-  {
-    name: "Bob Johnson",
-    email: "bob@example.com",
-    lastOrder: "2023-03-20",
-    method: "Stripe"
-  },
-  {
-    name: "Emma Brown",
-    email: "emma@example.com",
-    lastOrder: "2023-04-10",
-    method: "Venmo"
-  },
-  {
-    name: "Michael Davis",
-    email: "michael@example.com",
-    lastOrder: "2023-05-05",
-    method: "Cash"
-  },
-  {
-    name: "Sophia Wilson",
-    email: "sophia@example.com",
-    lastOrder: "2023-06-18",
-    method: "Bank Transfer"
-  },
-  {
-    name: "Liam Garcia",
-    email: "liam@example.com",
-    lastOrder: "2023-07-22",
-    method: "Payoneer"
-  },
-  {
-    name: "Olivia Martinez",
-    email: "olivia@example.com",
-    lastOrder: "2023-08-30",
-    method: "Apple Pay"
-  },
-  {
-    name: "Noah Rodriguez",
-    email: "noah@example.com",
-    lastOrder: "2023-09-12",
-    method: "Google Pay"
-  },
-  {
-    name: "Ava Lopez",
-    email: "ava@example.com",
-    lastOrder: "2023-10-25",
-    method: "Cryptocurrency"
-  },
-  {
-    name: "Elijah Hernandez",
-    email: "elijah@example.com",
-    lastOrder: "2023-11-05",
-    method: "Alipay"
-  },
-  {
-    name: "Mia Gonzalez",
-    email: "mia@example.com",
-    lastOrder: "2023-12-08",
-    method: "WeChat Pay"
-  },
-  {
-    name: "James Perez",
-    email: "james@example.com",
-    lastOrder: "2024-01-18",
-    method: "Square Cash"
-  },
-  {
-    name: "Charlotte Carter",
-    email: "charlotte@example.com",
-    lastOrder: "2024-02-22",
-    method: "Zelle"
-  },
-  {
-    name: "Benjamin Taylor",
-    email: "benjamin@example.com",
-    lastOrder: "2024-03-30",
-    method: "Stripe"
-  }
-];
+// Function to handle editing a user
+const handleEdit = (user: User) => {
+  // Add your edit functionality here
+  console.log("Edit user:", user);
+};
 
-export default function UsersPage({}: Props) {
+// Function to handle disabling a user
+const handleDisable = (user: User) => {
+  // Add your disable functionality here
+  console.log("Disable user:", user);
+};
+
+export default function UsersPage() {
+  const { data: userData, isPending: isUserPending } = useGetAllUsers();
+
   return (
-    <div className="flex flex-col gap-5  w-full">
-      <PageTitle title="Users" />
-      <DataTable columns={columns} data={data} />
+    <div className="flex flex-col gap-5 w-full">
+      <h1 className="text-xl font-bold">Users</h1>
+      {isUserPending ? (
+        <div className="flex justify-center items-center">
+          <Loader className="animate-spin h-5 w-5" />
+        </div>
+      ) : (
+        <DataTable columns={columns} data={userData?.data || []} />
+      )}
     </div>
   );
 }

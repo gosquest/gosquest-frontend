@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
 import add from "../../public/icons/add.png";
-import { ChevronRight, LayoutDashboard, Box, List, UsersIcon, Settings, LogOutIcon } from "lucide-react";
+import { ChevronRight, LayoutDashboard, Box, List, UsersIcon, Settings, LogOutIcon, Shield } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -65,8 +65,8 @@ export default function SideNavbar() {
                { title: "Dashboard", href: "/admin", icon: LayoutDashboard, variant: "default" },
                { title: "Projects", href: "/admin/projects", icon: Box, variant: "ghost" },
                { title: "Rating", href: "/admin/rating", icon: List, variant: "ghost" },
-               { title: "Feedbacks", href: "/admin/feedbacks", icon: UsersIcon, variant: "ghost" },
-               { title: "Menu Settings", href: "/admin/settings", icon: Settings, variant: "ghost" },
+               { title: "Feedbacks", href: "/admin/feedbacks", icon: Shield, variant: "ghost" },
+               { title: "Menu Settings", href: "/admin/users", icon: UsersIcon, variant: "ghost" },
             ]}
          />
 
