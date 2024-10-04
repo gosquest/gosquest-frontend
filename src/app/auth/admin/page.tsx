@@ -17,7 +17,7 @@ const FormSchema = z.object({
 const cookies = new Cookies();
 
 const AdminLoginPage = () => {
-   const { form, isSubmitting, onSubmit } = useUserLoginForm(FormSchema, cookies);
+   const { form, isSubmitting, onSubmit } = useUserLoginForm(FormSchema, cookies, 'Admin');
 
    return (
       <div className="relative z-10 w-full px-4 mt-4">
@@ -25,7 +25,7 @@ const AdminLoginPage = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col gap-4 items-center max-w-[400px] mx-auto">
                <FullNameField form={form} isSubmitting={isSubmitting} role={'Admin'} />
                <CodeField form={form} isSubmitting={isSubmitting} />
-               <Button type="submit" className="w-full p-6 text-lg bg-white text-main" disabled={isSubmitting}>
+               <Button type="submit" className="w-full max-w-[400px] p-6 text-lg bg-white text-main hover:text-main/90 hover:bg-input font-normal" disabled={isSubmitting}>
                   {isSubmitting ? <Loader className="animate-spin h-5 w-5 mr-2" /> : "Login"}
                </Button>
             </form>

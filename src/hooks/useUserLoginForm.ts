@@ -5,7 +5,7 @@ import { useLogin } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { storeData } from "@/utils/storage";
 
-export const useUserLoginForm = (FormSchema: any, cookies: any) => {
+export const useUserLoginForm = (FormSchema: any, cookies: any, role: string) => {
    const form = useForm({
       resolver: zodResolver(FormSchema),
       defaultValues: { fullName: "", code: "" },
@@ -21,7 +21,7 @@ export const useUserLoginForm = (FormSchema: any, cookies: any) => {
          if (response?.success) {
             storeData("userId", response.data.userId);
             cookies.set("token", response.token, { path: "/" });
-            window.location.replace("/dashboard");
+            role == 'User' ? location.replace('/dashboard') : location.replace('/admin')
          } else {
             toast.error(response.error.msg);
          }
