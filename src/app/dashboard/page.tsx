@@ -29,22 +29,22 @@ const page = () => {
    }
 
    return (
-      <>
+      <main>
          <MobileNav />
          <div>
-            <h3>Projects</h3>
-            <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+            <h3 className="px-4 md:p-0">Projects</h3>
+            <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
                {
                   data.data.map((project: any) => {
                      return (
                         <CardContent
-                           className="flex items-center bg-input justify-center md:h-40 cursor-pointer"
+                           className="flex items-center bg-input justify-center h-32 md:h-40 cursor-pointer"
                            onClick={() => router.push(`/dashboard/projects/${project.id}`)}
                         >
                            <img
                               src={project.logo}
                               alt={project.name}
-                              className="max-h-40"
+                              className="max-h-28 md:max-h-40"
                            />
                         </CardContent>
                      )
@@ -52,7 +52,7 @@ const page = () => {
                }
             </div>
          </div>
-      </>
+      </main>
    );
 };
 

@@ -6,30 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsDown, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-   Command,
-   CommandEmpty,
-   CommandGroup,
-   CommandInput,
-   CommandItem,
-   CommandList,
-} from "@/components/ui/command";
-import {
-   Form,
-   FormControl,
-   FormField,
-   FormItem,
-   FormLabel,
-   FormMessage,
-} from "@/components/ui/form";
-import {
-   Popover,
-   PopoverContent,
-   PopoverTrigger,
-} from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 
 import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
@@ -89,23 +70,21 @@ const Page = () => {
             fill
             className="absolute top-0 left-0 z-0"
          />
-         <Image
-            src={"/svg/welcome.svg"}
+         <img
+            src={'/svg/logo.svg'}
             alt="welcome"
-            width={300}
-            height={120}
-            className="relative z-10"
+            className="relative z-10 mx-auto h-[12rem]"
          />
-         <h2 className="text-center relative z-10 md:w-3/4 lg:w-[50%]">
+         <div className="text-center max-w-[540px] text-xl font-medium sm:text-2xl relative z-10 md:w-3/4 lg:w-[50%]">
             Welcome to Rwanda Coding Academy Hackathon
-         </h2>
-         <div className="relative z-10">
+         </div>
+         <div className="relative z-10 w-full px-4 mt-4">
             <Form {...form}>
                <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6 flex flex-col gap-4 items-center"
+                  className="space-y-6 flex flex-col gap-4 items-center max-w-[400px] mx-auto"
                >
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-4 w-full overflow-x-hidden">
                      <FormField
                         control={form.control}
                         name="fullName"
@@ -122,7 +101,7 @@ const Page = () => {
                                           variant="outline"
                                           role="combobox"
                                           className={cn(
-                                             "w-[400px] justify-between px-6 py-4 text-lg bg-white text-main",
+                                             "justify-between px-6 py-6 bg-white text-main !font-normal",
                                              !field.value &&
                                                 "text-muted-foreground"
                                           )}
@@ -142,7 +121,7 @@ const Page = () => {
                                        </Button>
                                     </FormControl>
                                  </PopoverTrigger>
-                                 <PopoverContent className="w-[400px] max-h-[200px] overflow-auto p-0">
+                                 <PopoverContent className="w-full max-h-[200px] overflow-auto p-0">
                                     <Command>
                                        <CommandInput
                                           placeholder="Search name..."
@@ -208,9 +187,9 @@ const Page = () => {
                               <FormLabel>Enter your passcode</FormLabel>
                               <Input
                                  {...field}
-                                 type="password" // Set the input type to password
+                                 type="password"
                                  placeholder="Enter passcode"
-                                 className="w-[400px] px-6 py-4 text-lg h-[50px] bg-white text-main"
+                                 className="h-[50px] bg-white text-main"
                                  disabled={isSubmitting}
                               />
                               <FormMessage />
@@ -220,7 +199,7 @@ const Page = () => {
                   </div>
                   <Button
                      type="submit"
-                     className="w-full max-w-[400px] p-6 text-lg bg-white text-main hover:text-white"
+                     className="w-full max-w-[400px] p-6 text-lg bg-white text-main hover:text-main/90 hover:bg-input"
                      disabled={isSubmitting}
                      variant={"secondary"}
                   >
