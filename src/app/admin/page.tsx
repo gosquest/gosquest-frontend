@@ -20,7 +20,7 @@ export default function Home() {
       name: project.name,
       team_leader: project.team_leader,
       fields: project.fields,
-      rating: project.Rating.length > 0
+      rating: project.Rating?.length > 0
          ? {
             relevance: project.Rating[0].relevance,
             impact_to_society: project.Rating[0].impact_to_society,
@@ -44,7 +44,6 @@ export default function Home() {
       );
    }
 
-   // Extract project data and calculate totals
    const totalProjects = data?.projects?.length || 0;
    const totalRatings = data?.projects?.reduce(
       (acc: any, project: { Rating: string | any[]; }) => acc + (project.Rating?.length || 0),
@@ -71,7 +70,12 @@ export default function Home() {
          icon: "/icons/feedbacks.png",
          desc: "Overall Project Feedback",
          title: `${totalFeedbacks} Feedbacks`,
-      }
+      },
+      {
+         icon: "/icons/feedbacks.png",
+         desc: "All users",
+         title: `${totalFeedbacks} Users`,
+      },
    ];
 
    return (
@@ -89,11 +93,11 @@ export default function Home() {
          </section>
 
          <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-3">
-            <div className="lg:col-span-2 flex flex-col gap-4">
+            <div className="lg:col-span-2 flex flex-col gap-4  border p-4 rounded shadow">
                <div>Ratings</div>
                <RatingsTable projects={projects} />
             </div>
-            <div className="lg:col-span-1 flex flex-col">
+            <div className="lg:col-span-1 flex flex-col border p-4 rounded shadow">
                <p className="p-4 font-semibold">Overall Ratings</p>
                <RatingsChart />
             </div>

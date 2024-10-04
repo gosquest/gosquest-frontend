@@ -12,7 +12,7 @@ export type CardProps = {
 
 export default function Card({ icon, desc, title }: CardProps) {
   return (
-    <CardContent className="shadow">
+    <CardContent className="shadow border">
       <section className="flex flex-col gap-4">
         <Image height={24} width={24} src={icon} alt="project" />
         <p>{desc}</p>

@@ -18,7 +18,7 @@ const page = () => {
       name: project.name,
       team_leader: project.team_leader,
       fields: project.fields,
-      rating: project.Rating.length > 0
+      rating: project.Rating?.length > 0
          ? {
             relevance: project.Rating[0].relevance,
             impact_to_society: project.Rating[0].impact_to_society,

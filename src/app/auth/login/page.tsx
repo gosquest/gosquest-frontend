@@ -142,7 +142,7 @@ const Page = () => {
                                        </Button>
                                     </FormControl>
                                  </PopoverTrigger>
-                                 <PopoverContent className="w-[400px] max-h-[200px] overflow-auto p-0">
+                                 <PopoverContent className="sm:w-[400px] max-h-[200px] overflow-auto p-0">
                                     <Command>
                                        <CommandInput
                                           placeholder="Search name..."
@@ -173,7 +173,7 @@ const Page = () => {
                                                                );
                                                                setPopoverOpen(
                                                                   false
-                                                               ); // Close popover after selection
+                                                               );
                                                             }}
                                                          >
                                                             <Check
@@ -208,9 +208,9 @@ const Page = () => {
                               <FormLabel>Enter your passcode</FormLabel>
                               <Input
                                  {...field}
-                                 type="password" // Set the input type to password
+                                 type="password" 
                                  placeholder="Enter passcode"
-                                 className="w-[400px] px-6 py-4 text-lg h-[50px] bg-white text-main"
+                                 className="sm:w-[400px] px-6 py-4 text-lg h-[50px] bg-white text-main"
                                  disabled={isSubmitting}
                               />
                               <FormMessage />

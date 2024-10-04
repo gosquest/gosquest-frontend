@@ -66,7 +66,7 @@ export default function SideNavbar() {
                { title: "Projects", href: "/admin/projects", icon: Box, variant: "ghost" },
                { title: "Rating", href: "/admin/rating", icon: List, variant: "ghost" },
                { title: "Feedbacks", href: "/admin/feedbacks", icon: Shield, variant: "ghost" },
-               { title: "Menu Settings", href: "/admin/users", icon: UsersIcon, variant: "ghost" },
+               { title: "Users", href: "/admin/users", icon: UsersIcon, variant: "ghost" },
             ]}
          />
 
