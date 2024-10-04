@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +12,8 @@ import { toast } from 'react-toastify';
 import { useCreateRating } from '@/hooks/useRating';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useParams } from 'next/navigation';
+import Confetti from 'react-confetti';
+import { useWindowHeight, useWindowSize, useWindowWidth} from "@react-hook/window-size";
 
 const feedbackSchema = z.object({
     feedback: z.string(),
@@ -25,7 +27,7 @@ interface RatingsState {
 }
 
 interface dialogProps {
-    projectName: string
+    projectName: string;
 }
 
 const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
@@ -35,12 +37,12 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
         performance: null,
         progress: null,
     });
-    const { user } = useAuthStore()
-    const params = useParams()
+    const { user } = useAuthStore();
+    const params = useParams();
     const [open, setOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    const ratingMutation = useCreateRating()
+    const ratingMutation = useCreateRating();
 
     const { handleSubmit, register, formState: { errors } } = useForm({
         resolver: zodResolver(feedbackSchema),
@@ -53,28 +55,31 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
             toast.error('Please rate all fields before submitting.');
             return;
         }
-        const { feedback } = data
+        const { feedback } = data;
         try {
             const response = await ratingMutation.mutateAsync({
                 ...(feedback ? { feedback } : {}),
                 ...ratingsState,
                 userId: user.id,
-                projectId: params.slug[0]
+                projectId: params.slug[0],
             });
             if (response.success) {
                 setSubmitted(true);
-            }else{
-                toast.error(response.error.msg)
+            } else {
+                toast.error(response.error.msg);
             }
         } catch (error) {
-            console.log(error)
-            toast.error("Rating failed please try again!")
+            console.log(error);
+            toast.error("Rating failed please try again!");
         }
     };
 
     const handleRatingChange = (category: keyof RatingsState, value: number) => {
         setRatingsState((prev) => ({ ...prev, [category]: value }));
     };
+
+    const width=useWindowWidth()
+    const height=useWindowHeight()
 
     return (
         <Dialog
@@ -91,11 +96,15 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
                 <DialogHeader className="bg-main text-white p-4 -ml-6 -mt-6 -mr-6 flex items-center md:p-6">
                     <DialogTitle>Rate {projectName}</DialogTitle>
                 </DialogHeader>
-                <DialogDescription className='hidden'></DialogDescription>
                 {!submitted ? (
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-4">
-                            {[['Relevance', 'relevance'], ['Impact to society', 'impact_to_society'], ['Performance', 'performance'], ['Progress', 'progress']].map((category, index) => (
+                            {[
+                                ['Relevance', 'relevance'],
+                                ['Impact to society', 'impact_to_society'],
+                                ['Performance', 'performance'],
+                                ['Progress', 'progress'],
+                            ].map((category, index) => (
                                 <RatingRow
                                     key={index}
                                     label={category[0]}
@@ -117,18 +126,20 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
                         <div className="flex justify-center gap-4 mt-6 items-center">
                             <Button className='!rounded' variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
                             <Button className='!rounded' type="submit" disabled={ratingMutation.isPending}>
-                                {
-                                    ratingMutation.isPending ? "Submitting..." : "Submit"
-                                }
+                                {ratingMutation.isPending ? "Submitting..." : "Submit"}
                             </Button>
                         </div>
                     </form>
                 ) : (
-                    <div className="p-4 flex flex-col gap-4 text-center items-center bg-main">
-                        <img src="/images/thank.png" alt="thanks" />
-                        <Button onClick={() => setOpen(false)} className="w-fit">
+                    <div className="p-4 flex flex-col gap-4 text-center items-center bg-main h-[50vh] justify-center relative">
+                        <h2 className="text-white text-2xl">Thanks for your feedback!</h2>
+                        <Button onClick={() => setOpen(false)} className="w-fit bg-white text-main hover:text-white">
                             <Link href="/dashboard">Back To Dashboard</Link>
                         </Button>
+                        <Confetti
+                            width={width}
+                            height={height}
+                        />
                     </div>
                 )}
             </DialogContent>

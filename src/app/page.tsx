@@ -2,15 +2,14 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
-import welcome from "../../public/svg/welcome.svg";
-import flo from "../../public/svg/flo.svg";
+import flow from "../../public/svg/flow.svg";
 import Link from "next/link";
 
 const page = () => {
    return (
-      <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
+      <div className="bg-main relative min-h-screen overflow-hidden flex items-center justify-center">
          <Image
-            src={flo}
+            src={flow}
             alt="flowers"
             fill
             style={{ objectFit: "cover" }}
@@ -18,16 +17,15 @@ const page = () => {
          />
 
          <div className="flex flex-col items-center justify-center gap-4 h-full relative z-10">
-            <Image
-               src={welcome}
+            <img
+               src={'/svg/logo.svg'}
                alt="welcome"
-               width={500}
-               className="ml-10"
+               className="relative z-10 mx-auto h-[12rem]"
             />
-            <h1 className="text-center text-main md:w-5/6">
-               Welcome to Rwanda Coding Academy Hackathon 😊
+            <h1 className="text-center text-white md:w-5/6 mt-6">
+               Welcome to Rwanda Coding Academy Hackathon
             </h1>
-            <Button className="mt-6 rounded-full p-6">
+            <Button className="mt-6 round p-6">
                <Link href="/auth/login">Login to continue</Link>
             </Button>
          </div>
