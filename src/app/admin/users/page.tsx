@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { toast } from "react-toastify";
-import { useGetAllUsers, useLogin } from "@/hooks/useAuth";
+import { useGetAllUsersByAdmin, useLogin } from "@/hooks/useAuth";
 
 type User = {
   name: string;
@@ -80,7 +80,7 @@ const handleDisable = (user: User) => {
 };
 
 export default function UsersPage() {
-  const { data: userData, isPending: isUserPending } = useGetAllUsers();
+  const { data: userData, isPending: isUserPending } = useGetAllUsersByAdmin();
 
   return (
     <div className="flex flex-col gap-5 w-full">

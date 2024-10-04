@@ -34,7 +34,7 @@ const page = () => {
                   data.projects.map((project: any) => {
                      return (
                         <CardContent
-                           className="flex items-center bg-input justify-center md:h-40 cursor-pointer"
+                           className="flex items-center bg-input justify-center  md:h-40 cursor-pointer"
                         >
                            <img
                               src={project.logo}

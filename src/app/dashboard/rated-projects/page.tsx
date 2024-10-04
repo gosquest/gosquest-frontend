@@ -38,7 +38,7 @@ const page = () => {
                   data.data.map((project: any) => {
                      return (
                         <CardContent
-                           className="flex items-center bg-input justify-center md:h-40 cursor-pointer"
+                           className="flex items-center bg-input justify-center h-[12rem] md:h-40 cursor-pointer"
                            onClick={() => router.push(`/dashboard/rated-projects/${project.id}`)}
                         >
                            <img
