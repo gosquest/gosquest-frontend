@@ -31,7 +31,7 @@ const page = () => {
    return (
       <>
          <MobileNav />
-         <div>
+         <div className="p-4 sm:p-0">
             <h3>Projects</h3>
             <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                {
@@ -40,6 +40,7 @@ const page = () => {
                         <CardContent
                            className="flex items-center bg-input justify-center h-[12rem] md:h-40 cursor-pointer"
                            onClick={() => router.push(`/dashboard/rated-projects/${project.id}`)}
+                           key={project.id}
                         >
                            <img
                               src={project.logo}
