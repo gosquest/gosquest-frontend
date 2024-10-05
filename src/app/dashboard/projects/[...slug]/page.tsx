@@ -49,7 +49,7 @@ const Page: React.FC = () => {
                   {data.project.description}
                </p>
                <div className="mt-4">
-                  <p>For more visit: <Link href={data.project.link} className="text-main ml-2 hover:text-blue-500 hover:underline">{data.project.name}</Link></p>
+                  <p>For more visit: <Link href={data.project.link} className="text-main ml-2 hover:text-blue-500 hover:underline" target='_blank'>{data.project.name}</Link></p>
                   <div className="flex items-center justify-center mt-4">
                      <RateUsDialog projectName={data.project.name} />
                   </div>
