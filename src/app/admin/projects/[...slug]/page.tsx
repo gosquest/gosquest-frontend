@@ -5,6 +5,7 @@ import EditProjectForm from '@/components/add-project/EditProjectForm'
 import { useParams } from 'next/navigation'
 import { useGetProjectById } from '@/hooks/useProject'
 import { Button } from '@/components/ui/button'
+import HandleFailed from '@/components/HandleFailed'
 
 const page = () => {
    const params = useParams()
@@ -16,12 +17,7 @@ const page = () => {
 
    if (isError) {
       return (
-         <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">Failed to fetch project</p>
-            <Button variant={"secondary"} onClick={() => location.reload()}>
-               Reload
-            </Button>
-         </main>
+         <HandleFailed />
       );
    }
 

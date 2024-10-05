@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/table";
 import { Edit, Trash2 } from "lucide-react";
 import Link from "next/link";
+import HandleFailed from "@/components/HandleFailed";
 
 const page = () => {
    const { data, isLoading, isError } = useGetAllProjects();
@@ -25,12 +26,7 @@ const page = () => {
 
    if (isError) {
       return (
-         <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">Failed to fetch projects</p>
-            <Button variant={"secondary"} onClick={() => location.reload()}>
-               Reload
-            </Button>
-         </main>
+         <HandleFailed />
       );
    }
 

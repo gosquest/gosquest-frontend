@@ -53,7 +53,7 @@ const Page: React.FC = () => {
                   <img
                      src={data.project.logo}
                      alt={data.project.log}
-                     className="object-cover"
+                     className="object-cover max-h-[10rem]"
                   />
                </div>
             </div>

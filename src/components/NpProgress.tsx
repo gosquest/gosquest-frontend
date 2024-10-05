@@ -14,7 +14,7 @@ const NpProgress: React.FC = () => {
   return (
     <ProgressBar
       height="3px"
-      color="#001A55"
+      color="green"
       options={{ showSpinner: false }}
       shallowRouting
     />

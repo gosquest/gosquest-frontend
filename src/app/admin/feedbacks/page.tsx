@@ -1,69 +1,54 @@
+"use client";
 import { CardContent } from "@/components/Card";
-import Image from "next/image";
 import React from "react";
 import MobileNav from "@/components/MobileNav";
+import { useGetAllProjects } from "@/hooks/useProject";
+
+import HandleFailed from "@/components/HandleFailed";
+import { useRouter } from "next/navigation";
 
 const Feedbacks = () => {
+   const { data, isLoading, isError } = useGetAllProjects();
+
+   const router = useRouter()
+
+   if (isLoading) {
+      return <p className="text-center">Fetching projects...</p>;
+   }
+
+   if (isError) {
+      return (
+         <HandleFailed />
+      );
+   }
+
+   // Calculate total number of feedbacks
+   const totalFeedbacks = data?.projects?.reduce((total: any, project: any) => {
+      return total + project.Rating.length;
+   }, 0);
+
    return (
       <>
          <MobileNav />
-         <div>
-            <h3>Feedbacks</h3>
-            <div className="bg-submain rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 p-6">
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
-               <CardContent className="flex items-center justify-center bg-white md:h-40 cursor-pointer">
-                  <img
-                     src={"/uploads/fishot.png"}
-                     alt="project"
-                  />
-               </CardContent>
+         <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {data?.projects?.map((project: any) => (
+                  <div key={project.id} className="bg-white rounded-lg shadow-md">
+                     <CardContent className="relative flex items-center justify-center h-40 bg-gray-100 rounded-t-lg cursor-pointer" onClick={() => router.push(`/admin/feedbacks/${project.id}`)}>
+                        <img
+                           src={project.logo}
+                           alt={`${project.name} logo`}
+                           className="max-h-20"
+                        />
+                        <div className="absolute top-4 right-4 bg-main rounded-full text-white w-8 h-8 text-sm flex items-center justify-center">
+                           {project.Rating.length}
+                        </div>
+                     </CardContent>
+                     <div className="p-4">
+                        <h2 className="text-lg font-semibold">{project.name}</h2>
+                     </div>
+                  </div>
+               ))}
             </div>
          </div>
       </>

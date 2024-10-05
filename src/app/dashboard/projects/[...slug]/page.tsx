@@ -40,7 +40,7 @@ const Page: React.FC = () => {
             <div className="mb-3 relative">
                <img src={data.project.cover_image} alt={data.project.cover_image} className="w-full h-[30vh] sm:h-[40vh] object-cover" />
                <div className='absolute flex items-center justify-center h-full w-full top-0'>
-                  <img src={data.project.logo} alt={data.project.log} className="object-cover max-h-[10rem]" />
+                  <img src={data.project.logo} alt={data.project.logo} className="object-cover max-h-[10rem]" />
                </div>
             </div>
             <div className="md:p-4">
