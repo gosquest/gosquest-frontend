@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CardContent } from "@/components/Card";
 import React from "react";
@@ -7,14 +7,15 @@ import { useGetUnRatedProjects } from "@/hooks/useProject";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const page = () => {
-  const { user } = useAuthStore()
-   const { data, isLoading, isError } = useGetUnRatedProjects(user.id)
-   const router = useRouter()
+   const { user } = useAuthStore();
+   const { data, isLoading, isError } = useGetUnRatedProjects(user.id);
+   const router = useRouter();
 
    if (isLoading) {
-      return <p className="text-center">Fetching projects...</p>
+      return <p className="text-center">Fetching projects...</p>;
    }
 
    if (isError) {
@@ -25,33 +26,43 @@ const page = () => {
                Reload
             </Button>
          </main>
-      )
+      );
    }
 
    return (
       <main>
          <MobileNav />
-         <div>
-            <h3 className="px-4 md:p-0">Projects</h3>
-            <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
-               {
-                  data.data.map((project: any) => {
-                     return (
+         {data?.data.length > 0 ? (
+            <div>
+               <h4 className="px-4 md:p-0 text-center">Projects Awaiting Your Rating</h4>
+               <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
+                  {data.data.map((project: any) => (
+                     <Link href={`/dashboard/projects/${project.id}`} className="bg-white shadow-lg">
                         <CardContent
+                           key={project.id}
                            className="flex items-center bg-input justify-center h-32 md:h-40 cursor-pointer"
-                           onClick={() => router.push(`/dashboard/projects/${project.id}`)}
                         >
                            <img
                               src={project.logo}
                               alt={project.name}
-                              className="max-h-28 md:max-h-40"
+                              className="max-h-28 md:max-h-32"
                            />
                         </CardContent>
-                     )
-                  })
-               }
+                        <p className="p-4 text-lg font-medium">{project.name}</p>
+                     </Link>
+                  ))}
+               </div>
             </div>
-         </div>
+         ) : (
+            <div className="flex flex-col items-center justify-center h-[40vh]">
+               <h2 className="text-2xl font-bold text-gray-700">
+                  All caught up! 🎉
+               </h2>
+               <p className="text-gray-600 mb-4">
+                  You've rated all the projects. Thanks!
+               </p>
+            </div>
+         )}
       </main>
    );
 };

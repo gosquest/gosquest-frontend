@@ -5,24 +5,9 @@ import React, { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuGroup,
-   DropdownMenuItem,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-   Dialog,
-   DialogContent,
-   DialogDescription,
-   DialogFooter,
-   DialogHeader,
-   DialogTitle,
-   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useRouter } from "next/navigation";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useRouter, usePathname } from "next/navigation";
 import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
@@ -30,6 +15,7 @@ const cookies = new Cookies();
 const MobileNav = () => {
    const { user } = useAuthStore();
    const router = useRouter();
+   const pathname = usePathname(); // Get the current pathname
    const [isLoggingOut, setIsLoggingOut] = useState(false);
    const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -57,11 +43,9 @@ const MobileNav = () => {
                   <DropdownMenuGroup>
                      <DropdownMenuItem asChild>
                         <Dialog>
-                           <DialogTrigger asChild>
-                              <div className="cursor-pointer flex items-center">
-                                 <LogOut className="mr-2 h-4 w-4" />
-                                 <span className="font-bold">Log out</span>
-                              </div>
+                           <DialogTrigger className="!rounded flex items-center pl-2">
+                              <LogOut className="mr-2 h-4 w-4" />
+                              <span className="">Log out</span>
                            </DialogTrigger>
                            <DialogContent className="bg-white">
                               <DialogHeader>
@@ -95,16 +79,18 @@ const MobileNav = () => {
             </DropdownMenu>
          </div>
 
-         <div className="bg-input rounded p-4 flex justify-between items-center">
+         <div className="bg-input rounded p-1 flex justify-between items-center space-x-1">
             <Link
                href="/dashboard"
-               className="px-4 py-2 bg-main rounded whitespace-nowrap"
+               className={`px-4 py-2 rounded whitespace-nowrap text-sm ${pathname === "/dashboard" ? "bg-main text-white" : "bg-transparent text-main hover:bg-main hover:text-white"
+                  } flex-1 text-center`}
             >
                Unrated Projects
             </Link>
             <Link
                href="/dashboard/rated-projects"
-               className="px-4 py-2 rounded bg-transparent text-main whitespace-nowrap hover:bg-main hover:text-white"
+               className={`px-4 py-2 rounded whitespace-nowrap text-sm ${pathname === "/dashboard/rated-projects" ? "bg-main text-white" : "bg-transparent text-main hover:bg-main hover:text-white"
+                  } flex-1 text-center`}
             >
                Rated Projects
             </Link>
