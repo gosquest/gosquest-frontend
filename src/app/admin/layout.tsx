@@ -13,7 +13,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       if (!roles) {
          router.push('/auth/login')
       }
-      if (roles && !['Admin' || 'SuperAdmin'].includes(roles.name)) {
+      if (roles && !['Admin' , 'SuperAdmin'].includes(roles.name)) {
          router.push("/dashboard")
       }
    }, [roles])
