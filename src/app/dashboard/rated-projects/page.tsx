@@ -34,10 +34,11 @@ const page = () => {
          <MobileNav />
          {data?.data.length > 0 ? (
             <div>
-               <h4 className="px-4 md:p-0 text-center">Projects You Have Previously Rated</h4>
+               <h4 className="px-4 md:p-0 text-center mb-8">Projects You Have Previously Rated</h4>
                <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
                   {data.data.map((project: any) => (
-                     <Link href={`/dashboard/projects/${project.id}`} className="bg-white shadow-lg">
+                     <Link href={`/dashboard/projects/${project.id}`} 
+                     className="bg-white shadow-lg" key={project.id}>
                         <CardContent
                            key={project.id}
                            className="flex items-center bg-input justify-center h-32 md:h-40 cursor-pointer"
