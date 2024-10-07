@@ -41,9 +41,10 @@ const Feedbacks = () => {
                            alt={`${project.name} logo`}
                            className="max-h-20"
                         />
-                        <div className="absolute top-4 right-4 bg-main rounded-full text-white w-8 h-8 text-sm flex items-center justify-center">
-                           {project.Rating.length}
-                        </div>
+                        {project.Rating.length > 0 &&
+                           <div className="absolute top-4 right-4 bg-main rounded-full text-white w-6 h-6 text-xs flex items-center justify-center">
+                              {project.Rating.length}
+                           </div>}
                      </CardContent>
                      <div className="p-4">
                         <h2 className="text-lg font-semibold">{project.name}</h2>
