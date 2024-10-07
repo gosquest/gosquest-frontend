@@ -6,6 +6,7 @@ import { useGetAllProjects } from "@/hooks/useProject";
 
 import HandleFailed from "@/components/HandleFailed";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Feedbacks = () => {
    const { data, isLoading, isError } = useGetAllProjects();
@@ -33,8 +34,8 @@ const Feedbacks = () => {
          <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                {data?.projects?.map((project: any) => (
-                  <div key={project.id} className="bg-white rounded-lg shadow-md">
-                     <CardContent className="relative flex items-center justify-center h-40 bg-gray-100 rounded-t-lg cursor-pointer" onClick={() => router.push(`/admin/feedbacks/${project.id}`)}>
+                  <Link href={`/admin/feedbacks/${project.id}`} key={project.id} className="bg-white rounded-lg shadow-md">
+                     <CardContent className="relative flex items-center justify-center h-40 bg-gray-100 rounded-t-lg cursor-pointer">
                         <img
                            src={project.logo}
                            alt={`${project.name} logo`}
@@ -47,7 +48,7 @@ const Feedbacks = () => {
                      <div className="p-4">
                         <h2 className="text-lg font-semibold">{project.name}</h2>
                      </div>
-                  </div>
+                  </Link>
                ))}
             </div>
          </div>

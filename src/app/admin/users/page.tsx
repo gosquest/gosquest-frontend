@@ -6,12 +6,11 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { useGetAllUsersByAdmin } from "@/hooks/useAuth";
+import { AddUserDialog } from "@/components/user/AddUserDialog";
+import DeleteUserDialog from "@/components/user/DeleteUserDialog";
+import { User } from "@/types";
+import EditUserDialog from "@/components/user/EditUserDialog";
 
-type User = {
-  name: string;
-  passcode: string;
-  role: string;
-};
 
 const columns: ColumnDef<User>[] = [
   {
@@ -23,21 +22,21 @@ const columns: ColumnDef<User>[] = [
     header: "Passcode",
   },
   {
-    accessorKey: "roleId",
+    accessorKey: "role.name",
     header: "Role",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
   {
     header: "Actions",
     cell: ({ row }) => {
-      const user = row.original;
+      const user: User = row.original;
       return (
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => handleEdit(user)}>
-            <PenBox />
-          </Button>
-          <Button variant="destructive" size="sm" onClick={() => handleDisable(user)}>
-            <X />
-          </Button>
+          <EditUserDialog user={user} />
+          <DeleteUserDialog user={user} />
         </div>
       );
     },
@@ -49,24 +48,14 @@ const handleEdit = (user: User) => {
   console.log("Edit user:", user);
 };
 
-// Function to handle disabling a user
-const handleDisable = (user: User) => {
-  console.log("Disable user:", user);
-};
-
 export default function UsersPage() {
   const { data: userData, isPending: isUserPending } = useGetAllUsersByAdmin();
-
-  useEffect(() => {
-    console.log("Is Data Pending:", isUserPending);
-    console.log("User Data:", userData);
-  }, [userData, isUserPending]);
 
   return (
     <div className="flex flex-col gap-5 w-full">
       <div className="flex justify-between items-center">
-      <h1 className="text-xl font-bold">Users</h1>
-      <Button className="bg-main">Add User</Button>
+        <h1 className="text-xl font-bold">Users</h1>
+        <AddUserDialog />
       </div>
       {isUserPending ? (
         <div className="flex justify-center items-center">

@@ -80,7 +80,7 @@ export const CodeField = ({ form, isSubmitting }: any) => (
         render={({ field }) => (
             <FormItem className="flex flex-col w-full">
                 <FormLabel>Enter your passcode</FormLabel>
-                <Input {...field} type="password" placeholder="Enter passcode" className="h-[50px] bg-white text-main" disabled={isSubmitting} />
+                <Input {...field} type="password" placeholder="Enter passcode" className="h-[50px] bg-white text-main !font-normal !text-sm" disabled={isSubmitting} />
                 <FormMessage />
             </FormItem>
         )}
