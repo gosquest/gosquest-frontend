@@ -23,7 +23,7 @@ const page = () => {
 
    return (
       <main>
-         <h3 className='text-center'>Edit Project</h3>
+         <h3 className='text-center mb-8'>Edit Project</h3>
          <EditProjectForm projectData={data.project} />
       </main>
    )

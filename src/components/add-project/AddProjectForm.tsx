@@ -43,7 +43,7 @@ export default function AddProjectForm() {
     <FormProvider {...formMethods}>
       <form
         onSubmit={formMethods.handleSubmit(onSubmit, onError)}
-        className="flex flex-col gap-6 p-6 bg-white rounded max-w-xl mx-auto"
+        className="flex flex-col gap-6 p-6 bg-white rounded max-w-xl mx-auto border"
       >
         <ProjectNameForm />
         <FieldClassificationForm />
