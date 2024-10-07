@@ -5,8 +5,8 @@ import AddProjectForm from '@/components/add-project/AddProjectForm'
 
 const page = () => {
   return (
-    <div>
-      <h3 className='text-center'>Add Project</h3>
+    <div className=''>
+      <h3 className='text-center mb-8'>Add new project</h3>
       <AddProjectForm />
     </div>
   )

@@ -61,21 +61,25 @@ export default function Home() {
          icon: Box,
          desc: "Total Projects in Hackathon",
          title: `${totalProjects} Projects`,
+         color: "#979205"
       },
       {
          icon: Star,
          desc: "Overall Projects Rating",
          title: `${totalRatings} Ratings`,
+         color: "#FEB185"
       },
       {
          icon: Shield,
          desc: "Overall Project Feedback",
          title: `${totalFeedbacks} Feedbacks`,
+         color: "#8495B2"
       },
       {
          icon: Users,
          desc: "All users",
          title: `${totalFeedbacks} Users`,
+         color: '#311D4A'
       },
    ];
 
@@ -89,6 +93,7 @@ export default function Home() {
                   icon={d.icon}
                   desc={d.desc}
                   title={d.title}
+                  color={d.color}
                />
             ))}
          </section>
