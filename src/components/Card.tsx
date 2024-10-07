@@ -12,13 +12,13 @@ export type CardProps = {
 
 export default function Card({ icon: Icon, desc, title, color }: CardProps) {
   return (
-    <CardContent className="bg-[#FFFFFF] rounded-lg shadow">
+    <CardContent className="bg-input/80 rounded-lg shadow">
       <section className="flex flex-col gap-4">
         <div className="rounded-full p-2 w-8 h-8 flex items-center justify-center" style={{ backgroundColor: color }}>
           <Icon className="text-white" />
         </div>
-        <p>{desc}</p>
-        <h4 className="text-main">{title}</h4>
+        <p className="text-600-200">{desc}</p>
+        <p className="text-main text-lg font-semibold">{title}</p>
       </section>
     </CardContent>
   );

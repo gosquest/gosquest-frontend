@@ -28,7 +28,9 @@ export default function AddProjectForm() {
       if (response.success) {
         toast.success("Project added successfully!");
         reset();
-      }
+      }else {
+        toast.error(response.error.msg);
+    }
     } catch (error) {
       console.log(error);
       toast.error("Adding project failed!");

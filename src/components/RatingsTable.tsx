@@ -82,7 +82,7 @@ const columns: ColumnDef<Project>[] = [
       const status = getStatus(rating);
       const { textColor, bgColor } = getStatusStyles(status);
       return (
-        <span className={clsx('rounded-full p-2', textColor, bgColor)}>
+        <span className={clsx('rounded text-xs p-2 whitespace-nowrap', textColor, bgColor)}>
           {status}
         </span>
       );
@@ -121,7 +121,7 @@ type RatingsTableProps = {
 const RatingsTable: React.FC<RatingsTableProps> = ({ projects }) => {
   
   return (
-    <div>
+    <div className=''>
       <DataTable columns={columns} data={projects} />
     </div>
   );

@@ -27,7 +27,7 @@ const MobileNav = () => {
    };
 
    return (
-      <div className="bg-main mb-6 p-4 text-white md:hidden">
+      <div className="bg-main mb-6 p-4 text-white md:hidden sticky top-0 w-full">
          <div className="flex justify-between mb-3">
             <div>
                <h3>Hello 👋,</h3>
