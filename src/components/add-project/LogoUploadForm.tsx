@@ -58,7 +58,7 @@ export default function LogoUploadForm() {
             >
               {logo ? (
                 // Display uploaded logo if available
-                <img src={logo} alt="Uploaded logo" className="h-40 object-cover" />
+                <img src={logo} alt="Uploaded logo" className=" max-h-40 object-cover" />
               ) : (
                 <>
                   <Image src={upload} alt="upload" />

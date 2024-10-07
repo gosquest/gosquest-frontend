@@ -124,7 +124,7 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
                             {errors.feedback && <span className="text-red-500">{errors.feedback.message?.toString()}</span>}
                         </div>
                         <div className="flex justify-center gap-4 mt-6 items-center">
-                            <Button className='!rounded' variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+                            <Button type='button' className='!rounded' variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
                             <Button className='!rounded' type="submit" disabled={ratingMutation.isPending}>
                                 {ratingMutation.isPending ? "Submitting..." : "Submit"}
                             </Button>

@@ -24,9 +24,9 @@ module.exports = {
       colors: {
         main:"#311D4A",
         submain:"#FCFAFA",
-        bgMain: "#EBDFD7",
+        bgMain: "#F6F9FF",
         border: "hsl(var(--border))",
-        input: "#F0F0F0",
+        input: "#E5EDFF",
         ring: "hsl(var(--ring))",
         background: "#EBDFD7",
         foreground: "hsl(var(--foreground))",

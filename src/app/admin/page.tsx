@@ -30,7 +30,7 @@ export default function Home() {
             feedback: project.Rating[0].feedback,
          }
          : null,
-   }));   
+   }));
 
 
 
@@ -98,17 +98,10 @@ export default function Home() {
             ))}
          </section>
 
-         <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-3">
-            <div className="lg:col-span-2 flex flex-col gap-4  border p-4 rounded shadow">
-               <div>Ratings</div>
-               <RatingsTable projects={projects} />
-            </div>
-            <div className="lg:col-span-1 flex flex-col border p-4 rounded shadow">
-               <p className="p-4 font-semibold">Overall Ratings</p>
-               <RatingsChart />
-            </div>
+         <section className="">
+            <div className="mb-2 font-medium">Ratings</div>
+            <RatingsTable projects={projects} />
          </section>
-
          <section>
             <CardContent className="flex justify-between gap-4">
                <h4>Project Workload</h4>

@@ -11,7 +11,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({ columns, data = [] }: DataTableProps<TData, TValue>) {
   
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [pageIndex, setPageIndex] = useState(0);
 
   // Initialize the table with pagination
@@ -35,13 +35,13 @@ export function DataTable<TData, TValue>({ columns, data = [] }: DataTableProps<
 
   return (
     <div>
-      <div className="rounded-md border">
+      <div className="rounded border text-slate-600">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="whitespace-nowrap text-main bg-input">
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
