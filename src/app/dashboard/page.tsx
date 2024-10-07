@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import SearchForm from "@/components/SearchForm";
 
 const page = () => {
    const { user } = useAuthStore();
@@ -34,8 +35,8 @@ const page = () => {
          <MobileNav />
          {data?.data.length > 0 ? (
             <div>
-               <h4 className="px-4 md:p-0 text-center">Projects Awaiting Your Rating</h4>
-               <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
+               <h4 className="px-4 md:p-0 text-center mb-4 md:mb-10">Projects Awaiting Your Rating</h4>
+               <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 p-4 md:p-0 ">
                   {data.data.map((project: any) => (
                      <Link href={`/dashboard/projects/${project.id}`} 
                      className="bg-white shadow" key={project.id}>
