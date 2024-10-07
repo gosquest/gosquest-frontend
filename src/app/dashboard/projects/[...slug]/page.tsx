@@ -36,7 +36,7 @@ const Page: React.FC = () => {
             <ArrowLeft size={21} />
          </div>
          <div className="w-full">
-            <h3 className='mb-3 text-right md:text-start mt-4 md:mt-0'>{data.project.name}</h3>
+            <h3 className='mb-3 text-right md:text-start mt-4 md:mt-0 mr-4 md:mr-0'>{data.project.name}</h3>
             <div className="mb-3 relative">
                <img src={data.project.cover_image} alt={data.project.cover_image} className="w-full h-[30vh] sm:h-[40vh] object-cover mt-8 md:mt-0" />
                <div className='absolute flex items-center justify-center h-full w-full top-0'>

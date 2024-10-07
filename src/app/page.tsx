@@ -25,7 +25,7 @@ const page = () => {
             <h1 className="text-center text-white md:w-5/6 mt-6">
                Welcome to Rwanda Coding Academy Hackathon
             </h1>
-            <Button className="mt-6 round p-6">
+            <Button className="mt-6 round p-6 bg-white text-main hover:bg-transparent hover:text-white border-white border">
                <Link href="/auth/login">Login to continue</Link>
             </Button>
          </div>
