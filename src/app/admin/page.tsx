@@ -7,6 +7,7 @@ import { RatingsChart } from "@/components/RatingsChart";
 import ProjectsChart from "@/components/ProjectsChart";
 import { useGetAllProjects } from "@/hooks/useProject";
 import { Button } from "@/components/ui/button";
+import { Box, Shield, Star, Users } from "lucide-react";
 
 export default function Home() {
    const { data, isLoading, isError } = useGetAllProjects();
@@ -57,22 +58,22 @@ export default function Home() {
 
    const cardData = [
       {
-         icon: "/icons/proj.png",
+         icon: Box,
          desc: "Total Projects in Hackathon",
          title: `${totalProjects} Projects`,
       },
       {
-         icon: "/icons/rates.png",
+         icon: Star,
          desc: "Overall Projects Rating",
          title: `${totalRatings} Ratings`,
       },
       {
-         icon: "/icons/feedbacks.png",
+         icon: Shield,
          desc: "Overall Project Feedback",
          title: `${totalFeedbacks} Feedbacks`,
       },
       {
-         icon: "/icons/feedbacks.png",
+         icon: Users,
          desc: "All users",
          title: `${totalFeedbacks} Users`,
       },
@@ -81,7 +82,7 @@ export default function Home() {
    return (
       <div className="flex flex-col gap-5 w-full">
          <PageTitle title="Overview" />
-         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
+         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4 mb-6">
             {cardData.map((d, i) => (
                <Card
                   key={i}

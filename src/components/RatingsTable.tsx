@@ -82,7 +82,7 @@ const columns: ColumnDef<Project>[] = [
       const status = getStatus(rating);
       const { textColor, bgColor } = getStatusStyles(status);
       return (
-        <span className={clsx('rounded-full p-4', textColor, bgColor)}>
+        <span className={clsx('rounded-full p-2', textColor, bgColor)}>
           {status}
         </span>
       );

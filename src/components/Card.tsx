@@ -1,20 +1,21 @@
 /** @format */
 
 import React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export type CardProps = {
-  icon: string;
+  icon: React.ElementType;
   desc: string;
   title: string;
 };
 
-export default function Card({ icon, desc, title }: CardProps) {
+export default function Card({ icon: Icon, desc, title }: CardProps) {
   return (
     <CardContent className="shadow border">
       <section className="flex flex-col gap-4">
-        <Image height={24} width={24} src={icon} alt="project" />
+        <div className="rounded-full p-3 bg-gray-100 w-10 h-10 flex items-center justify-center">
+          <Icon className="text-2xl text-black" />
+        </div>
         <p>{desc}</p>
         <h4 className="text-main">{title}</h4>
       </section>
@@ -27,7 +28,7 @@ export function CardContent(props: React.HTMLAttributes<HTMLDivElement>) {
     <div
       {...props}
       className={cn(
-        "flex w-full flex-col gap-3 rounded p-5  bg-white/60",
+        "flex w-full flex-col gap-3 rounded p-5 bg-white/60",
         props.className
       )}
     />

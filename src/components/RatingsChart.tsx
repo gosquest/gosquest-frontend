@@ -1,40 +1,76 @@
-"use client";
 import * as React from "react";
-import { Label, Pie, PieChart } from "recharts";
+import { Pie, PieChart, Label } from "recharts";
+import { useGetAllProjects } from "@/hooks/useProject";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  ChartConfig,
 } from "@/components/ui/chart";
 
-export const description = "A donut chart with rating data";
-
-const chartData = [
-  { rating: "Excellent", value: 100, fill: "#4caf50" }, 
-  { rating: "Very Good", value: 80, fill: "#ffeb3b" },  
-  { rating: "Good", value: 60, fill: "#ff9800" },      
-  { rating: "Bad", value: 30, fill: "#f44336" },        
-];
-
-const chartConfig: ChartConfig = {
-  excellent: { label: "Excellent", color: "#4caf50" },
-  veryGood: { label: "Very Good", color: "#ffeb3b" },
-  good: { label: "Good", color: "#ff9800" },
-  bad: { label: "Bad", color: "#f44336" },
-};
+const defaultChartConfig: ChartConfig = {};
 
 export function RatingsChart() {
-  const totalRatings = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.value, 0);
-  }, []);
+  const { data, isLoading, isError } = useGetAllProjects();
+
+  if (isLoading) {
+    return <p className="text-center">Loading ratings...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-center text-red-500">Failed to fetch ratings</p>;
+  }
+
+  const ratingsCount = {
+    excellent: 0,
+    veryGood: 0,
+    good: 0,
+    bad: 0,
+  };
+
+  data?.projects.forEach((project: any) => {
+    if (project.Rating && project.Rating.length > 0) {
+      // Iterate over all the ratings for the project
+      project.Rating.forEach((rating: any) => {
+        const { relevance, impact_to_society, performance, progress } = rating;
+
+        const validRatings = [relevance, impact_to_society, performance, progress].filter(
+          (rating) => typeof rating === "number" && rating >= 0 && rating <= 5
+        );
+
+        if (validRatings.length === 4) {
+          const averageRating = validRatings.reduce((sum, rating) => sum + rating, 0) / 4;
+
+          if (averageRating > 4) {
+            ratingsCount.excellent += 1;
+          } else if (averageRating > 3) {
+            ratingsCount.veryGood += 1;
+          } else if (averageRating > 2) {
+            ratingsCount.good += 1;
+          } else {
+            ratingsCount.bad += 1;
+          }
+        } else {
+          ratingsCount.bad += 1;
+        }
+      });
+    } else {
+      ratingsCount.bad += 1;
+    }
+  });
+
+  const chartData = [
+    { rating: "Excellent", value: ratingsCount.excellent, fill: "#4caf50" },
+    { rating: "Very Good", value: ratingsCount.veryGood, fill: "#ffeb3b" },
+    { rating: "Good", value: ratingsCount.good, fill: "#ff9800" },
+    { rating: "Bad", value: ratingsCount.bad, fill: "#f44336" },
+  ];
+
+  const totalRatings = chartData.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
     <div>
-      <ChartContainer
-        config={chartConfig}
-        className="mx-auto aspect-square max-h-[250px]"
-      >
+      <ChartContainer config={defaultChartConfig} className="mx-auto aspect-square max-h-[250px]">
         <PieChart>
           <ChartTooltip
             cursor={false}
@@ -79,20 +115,37 @@ export function RatingsChart() {
           </Pie>
         </PieChart>
       </ChartContainer>
-      <div className="mt-4">
-        <p className="text-sm">
-          <span style={{ color: "#4caf50" }}>●</span> Excellent
-        </p>
-        <p className="text-sm">
-          <span style={{ color: "#ffeb3b" }}>●</span> Very Good
-        </p>
-        <p className="text-sm">
-          <span style={{ color: "#ff9800" }}>●</span> Good
-        </p>
-        <p className="text-sm">
-          <span style={{ color: "#f44336" }}>●</span> Bad
-        </p>
-      </div>
+      <div className="mt-4 space-y-2">
+  <div className="flex items-center justify-between text-sm p-2 border-b">
+    <div className="flex items-center space-x-2">
+      <span style={{ color: "#4caf50" }}>●</span>
+      <span>Excellent</span>
+    </div>
+    <span className="font-bold text-gray-700"> {ratingsCount.excellent}</span>
+  </div>
+  <div className="flex items-center justify-between text-sm p-2 border-b">
+    <div className="flex items-center space-x-2">
+      <span style={{ color: "#ffeb3b" }}>●</span>
+      <span>Very Good</span>
+    </div>
+    <span className="font-bold text-gray-700"> {ratingsCount.veryGood}</span>
+  </div>
+  <div className="flex items-center justify-between text-sm p-2 border-b">
+    <div className="flex items-center space-x-2">
+      <span style={{ color: "#ff9800" }}>●</span>
+      <span>Good</span>
+    </div>
+    <span className="font-bold text-gray-700"> {ratingsCount.good}</span>
+  </div>
+  <div className="flex items-center justify-between text-sm p-2">
+    <div className="flex items-center space-x-2">
+      <span style={{ color: "#f44336" }}>●</span>
+      <span>Bad</span>
+    </div>
+    <span className="font-bold text-gray-700"> {ratingsCount.bad}</span>
+  </div>
+</div>
+
     </div>
   );
 }
