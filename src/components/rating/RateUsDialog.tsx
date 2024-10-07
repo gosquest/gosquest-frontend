@@ -131,7 +131,7 @@ const RateUsDialog: React.FC<dialogProps> = ({ projectName }) => {
                         </div>
                     </form>
                 ) : (
-                    <div className="p-4 flex flex-col gap-4 text-center items-center bg-main h-[50vh] justify-center relative">
+                    <div className="p-2 flex flex-col gap-4 text-center items-center bg-main min-h-[50vh] justify-center relative overflow-hidden">
                         <h2 className="text-white text-2xl">Thanks for your feedback!</h2>
                         <Button onClick={() => setOpen(false)} className="w-fit bg-white text-main hover:text-white">
                             <Link href="/dashboard">Back To Dashboard</Link>
