@@ -38,10 +38,10 @@ const page = () => {
                <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
                   {data.data.map((project: any) => (
                      <Link href={`/dashboard/projects/${project.id}`} 
-                     className="bg-white shadow-lg" key={project.id}>
+                     className="bg-white shadow" key={project.id}>
                         <CardContent
                            key={project.id}
-                           className="flex items-center bg-input justify-center h-32 md:h-40 cursor-pointer"
+                           className="flex items-center bg-slate-50 justify-center h-32 md:h-40 cursor-pointer"
                         >
                            <img
                               src={project.logo}
