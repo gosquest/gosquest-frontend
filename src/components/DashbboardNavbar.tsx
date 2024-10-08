@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 const DashboardNavbar = () => {
    const { isCollapsed, mobileWidth, isClient } = useSidebarState();
    const { user } = useAuthStore();
-   const pathname = usePathname(); // Get the current path
+   const pathname = usePathname();
 
    if (!isClient) {
       return null;
@@ -18,8 +18,8 @@ const DashboardNavbar = () => {
 
    // Check if the user is in the dashboard or admin panel
    const isDashboard = pathname.includes("/dashboard");
-   const buttonText = isDashboard ? "View Unrated Projects" : "View All Projects";
-   const buttonLink = isDashboard ? "/dashboard" : "/admin/projects";
+   const buttonText = "View All Projects";
+   const buttonLink = isDashboard ? "/dashboard/projects" : "/admin/projects";
 
    return (
       <main

@@ -8,11 +8,13 @@ import ProjectsChart from "@/components/ProjectsChart";
 import { useGetAllProjects } from "@/hooks/useProject";
 import { Button } from "@/components/ui/button";
 import { Box, Shield, Star, Users } from "lucide-react";
+import { useGetAllUsers } from "@/hooks/useAuth";
 
 export default function Home() {
    const { data, isLoading, isError } = useGetAllProjects();
+   const { data: totalUsers, isPending } = useGetAllUsers()
 
-   if (isLoading) {
+   if (isLoading || isPending) {
       return <p className="text-center">Fetching projects...</p>;
    }
 
@@ -97,7 +99,7 @@ export default function Home() {
       {
          icon: Users,
          desc: "All users",
-         title: `${totalFeedbacks} Users`,
+         title: `${totalUsers.data.length} Users`,
          color: "#311D4A",
       },
    ];

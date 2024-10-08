@@ -17,7 +17,9 @@ const cookies = new Cookies()
 export default function SideNavbar() {
    const { isCollapsed, mobileWidth, isClient, toggleSidebar } = useSidebarState();
    const router = useRouter();
-   const [isDialogOpen, setDialogOpen] = useState(false);
+   const [isDialogOpen, setIsDialogOpen] = useState(false);
+   console.log(isDialogOpen);
+   
    const [isLoggingOut, setIsLoggingOut] = useState(false)
 
    if (!isClient) {
@@ -71,7 +73,7 @@ export default function SideNavbar() {
          />
 
          <div className="flex flex-col gap-4">
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                <DialogTrigger asChild>
                   <Button variant="secondary" className="flex items-center gap-2">
                      <LogOutIcon className="w-5 h-5" />
@@ -87,7 +89,7 @@ export default function SideNavbar() {
                      </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                     <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                     <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                      <Button onClick={handleLogout} className="ml-2" disabled={isLoggingOut}>
                         {
                            isLoggingOut ? 'loggin out....' : 'Logout'

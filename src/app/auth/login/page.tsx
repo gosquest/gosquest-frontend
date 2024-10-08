@@ -6,6 +6,7 @@ import { useUserLoginForm } from "@/hooks/useUserLoginForm";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Cookies } from "react-cookie";
+import { useSearchParams } from "next/navigation"; // New import to access search params
 
 const FormSchema = z.object({
    fullName: z.string({
@@ -17,7 +18,10 @@ const FormSchema = z.object({
 const cookies = new Cookies();
 
 const UserLoginPage = () => {
-   const { form, isSubmitting, onSubmit } = useUserLoginForm(FormSchema, cookies, "User");
+   const searchParams = useSearchParams();
+   const redirectUrl = searchParams.get("redirectUrl");
+   console.log(redirectUrl)
+   const { form, isSubmitting, onSubmit } = useUserLoginForm(FormSchema, cookies, "User", redirectUrl);
 
    return (
       <div className="relative z-10 w-full px-4 mt-4">

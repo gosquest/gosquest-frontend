@@ -6,10 +6,19 @@ import RateUsDialog from '@/components/rating/RateUsDialog';
 import { useGetProjectById } from '@/hooks/useProject';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import InvalidRequest from '@/components/IsValidUUID';
+import { isValidUUID } from '@/utils/constants';
 
 const Page: React.FC = () => {
    const router = useRouter();
    const params = useParams()
+  
+   if (!isValidUUID(params.slug[0])) {
+      return (
+         <InvalidRequest />
+      );
+   }
+
    const { data, isLoading, isError } = useGetProjectById(params.slug[0])
 
    if (isLoading) {

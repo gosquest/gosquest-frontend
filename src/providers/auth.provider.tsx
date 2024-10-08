@@ -23,6 +23,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           const userData = response.data;
           setUser(userData.user);
           setRoles(userData.userRole);
+          redirectToDashboard();
         } else {
           redirectToLogin();
         }
@@ -34,8 +35,21 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     const redirectToLogin = () => {
+      const redirectUrl = encodeURIComponent(pathName);
       if (!['/auth/login', '/', '/auth/admin'].includes(pathName)) {
-        window.location.replace('/auth/login')
+        window.location.replace(`/auth/login?redirectUrl=${redirectUrl}`);
+      }
+    };
+
+    const redirectToDashboard = () => {
+      if (['/auth/login', '/', '/auth/admin'].includes(pathName)) {
+        const params = new URLSearchParams(window.location.search);
+        const redirectUrl = params.get('redirectUrl');
+        if (redirectUrl) {
+          window.location.replace(redirectUrl);
+        } else {
+          window.location.replace('/dashboard');
+        }
       }
     };
 

@@ -3,21 +3,19 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
-import add from "../../public/icons/add.png";
-import { ChevronRight, LayoutDashboard, Box, List, UsersIcon, Settings, LogOutIcon, FolderKanban, FolderOpenDot } from "lucide-react";
+import { ChevronRight, LogOutIcon, FolderKanban, FolderOpenDot } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { Cookies } from "react-cookie";
-import Link from "next/link";
 
 const cookies = new Cookies()
 
 export default function DashbboardNavbar() {
    const { isCollapsed, mobileWidth, isClient, toggleSidebar } = useSidebarState();
    const router = useRouter();
-   const [isDialogOpen, setDialogOpen] = useState(false);
+   const [isDialogOpen, setIsDialogOpen] = useState(false);
    const [isLoggingOut, setIsLoggingOut] = useState(false)
 
    if (!isClient) {
@@ -61,7 +59,7 @@ export default function DashbboardNavbar() {
          />
 
          <div className="flex flex-col gap-4">
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                <DialogTrigger asChild>
                   <Button variant="secondary" className="flex items-center gap-2">
                      <LogOutIcon className="w-5 h-5" />
@@ -77,7 +75,7 @@ export default function DashbboardNavbar() {
                      </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                     <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                     <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                      <Button onClick={handleLogout} className="ml-2" disabled={isLoggingOut}>
                         {
                            isLoggingOut ? 'loggin out....' : 'Logout'

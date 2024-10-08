@@ -5,7 +5,7 @@ import { useLogin } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { storeData } from "@/utils/storage";
 
-export const useUserLoginForm = (FormSchema: any, cookies: any, role: string) => {
+export const useUserLoginForm = (FormSchema: any, cookies: any, role: string, redirectUrl: string | null) => {
    const form = useForm({
       resolver: zodResolver(FormSchema),
       defaultValues: { fullName: "", code: "" },
@@ -21,7 +21,14 @@ export const useUserLoginForm = (FormSchema: any, cookies: any, role: string) =>
          if (response?.success) {
             storeData("userId", response.data.userId);
             cookies.set("token", response.token, { path: "/" });
-            role == 'User' ? location.replace('/dashboard') : location.replace('/admin')
+
+            // If redirectUrl is present, redirect to that URL
+            if (redirectUrl) {
+               location.replace(redirectUrl);
+            } else {
+               // Fallback to default redirects based on role
+               role === 'User' ? location.replace('/dashboard') : location.replace('/admin');
+            }
          } else {
             toast.error(response.error.msg);
          }
