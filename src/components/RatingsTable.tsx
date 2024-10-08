@@ -120,9 +120,19 @@ type RatingsTableProps = {
 
 const RatingsTable: React.FC<RatingsTableProps> = ({ projects }) => {
   
+  const sortedProjects = projects.sort((a, b) => {
+    const ratingA = getAverageRating(a.rating);
+    const ratingB = getAverageRating(b.rating);
+
+
+    if (ratingA === null) return 1; 
+    if (ratingB === null) return -1;
+    
+    return ratingB - ratingA;
+  });
   return (
     <div className=''>
-      <DataTable columns={columns} data={projects} />
+      <DataTable columns={columns} data={sortedProjects} />
     </div>
   );
 };

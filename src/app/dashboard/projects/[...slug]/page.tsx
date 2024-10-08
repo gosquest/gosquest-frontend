@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
@@ -11,29 +11,32 @@ import { isValidUUID } from '@/utils/constants';
 
 const Page: React.FC = () => {
    const router = useRouter();
-   const params = useParams()
-  
+   const params = useParams();
+
    if (!isValidUUID(params.slug[0])) {
-      return (
-         <InvalidRequest />
-      );
+      return <InvalidRequest />;
    }
 
-   const { data, isLoading, isError } = useGetProjectById(params.slug[0])
+   const { data, isLoading, isError } = useGetProjectById(params.slug[0]);
 
    if (isLoading) {
-      return <p className="text-center">Fetching projects...</p>;
+      return <p className="text-center">Fetching project...</p>;
    }
 
    if (isError) {
       return (
          <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">Failed to fetch projects</p>
+            <p className="text-center text-red-500 mb-3">Failed to fetch project</p>
             <Button variant={"secondary"} onClick={() => location.reload()}>
                Reload
             </Button>
          </main>
       );
+   }
+
+   if (!data || !data.project) {
+      router.push('/not-found');  
+      return null;
    }
 
    return (

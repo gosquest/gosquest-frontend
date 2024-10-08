@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Check, ChevronsDown, Loader } from "lucide-react";
+import { Check, ChevronsDown, Eye, EyeOff, Loader } from "lucide-react";
 
 export const FullNameField = ({ form, isSubmitting, role }: any) => {
     const { data: userData, isPending: isUserPending } = role == "User" ? useGetAllUsers() : useGetAllAdmins();
@@ -73,16 +73,35 @@ export const FullNameField = ({ form, isSubmitting, role }: any) => {
     );
 };
 
-export const CodeField = ({ form, isSubmitting }: any) => (
-    <FormField
-        control={form.control}
-        name="code"
-        render={({ field }) => (
-            <FormItem className="flex flex-col w-full">
-                <FormLabel>Enter your passcode</FormLabel>
-                <Input {...field} type="password" placeholder="Enter passcode" className="h-[50px] bg-white text-main !font-normal !text-sm" disabled={isSubmitting} />
-                <FormMessage />
-            </FormItem>
-        )}
-    />
-);
+export const CodeField = ({ form, isSubmitting }: any) => {
+    const [showPasscode, setShowPasscode] = useState(false);
+
+    return (
+        <FormField
+            control={form.control}
+            name="code"
+            render={({ field }) => (
+                <FormItem className="flex flex-col w-full">
+                    <FormLabel>Enter your passcode</FormLabel>
+                    <div className="relative">
+                        <Input
+                            {...field}
+                            type={showPasscode ? "text" : "password"} 
+                            placeholder="Enter passcode"
+                            className="h-[50px] bg-white text-main !font-normal !text-sm"
+                            disabled={isSubmitting}
+                        />
+                        <button
+                            type="button"
+                            className="absolute inset-y-0 right-2 flex items-center"
+                            onClick={() => setShowPasscode(!showPasscode)}
+                        >
+                            {showPasscode ? <EyeOff className="h-5 w-5 text-gray-500" /> : <Eye className="h-5 w-5 text-gray-500" />}
+                        </button>
+                    </div>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
+    );
+};

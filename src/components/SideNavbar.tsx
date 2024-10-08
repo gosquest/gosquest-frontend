@@ -18,7 +18,6 @@ export default function SideNavbar() {
    const { isCollapsed, mobileWidth, isClient, toggleSidebar } = useSidebarState();
    const router = useRouter();
    const [isDialogOpen, setIsDialogOpen] = useState(false);
-   console.log(isDialogOpen);
    
    const [isLoggingOut, setIsLoggingOut] = useState(false)
 

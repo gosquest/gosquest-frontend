@@ -5,27 +5,30 @@ import { useParams, useRouter } from "next/navigation";
 import { useGetProjectById } from "@/hooks/useProject";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { isValidUUID } from "@/utils/constants"; 
+import InvalidRequest from "@/components/IsValidUUID"; 
 
 const Page: React.FC = () => {
    const router = useRouter();
    const params = useParams();
-   const { data, isLoading, isError } = useGetProjectById(params.slug[0]);
 
-   if (isLoading) {
-      return <p className="text-center">Fetching projects...</p>;
+   const projectId = params.slug[0];
+   if (!isValidUUID(projectId)) {
+      return <InvalidRequest />;
    }
 
-   if (isError) {
+   const { data, isLoading, isError } = useGetProjectById(projectId);
+
+   if (isLoading) {
+      return <p className="text-center">Fetching project...</p>;
+   }
+
+   if (isError || !data || !data.project) {
       return (
-         <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">
-               Failed to fetch projects
-            </p>
-            <Button
-               variant={"secondary"}
-               onClick={() => location.reload()}
-            >
-               Reload
+         <main className="flex flex-col justify-center min-h-screen items-center gap-4">
+            <p className="text-center text-red-500 mb-3">Project not found </p>
+            <Button variant="secondary" onClick={() => router.push("/dashboard")} className="w-fit">
+               Go back to Dashboard
             </Button>
          </main>
       );
@@ -40,7 +43,7 @@ const Page: React.FC = () => {
             <ArrowLeft size={21} />
          </div>
          <div className="w-full">
-            <h3 className="mb-3 text-right md:text-start">
+            <h3 className="mb-4 text-right md:text-start mt-4 md:mt-0 mr-4 md:mr-0">
                {data.project.name}
             </h3>
             <div className="mb-3 relative">
@@ -52,12 +55,12 @@ const Page: React.FC = () => {
                <div className="absolute flex items-center justify-center h-full w-full top-0">
                   <img
                      src={data.project.logo}
-                     alt={data.project.log}
+                     alt={data.project.logo}
                      className="object-cover max-h-[10rem]"
                   />
                </div>
             </div>
-            <div className="md:p-4">
+            <div className="p-4">
                <h3 className="text-main">Description</h3>
                <p className="mt-3">{data.project.description}</p>
                <div className="mt-4">

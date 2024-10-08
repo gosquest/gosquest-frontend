@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 
-// Function to shuffle an array
 const shuffleArray = (array: any[]) => {
    for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -29,7 +28,6 @@ const Page = () => {
 
    useEffect(() => {
       if (data?.data) {
-         // Shuffle projects when data is available
          const shuffled = shuffleArray([...data.data]);
          setShuffledProjects(shuffled);
       }
@@ -57,7 +55,7 @@ const Page = () => {
    return (
       <main>
          <MobileNav />
-         <div className="px-4 md:p-0 text-center md:flex justify-between items-center">
+         <div className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8">
             <h4>Projects Awaiting Your Rating</h4>
             <Input
                type="text"
