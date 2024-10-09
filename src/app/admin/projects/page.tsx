@@ -17,7 +17,7 @@ import { Edit, Trash2 } from "lucide-react";
 import Link from "next/link";
 import HandleFailed from "@/components/HandleFailed";
 
-const page = () => {
+const Project = () => {
    const { data, isLoading, isError } = useGetAllProjects();
 
    if (isLoading) {
@@ -78,4 +78,4 @@ const page = () => {
    );
 };
 
-export default page;
+export default Project;

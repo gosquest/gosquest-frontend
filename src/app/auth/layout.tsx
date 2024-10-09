@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
    const { roles } = useAuthStore()
    const router = useRouter()
 
@@ -25,4 +25,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
    );
 };
 
-export default layout;
+export default AuthLayout;

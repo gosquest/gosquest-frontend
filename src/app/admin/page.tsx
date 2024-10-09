@@ -51,6 +51,8 @@ export default function Home() {
       );
    }
 
+   const userCount = totalUsers?.data?.length || 0;
+
    const totalProjects = data?.projects?.length || 0;
    const totalRatings = data?.projects?.reduce(
       (acc: any, project: { Rating: string | any[] }) =>
@@ -99,7 +101,7 @@ export default function Home() {
       {
          icon: Users,
          desc: "All users",
-         title: `${totalUsers.data.length} Users`,
+         title: `${userCount} Users`,
          color: "#311D4A",
       },
    ];

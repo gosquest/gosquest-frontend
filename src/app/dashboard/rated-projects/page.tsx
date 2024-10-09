@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 
-const page = () => {
+const RatedProject = () => {
    const { user } = useAuthStore();
    const { data, isLoading, isError } = useGetRatedProjects(user.id);
 
@@ -87,7 +87,7 @@ const page = () => {
                   No Projects Rated Yet
                </h2>
                <p className="text-gray-600 mb-4 text-center">
-                  You haven't rated any projects. Start by reviewing the ones
+                  You haven&apos;t rated any projects. Start by reviewing the ones
                   available!
                </p>
             </div>
@@ -96,4 +96,4 @@ const page = () => {
    );
 };
 
-export default page;
+export default RatedProject;

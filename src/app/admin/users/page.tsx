@@ -43,10 +43,6 @@ const columns: ColumnDef<User>[] = [
   },
 ];
 
-// Function to handle editing a user
-const handleEdit = (user: User) => {
-  console.log("Edit user:", user);
-};
 
 export default function UsersPage() {
   const { data: userData, isPending: isUserPending } = useGetAllUsersByAdmin();

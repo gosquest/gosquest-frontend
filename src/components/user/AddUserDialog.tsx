@@ -9,7 +9,7 @@ export function AddUserDialog() {
     const [fullName, setFullName] = useState("");
     const [roleId, setRoleId] = useState("");
     const { data, isLoading, isError } = useGetAllRoles();
-    const registerMutation = useRegister()
+    const registerMutation = useRegister();
 
     const handleAddUser = async () => {
         if (!fullName) {
@@ -21,16 +21,16 @@ export function AddUserDialog() {
             return;
         }
         try {
-            const response = await registerMutation.mutateAsync({ fullName, roleId })
+            const response = await registerMutation.mutateAsync({ fullName, roleId });
             if (response.success) {
-                toast.success(response.message)
-                setRoleId("")
-                setFullName("")
+                toast.success(response.message);
+                setRoleId("");
+                setFullName("");
             } else {
-                toast.error(response.error.msg)
+                toast.error(response.error.msg);
             }
         } catch (error) {
-            toast.error("Adding user failed")
+            toast.error("Adding user failed");
         }
     };
 
@@ -62,17 +62,24 @@ export function AddUserDialog() {
                         onChange={(e) => setRoleId(e.target.value)}
                     >
                         <option value="" disabled>Select Role</option>
-                        {!isLoading && !isError && data?.roles.map((role: any) => (
-                            <option key={role.id} value={role.id}>
-                                {role.name}
-                            </option>
-                        ))}
+                        {/* Check for loading, error, and data roles existence */}
+                        {isLoading ? (
+                            <option>Loading roles...</option>
+                        ) : isError ? (
+                            <option>Error loading roles</option>
+                        ) : Array.isArray(data?.roles) && data.roles.length > 0 ? (
+                            data.roles.map((role: any) => (
+                                <option key={role.id} value={role.id}>
+                                    {role.name}
+                                </option>
+                            ))
+                        ) : (
+                            <option>No roles available</option>
+                        )}
                     </select>
 
                     <Button className="bg-main !rounded" onClick={handleAddUser} disabled={registerMutation.isPending}>
-                        {
-                            registerMutation.isPending ? "Saving..." : "Save"
-                        }
+                        {registerMutation.isPending ? "Saving..." : "Save"}
                     </Button>
                 </div>
             </DialogContent>

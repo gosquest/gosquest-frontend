@@ -7,7 +7,7 @@ import { useGetProjectById } from '@/hooks/useProject'
 import { Button } from '@/components/ui/button'
 import HandleFailed from '@/components/HandleFailed'
 
-const page = () => {
+const ProjectDetails = () => {
    const params = useParams()
    const { data, isLoading, isError } = useGetProjectById(params.slug[0])
    
@@ -29,4 +29,4 @@ const page = () => {
    )
 }
 
-export default page
+export default ProjectDetails

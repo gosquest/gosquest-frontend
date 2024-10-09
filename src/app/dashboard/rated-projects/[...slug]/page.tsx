@@ -8,16 +8,19 @@ import Link from "next/link";
 import { isValidUUID } from "@/utils/constants"; 
 import InvalidRequest from "@/components/IsValidUUID"; 
 
-const Page: React.FC = () => {
+const RatedProject: React.FC = () => {
    const router = useRouter();
    const params = useParams();
 
    const projectId = params.slug[0];
+
+
+   const { data, isLoading, isError } = useGetProjectById(projectId);
+
+
    if (!isValidUUID(projectId)) {
       return <InvalidRequest />;
    }
-
-   const { data, isLoading, isError } = useGetProjectById(projectId);
 
    if (isLoading) {
       return <p className="text-center">Fetching project...</p>;
@@ -26,7 +29,7 @@ const Page: React.FC = () => {
    if (isError || !data || !data.project) {
       return (
          <main className="flex flex-col justify-center min-h-screen items-center gap-4">
-            <p className="text-center text-red-500 mb-3">Project not found </p>
+            <p className="text-center text-red-500 mb-3">Project not found</p>
             <Button variant="secondary" onClick={() => router.push("/dashboard")} className="w-fit">
                Go back to Dashboard
             </Button>
@@ -81,4 +84,4 @@ const Page: React.FC = () => {
    );
 };
 
-export default Page;
+export default RatedProject;

@@ -2,7 +2,7 @@ import DashboardNavbar from "@/components/DashbboardNavbar";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import React from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
    return (
       <div className="h-[100vh] w-full bg-white text-black flex overflow-y-hidden">
          <DashboardSidebar />
@@ -14,4 +14,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
    );
 };
 
-export default layout;
+export default DashboardLayout;

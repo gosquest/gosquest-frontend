@@ -97,7 +97,7 @@ const Page = () => {
             data.data.length <= 0 && (
                <div className="flex flex-col items-center justify-center h-[40vh]">
                   <h2 className="text-2xl font-bold text-gray-700">All caught up! 🎉</h2>
-                  <p className="text-gray-600 mb-4">You've rated all the projects. Thanks!</p>
+                  <p className="text-gray-600 mb-4">You&apos;ve rated all the projects. Thanks!</p>
                </div>
             )
          }

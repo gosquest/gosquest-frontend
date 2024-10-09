@@ -2,7 +2,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 
-export default function team_leaderForm() {
+export default function TeamLeaderForm() {
   const { control } = useFormContext();
   return (
     <FormField

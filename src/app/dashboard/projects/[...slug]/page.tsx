@@ -9,15 +9,20 @@ import Link from 'next/link';
 import InvalidRequest from '@/components/IsValidUUID';
 import { isValidUUID } from '@/utils/constants';
 
-const Page: React.FC = () => {
+const ProjectPage: React.FC = () => {
    const router = useRouter();
    const params = useParams();
 
-   if (!isValidUUID(params.slug[0])) {
+
+   const isValid = isValidUUID(params.slug[0]);
+
+ 
+   const { data, isLoading, isError } = useGetProjectById(isValid ? params.slug[0] : '');
+
+
+   if (!isValid) {
       return <InvalidRequest />;
    }
-
-   const { data, isLoading, isError } = useGetProjectById(params.slug[0]);
 
    if (isLoading) {
       return <p className="text-center">Fetching project...</p>;
@@ -72,4 +77,4 @@ const Page: React.FC = () => {
    );
 };
 
-export default Page;
+export default ProjectPage;

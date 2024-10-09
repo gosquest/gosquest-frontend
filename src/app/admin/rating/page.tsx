@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useGetAllProjects } from "@/hooks/useProject";
 
 
-const page = () => {
+const ProjectRating = () => {
    const { data, isLoading, isError } = useGetAllProjects();
 
    if (isLoading) {
@@ -52,4 +52,4 @@ const page = () => {
    );
 };
 
-export default page;
+export default ProjectRating;

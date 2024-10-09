@@ -8,9 +8,15 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Check, ChevronsDown, Eye, EyeOff, Loader } from "lucide-react";
 
 export const FullNameField = ({ form, isSubmitting, role }: any) => {
-    const { data: userData, isPending: isUserPending } = role == "User" ? useGetAllUsers() : useGetAllAdmins();
+
+    const { data: userData, isPending: isUserPending } = useGetAllUsers();
+    const { data: adminData, isPending: isAdminPending } = useGetAllAdmins();
 
     const [popoverOpen, setPopoverOpen] = useState(false);
+    
+
+    const data = role === "User" ? userData : adminData;
+    const isPending = role === "User" ? isUserPending : isAdminPending;
 
     return (
         <FormField
@@ -29,7 +35,7 @@ export const FullNameField = ({ form, isSubmitting, role }: any) => {
                                     disabled={isSubmitting}
                                     onClick={() => setPopoverOpen(!popoverOpen)}
                                 >
-                                    {field.value ? userData?.data.find((user: any) => user.fullName === field.value)?.label || field.value : "Select name"}
+                                    {field.value ? data?.data.find((user: any) => user.fullName === field.value)?.label || field.value : "Select name"}
                                     <ChevronsDown className="ml-2 h-5 w-5 shrink-0 opacity-50" />
                                 </Button>
                             </FormControl>
@@ -38,15 +44,15 @@ export const FullNameField = ({ form, isSubmitting, role }: any) => {
                             <Command>
                                 <CommandInput placeholder="Search name..." className="bg-white" />
                                 <CommandList>
-                                    {isUserPending ? (
+                                    {isPending ? (
                                         <div className="flex items-center justify-center p-4">
                                             <Loader className="animate-spin h-5 w-5" />
                                         </div>
                                     ) : (
                                         <>
                                             <CommandEmpty>No name found.</CommandEmpty>
-                                            <CommandGroup className="">
-                                                {userData?.data.map((user: any) => (
+                                            <CommandGroup>
+                                                {data?.data.map((user: any) => (
                                                     <CommandItem
                                                         key={user.id}
                                                         value={user.fullName}
@@ -72,6 +78,7 @@ export const FullNameField = ({ form, isSubmitting, role }: any) => {
         />
     );
 };
+
 
 export const CodeField = ({ form, isSubmitting }: any) => {
     const [showPasscode, setShowPasscode] = useState(false);
