@@ -16,10 +16,9 @@ const DashboardNavbar = () => {
       return null;
    }
 
-   // Check if the user is in the dashboard or admin panel
    const isDashboard = pathname.includes("/dashboard");
-   const buttonText = "View All Projects";
-   const buttonLink = isDashboard ? "/dashboard/projects" : "/admin/projects";
+   const buttonText = "View All Websites";
+   const buttonLink = isDashboard ? "/dashboard/websites" : "/admin/websites";
 
    return (
       <main
@@ -33,7 +32,10 @@ const DashboardNavbar = () => {
          </section>
 
          <section className="flex gap-4 items-center justify-center">
-            <Link href={buttonLink} className="flex bg-main rounded gap-2 items-center p-2 text-white w-auto px-4">
+            <Link
+               href={buttonLink}
+               className="flex bg-main rounded gap-2 items-center p-2 text-white w-auto px-4"
+            >
                <Blocks className="w-4 h-4" />
                <small className="text-xs sm:text-sm">{buttonText}</small>
             </Link>

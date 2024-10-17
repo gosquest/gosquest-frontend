@@ -5,11 +5,11 @@ import { Loader, PenBox, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import { useGetAllUsersByAdmin } from "@/hooks/useAuth";
 import { AddUserDialog } from "@/components/user/AddUserDialog";
 import DeleteUserDialog from "@/components/user/DeleteUserDialog";
 import { User } from "@/types";
 import EditUserDialog from "@/components/user/EditUserDialog";
+import { useFetchAllUsers } from "@/hooks/useAuth";
 
 
 const columns: ColumnDef<User>[] = [
@@ -18,16 +18,12 @@ const columns: ColumnDef<User>[] = [
     header: "Name",
   },
   {
-    accessorKey: "code",
-    header: "Passcode",
+    accessorKey: "email",
+    header: "Email",
   },
   {
-    accessorKey: "role.name",
+    accessorKey: "role",
     header: "Role",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
   },
   {
     header: "Actions",
@@ -45,7 +41,7 @@ const columns: ColumnDef<User>[] = [
 
 
 export default function UsersPage() {
-  const { data: userData, isPending: isUserPending } = useGetAllUsersByAdmin();
+  const { data: userData, isPending: isUserPending } = useFetchAllUsers();
 
   return (
     <div className="flex flex-col gap-5 w-full">

@@ -50,14 +50,13 @@ export default function LogoUploadForm() {
       name="logo"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Project Logo</FormLabel>
+          <FormLabel>Website Logo</FormLabel>
           <FormControl>
             <div
               {...getRootProps()}
               className={`p-6 rounded border-dashed border-2 text-main flex flex-col items-center gap-2 ${isUploading ? "opacity-50" : ""}`}
             >
               {logo ? (
-                // Display uploaded logo if available
                 <img src={logo} alt="Uploaded logo" className=" max-h-40 object-cover" />
               ) : (
                 <>

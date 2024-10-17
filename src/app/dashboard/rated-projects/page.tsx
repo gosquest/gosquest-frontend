@@ -3,7 +3,7 @@
 import { CardContent } from "@/components/Card";
 import React, { useState } from "react";
 import MobileNav from "@/components/MobileNav";
-import { useGetRatedProjects } from "@/hooks/useProject";
+import { useGetRatedProjects } from "@/hooks/useWebsites";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
@@ -56,7 +56,6 @@ const RatedProject = () => {
          </div>
          {filteredProjects?.length > 0 ? (
             <div>
-               
                <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 p-4 md:p-0">
                   {data.data.map((project: any) => (
                      <Link
@@ -87,8 +86,8 @@ const RatedProject = () => {
                   No Projects Rated Yet
                </h2>
                <p className="text-gray-600 mb-4 text-center">
-                  You haven&apos;t rated any projects. Start by reviewing the ones
-                  available!
+                  You haven&apos;t rated any projects. Start by reviewing the
+                  ones available!
                </p>
             </div>
          )}

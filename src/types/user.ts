@@ -1,7 +1,7 @@
 export interface User {
     id: string;
     fullName: string;
-    roleId: string;
+    email:string;
     status: string;
     createdAt: string;
     updatedAt: string;

@@ -3,8 +3,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { User } from "@/types";
-import { useUpdateUser } from "@/hooks/useAuth";
 import { PenBox } from "lucide-react";
+import { useModifyUser } from "@/hooks/useAuth";
 
 type EditUserDialogProps = {
     user: User;
@@ -13,25 +13,30 @@ type EditUserDialogProps = {
 export default function EditUserDialog({ user }: EditUserDialogProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [fullName, setFullName] = useState(user.fullName);
-    const [status, setStatus] = useState(user.status);
+    const [email, setEmail] = useState(user.email); // Add email state
+    const [role, setRole] = useState(user.role || ""); // Add role state
+    const [password, setPassword] = useState(""); // Add password state (optional)
 
-    const updateUserMutation = useUpdateUser()
+    const updateUserMutation = useModifyUser();
 
     const handleUpdate = async () => {
-        if (!fullName) {
-            toast.error("Full Name is required");
+        if (!fullName || !email || !password) {
+            toast.error("Full Name, Email, and Password are required");
             return;
         }
         try {
-            const response = await updateUserMutation.mutateAsync({ userId: user.id, formData: { fullName, status } })
+            const response = await updateUserMutation.mutateAsync({
+                userId: user.id,
+                formData: { fullName, email, role, password: password || undefined }, // Include password
+            });
             if (response.success) {
-                toast.success(response.message)
-                setIsOpen(false)
+                toast.success(response.message);
+                setIsOpen(false);
             } else {
-                toast.error(response.error.msg)
+                toast.error(response.error.msg);
             }
         } catch (error) {
-            toast.error("Updating user failed!")
+            toast.error("Updating user failed!");
         }
     };
 
@@ -55,20 +60,33 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                     />
+                    <input
+                        type="email"
+                        className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <select
                         className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     >
-                        <option value="Enabled">Enabled</option>
-                        <option value="Disabled">Disabled</option>
+                        <option value="" disabled>Select Role</option>
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
                     </select>
                     <div className="flex gap-2 justify-end mt-4">
                         <Button variant="secondary" onClick={() => setIsOpen(false)}>Cancel</Button>
                         <Button className="bg-main !rounded" onClick={handleUpdate} disabled={updateUserMutation.isPending}>
-                            {
-                                updateUserMutation.isPending ? "Saving..." : "Save"
-                            }
+                            {updateUserMutation.isPending ? "Saving..." : "Save"}
                         </Button>
                     </div>
                 </div>

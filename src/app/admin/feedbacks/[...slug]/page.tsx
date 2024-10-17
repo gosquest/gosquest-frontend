@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useGetProjectById } from "@/hooks/useProject";
+import { useGetProjectById } from "@/hooks/useWebsites";
 import { useParams } from "next/navigation";
 import HandleFailed from "@/components/HandleFailed";
 import { toast } from "react-toastify";
@@ -10,7 +10,11 @@ const Feedback = () => {
    const params = useParams();
 
    const { data, isLoading, isError } = useGetProjectById(params.slug[0]);
-   const { data: users, isPending, isError: userError } = useGetAllUsersByAdmin();
+   const {
+      data: users,
+      isPending,
+      isError: userError,
+   } = useGetAllUsersByAdmin();
 
    if (isLoading || isPending) {
       return <p className="text-center">Fetching projects...</p>;
@@ -62,11 +66,18 @@ const Feedback = () => {
                   <h4>Feedbacks ({project.Rating.length})</h4>
 
                   {project.Rating.map((rating: any) => {
-                     const user = users.data.find((user: any) => user.id === rating.userId);
-                     const firstLetter = user ? user.fullName.charAt(0).toUpperCase() : "?";
+                     const user = users.data.find(
+                        (user: any) => user.id === rating.userId
+                     );
+                     const firstLetter = user
+                        ? user.fullName.charAt(0).toUpperCase()
+                        : "?";
 
                      return (
-                        <div key={rating.id} className="flex gap-4">
+                        <div
+                           key={rating.id}
+                           className="flex gap-4"
+                        >
                            <div className="bg-gray-100 text-main rounded-full w-6 h-6 flex items-center justify-center text-xs">
                               {firstLetter}
                            </div>
@@ -74,7 +85,9 @@ const Feedback = () => {
                               <p className="text-main">
                                  {user ? user.fullName : "Unknown User"}
                               </p>
-                              <p>{rating.feedback || "No feedback provided."}</p>
+                              <p>
+                                 {rating.feedback || "No feedback provided."}
+                              </p>
                            </div>
                         </div>
                      );

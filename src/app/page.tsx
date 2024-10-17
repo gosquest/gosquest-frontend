@@ -1,36 +1,65 @@
-/** @format */
+"use client";
+import React from "react";
+import { Canvas } from "@react-three/fiber";
+import { Stars, OrbitControls } from "@react-three/drei";
+import PublicNavbar from "@/components/PublicNavbar";
+import { BibleModel } from "@/components/BibleModel";
+import RotatingSword from "@/components/RotatingSword";
+import SceneComponents from "@/components/SceneComponents";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
-import flow from "../../public/svg/flow.svg";
-import Link from "next/link";
+import baby from "../../public/images/baby.jpeg";
+import Faqs from "@/components/Faqs";
+import Footer from "@/components/Footer";
 
-const page = () => {
+const InteractiveScene: React.FC = () => {
    return (
-      <div className="bg-main relative min-h-screen overflow-hidden flex items-center justify-center">
-         <Image
-            src={flow}
-            alt="flowers"
-            fill
-            style={{ objectFit: "cover" }}
-            className="absolute top-0 left-0"
-         />
+      <>
+         <PublicNavbar />
+         <div className="w-full h-screen fixed top-0 left-0 -z-10 big-main">
+            <SceneComponents />
 
-         <div className="flex flex-col items-center justify-center gap-4 h-full relative z-10">
-            <img
-               src={'/svg/logo.svg'}
-               alt="welcome"
-               className="relative z-10 mx-auto h-[12rem]"
-            />
-            <h1 className="text-center text-white md:w-5/6 mt-6">
-               Welcome to Rwanda Coding Academy Hackathon
-            </h1>
-            <Button className="mt-6 round p-6 bg-white text-main hover:bg-transparent hover:text-white border-white border">
-               <Link href="/auth/login">Login to continue</Link>
-            </Button>
+            <div className="absolute top-[65%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center text-main z-10">
+               <h1 className="text-4xl font-bold">GosQuest</h1>
+               <p className="text-lg mt-2">A best quiz game ever.</p>
+               <Button className="mt-6">Have Fun</Button>
+            </div>
          </div>
-      </div>
+         <div className=" min-h-screen mt-[100vh]  py-6">
+            <div className="flex flex-col md:flex-row gap-6 mt-10 container">
+               <div className="flex flex-col gap-4 justify-center">
+                  <h2 className="text-main">Yaratwimanye</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Ab, dolorem? Ipsam nemo soluta natus officia, quasi quis.
+                     Dolorum, quam provident.
+                  </p>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Ullam cum expedita consequatur officia? Saepe consequuntur,
+                     laborum adipisci fugiat molestias inventore veritatis,
+                     voluptatem in voluptate laudantium modi hic praesentium.
+                     Optio, voluptas rerum maiores adipisci enim porro. Optio
+                     numquam exercitationem laborum illo.
+                  </p>
+                  <Button className="w-fit p-6">Play</Button>
+               </div>
+               <Image
+                  src={baby}
+                  alt="gosquest"
+                  className="md:w-[500px]"
+               />
+            </div>
+
+            {/* faq */}
+
+            <Faqs/>
+            <Footer/>
+         </div>
+
+
+      </>
    );
 };
 
-export default page;
+export default InteractiveScene;

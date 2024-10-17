@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
 import Logo from "../../public/svg/logo.svg";
-import { ChevronRight, LogOutIcon, FolderKanban, FolderOpenDot } from "lucide-react";
+import { ChevronRight, LogOutIcon, FolderKanban, FolderOpenDot, Globe } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -47,14 +47,15 @@ export default function DashbboardNavbar() {
          )}
 
          <div className={`flex items-center justify-center flex-col gap-2 transition-all duration-300`}>
-            <Image src={Logo} alt="logo" className="rounded" />
-            {!isCollapsed && <h4 className="text-center text-sm">RCA Rating System</h4>}
+            {/* <Image src={Logo} alt="logo" className="rounded" /> */}
+            {!isCollapsed && <h4 className="text-center text-sm">GosQuest</h4>}
          </div>
          <Nav
             isCollapsed={isCollapsed}
             links={[
-               { title: "Unrated Projects", href: "/dashboard", icon: FolderKanban, variant: "ghost" },
-               { title: "Rated projects", href: "/dashboard/rated-projects", icon: FolderOpenDot, variant: "ghost" },
+               { title: "Dashboard", href: "/dashboard", icon: FolderKanban, variant: "ghost" },
+               { title: "Websites", href: "/dashboard/websites", icon: Globe, variant: "ghost" },
+               { title: "Liked Websites", href: "/dashboard/liked-websites", icon: Globe, variant: "ghost" },
             ]}
          />
 

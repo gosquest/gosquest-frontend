@@ -43,7 +43,7 @@ const MobileNav = () => {
          <div className="flex justify-between mb-3">
             <div>
                <h3>Hello 👋,</h3>
-               <small>{user.fullName}</small>
+               <small>{user && user.name}</small>
             </div>
             <DropdownMenu>
                <DropdownMenuTrigger asChild>

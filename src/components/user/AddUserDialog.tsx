@@ -1,31 +1,45 @@
+
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { useGetAllRoles } from "@/hooks/useRole";
-import { useRegister } from "@/hooks/useAuth";
+import { useRegisterUser } from "@/hooks/useAuth";
 
 export function AddUserDialog() {
     const [fullName, setFullName] = useState("");
-    const [roleId, setRoleId] = useState("");
-    const { data, isLoading, isError } = useGetAllRoles();
-    const registerMutation = useRegister();
+    const [email, setEmail] = useState("");
+    const [role, setRole] = useState(""); // Role is optional
+    const [password, setPassword] = useState("");
+    const registerMutation = useRegisterUser();
 
     const handleAddUser = async () => {
-        if (!fullName) {
-            toast.error("User full name is required");
+        // Validation for required fields (role is now optional)
+        if (!fullName || !email || !password) {
+            toast.error("Full Name, Email, and Password are required");
             return;
         }
-        if (!roleId) {
-            toast.error("Please select a role");
-            return;
-        }
+
         try {
-            const response = await registerMutation.mutateAsync({ fullName, roleId });
+            const response = await registerMutation.mutateAsync({
+                fullName,
+                email,
+                password,
+                role: role || undefined, // Send role as undefined if empty
+            });
             if (response.success) {
                 toast.success(response.message);
-                setRoleId("");
+                // Reset fields after successful registration
+                setRole("");
                 setFullName("");
+                setEmail("");
+                setPassword("");
             } else {
                 toast.error(response.error.msg);
             }
@@ -44,7 +58,9 @@ export function AddUserDialog() {
             <DialogContent className="bg-white">
                 <DialogHeader>
                     <DialogTitle>Add New User</DialogTitle>
-                    <DialogDescription>Enter the full name of the user and assign a role.</DialogDescription>
+                    <DialogDescription>
+                        Enter the full name of the user, email, password, and assign a role (optional).
+                    </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col gap-4">
                     <input
@@ -55,30 +71,38 @@ export function AddUserDialog() {
                         onChange={(e) => setFullName(e.target.value)}
                     />
 
+                    <input
+                        type="email"
+                        className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <input
+                        type="password"
+                        className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
                     {/* Role selection */}
                     <select
                         className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-main"
-                        value={roleId}
-                        onChange={(e) => setRoleId(e.target.value)}
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     >
-                        <option value="" disabled>Select Role</option>
-                        {/* Check for loading, error, and data roles existence */}
-                        {isLoading ? (
-                            <option>Loading roles...</option>
-                        ) : isError ? (
-                            <option>Error loading roles</option>
-                        ) : Array.isArray(data?.roles) && data.roles.length > 0 ? (
-                            data.roles.map((role: any) => (
-                                <option key={role.id} value={role.id}>
-                                    {role.name}
-                                </option>
-                            ))
-                        ) : (
-                            <option>No roles available</option>
-                        )}
+                        <option value="" disabled>Select Role (Optional)</option>
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
                     </select>
 
-                    <Button className="bg-main !rounded" onClick={handleAddUser} disabled={registerMutation.isPending}>
+                    <Button
+                        className="bg-main !rounded"
+                        onClick={handleAddUser}
+                        disabled={registerMutation.isPending}
+                    >
                         {registerMutation.isPending ? "Saving..." : "Save"}
                     </Button>
                 </div>

@@ -4,12 +4,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { User } from "@/types";
-import { useDeleteUser } from "@/hooks/useAuth";
+import { useRemoveUser } from "@/hooks/useAuth";
+
 
 // Delete user dialog component
 const DeleteUserDialog = ({ user }: { user: User }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const deleteUserMutation = useDeleteUser()
+    const deleteUserMutation = useRemoveUser()
 
     const handleDelete = async () => {
         try {

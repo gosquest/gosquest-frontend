@@ -50,21 +50,21 @@ export default function SideNavbar() {
          )}
 
          <div className={`flex items-center justify-center flex-col gap-2 transition-all duration-300`}>
-            <Image src={Logo} alt="logo" className="rounded" />
-            {!isCollapsed && <h4 className="text-center text-sm">RCA Rating System</h4>}
+            {/* <Image src={Logo} alt="logo" className="rounded" /> */}
+            {!isCollapsed && <h4 className="text-center text-sm">GosQuest</h4>}
          </div>
 
-         <Link href={'/admin/add-project'} className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 py-2.5 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-3"}`}
+         <Link href={'/admin/add-website'} className={`flex items-center justify-center bg-white rounded text-main hover:!bg-input transition-all duration-300 px-4 py-2.5 ${isCollapsed ? "w-[70%] mx-auto" : "space-x-3"}`}
          >
-            <Image src={add} alt="create" className={`w-[20px] ${isCollapsed && ''}`} />
-            <p className="text-sm">{!isCollapsed && "Add new project"}</p>
+            <Image src={add} alt="add" className={`w-[20px] ${isCollapsed && ''}`} />
+            <p className="text-sm">{!isCollapsed && "Add new website"}</p>
          </Link>
 
          <Nav
             isCollapsed={isCollapsed}
             links={[
                { title: "Dashboard", href: "/admin", icon: LayoutDashboard, variant: "default" },
-               { title: "Projects", href: "/admin/projects", icon: Box, variant: "ghost" },
+               { title: "Websites", href: "/admin/websites", icon: Box, variant: "ghost" },
                { title: "Rating", href: "/admin/rating", icon: List, variant: "ghost" },
                { title: "Feedbacks", href: "/admin/feedbacks", icon: Shield, variant: "ghost" },
                { title: "Users", href: "/admin/users", icon: UsersIcon, variant: "ghost" },

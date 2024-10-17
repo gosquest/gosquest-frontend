@@ -2,7 +2,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 
-export default function ProjectNameForm() {
+export default function WebsiteNameForm() {
   const { control } = useFormContext();
   return (
     <FormField
@@ -10,9 +10,9 @@ export default function ProjectNameForm() {
       name="name"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Project Name</FormLabel>
+          <FormLabel>Website Name</FormLabel>
           <FormControl>
-            <Input {...field} value={field.value ?? ""} placeholder="Enter project name" />
+            <Input {...field} value={field.value ?? ""} placeholder="Enter website name" />
           </FormControl>
           <FormMessage />
         </FormItem>

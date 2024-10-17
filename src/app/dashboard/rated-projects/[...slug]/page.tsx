@@ -2,11 +2,11 @@
 import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useGetProjectById } from "@/hooks/useProject";
+import { useGetProjectById } from "@/hooks/useWebsites";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { isValidUUID } from "@/utils/constants"; 
-import InvalidRequest from "@/components/IsValidUUID"; 
+import { isValidUUID } from "@/utils/constants";
+import InvalidRequest from "@/components/IsValidUUID";
 
 const RatedProject: React.FC = () => {
    const router = useRouter();
@@ -14,9 +14,7 @@ const RatedProject: React.FC = () => {
 
    const projectId = params.slug[0];
 
-
    const { data, isLoading, isError } = useGetProjectById(projectId);
-
 
    if (!isValidUUID(projectId)) {
       return <InvalidRequest />;
@@ -30,7 +28,11 @@ const RatedProject: React.FC = () => {
       return (
          <main className="flex flex-col justify-center min-h-screen items-center gap-4">
             <p className="text-center text-red-500 mb-3">Project not found</p>
-            <Button variant="secondary" onClick={() => router.push("/dashboard")} className="w-fit">
+            <Button
+               variant="secondary"
+               onClick={() => router.push("/dashboard")}
+               className="w-fit"
+            >
                Go back to Dashboard
             </Button>
          </main>
