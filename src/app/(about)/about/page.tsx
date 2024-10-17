@@ -121,15 +121,14 @@ const AboutPage = () => {
                         </p>
                      </div>
                      <Image
-                     className="xl:w-1/2"
+                        className="xl:w-1/2"
                         src={joy}
                         alt="joy"
                      />
                   </div>
                   <div className="flex gap-6 flex-col md:flex-row items-center justify-center">
-                     
                      <Image
-                     className="xl:w-1/2"
+                        className="xl:w-1/2"
                         src={values}
                         alt="joy"
                      />
@@ -164,7 +163,7 @@ const AboutPage = () => {
                         </p>
                      </div>
                      <Image
-                     className="xl:w-1/2"
+                        className="xl:w-1/2"
                         src={charity}
                         alt="joy"
                      />

@@ -11,13 +11,15 @@ import Image from "next/image";
 import baby from "../../public/images/baby.jpeg";
 import Faqs from "@/components/Faqs";
 import Footer from "@/components/Footer";
+import RecommendedWebsites from "@/components/RecommendedWebsites";
+import RecommendedYoutube from "@/components/RecommendedYoutube";
 
 const InteractiveScene: React.FC = () => {
    return (
       <>
          <PublicNavbar />
          <div className="w-full h-screen fixed top-0 left-0 -z-10 big-main">
-            <SceneComponents />
+            {/* <SceneComponents /> */}
 
             <div className="absolute top-[65%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center text-main z-10">
                <h1 className="text-4xl font-bold">GosQuest</h1>
@@ -50,14 +52,16 @@ const InteractiveScene: React.FC = () => {
                   className="md:w-[500px]"
                />
             </div>
+            {/* Recommended Gospel websites */}
+            <RecommendedWebsites />
 
+            {/* Recommended Gospel Youtube channels */}
+            <RecommendedYoutube />
             {/* faq */}
 
-            <Faqs/>
-            <Footer/>
+            <Faqs />
+            <Footer />
          </div>
-
-
       </>
    );
 };

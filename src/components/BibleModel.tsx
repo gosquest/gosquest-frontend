@@ -1,8 +1,9 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTF } from '@/types';
+import * as THREE from "three"
 
-// Extend GLTF type for TypeScript
+// Extend the custom GLTF type for TypeScript
 type GLTFResult = GLTF & {
   nodes: {
     Model_material0_0: THREE.Mesh;
@@ -13,8 +14,9 @@ type GLTFResult = GLTF & {
 };
 
 export const BibleModel: React.FC<{ position?: [number, number, number], scale?: number }> = (props) => {
-  const { nodes, materials } = useGLTF('/bible.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF('/bible.glb') as unknown as GLTFResult;
   return (
+    
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={20}>
         <mesh
