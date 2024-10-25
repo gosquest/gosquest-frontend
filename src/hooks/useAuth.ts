@@ -96,10 +96,20 @@ export const useFetchUsersByAdmin = () =>
 export const useRegisterUser = () => {
    const setUser = useAuthStore((state) => state.setUser);
    const setRoles = useAuthStore((state) => state.setRoles);
-   
-   const queryClient = useQueryClient();
-   return useMutation<void, Error, Partial<User>>({
+
+   return useMutation({
       mutationFn: registerUser,
+      onSuccess: (data) => {
+         console.log("Signup successful:", data);
+         if (data && data.success) {
+            setUser(data.data);
+            setRoles(data.data.roles);
+            document.cookie = `auth-token=${data.data.token}; path=/;`;
+         }
+      },
+      onError: (error) => {
+         console.error("Signup error:", error);
+      },
    });
 };
 

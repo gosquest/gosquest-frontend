@@ -11,50 +11,65 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRegisterUser } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { Cookies } from "react-cookie";
+import { useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
    fullName: z.string().min(1, "Username is required"),
    email: z.string().email("Invalid email"),
-   password: z.string().min(8, "Password must be atleast 8 characters"),
+   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 type FormData = z.infer<typeof formSchema>;
 const SignupPage = () => {
+   const [isSubmitting, setIsSubmitting] = useState(false);
+
+   const searchParams = useSearchParams();
+   const redirectUrl = searchParams.get("redirectUrl");
+
    const form = useForm<FormData>({
       resolver: zodResolver(formSchema),
       mode: "onChange",
-      defaultValues:{
-         fullName:"",
-         email:"",
-         password:""
-      }
+      defaultValues: {
+         fullName: "",
+         email: "",
+         password: "",
+      },
    });
 
    const cookies = new Cookies();
    const registerUserMutation = useRegisterUser();
 
    const onSubmit = async (data: FormData) => {
+      setIsSubmitting(true);
       try {
-         const res = await registerUserMutation.mutateAsync(data);
-         if (res?.success) {
-            cookies.set("token", res.token, { path: "/" });
-            toast.success("Registration successful! Please login.");
-            location.replace("/dashboard");
+         const response = await registerUserMutation.mutateAsync(data);
+         if (response?.success) {
+            cookies.set("auth-token", response.token, { path: "/" });
+
+            if (redirectUrl) {
+               location.replace(redirectUrl);
+            } else {
+               response.data.role === "USER"
+                  ? location.replace("/dashboard")
+                  : location.replace("/admin");
+            }
          } else {
-            toast.error(res?.error?.message || "Registration failed");
+            toast.error(response?.error?.msg || "Login failed");
          }
-      } catch (err) {
-         toast.error("An unexpected error occurred. Please try again.");
+      } catch (error) {
+         toast.error("Login failed. Please try again.");
+      } finally {
+         setIsSubmitting(false);
       }
    };
-   
+
    return (
-      <div className="w-full md:w-5/6 container flex items-center justify-center flex-col">
+      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-main">
          <Form {...form}>
             <form
                onSubmit={form.handleSubmit(onSubmit)}
@@ -128,8 +143,9 @@ const SignupPage = () => {
                <Button
                   type="submit"
                   className="w-full"
+                  disabled={isSubmitting}
                >
-                  Create Account
+                  {isSubmitting ? "Creating Account..." : "Create Account"}
                </Button>
             </form>
          </Form>

@@ -8,7 +8,6 @@ import {
    FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,7 +22,7 @@ const cookies = new Cookies();
 
 const formSchema = z.object({
    email: z.string().email("Invalid email"),
-   password: z.string().min(8, "Password must be atleast 8 characters"),
+   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -69,11 +68,11 @@ const LoginPage = () => {
       }
    };
    return (
-      <div className="w-full md:w-5/6 container flex items-center justify-center flex-col">
+      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-main">
          <Form {...form}>
             <form
                onSubmit={form.handleSubmit(onSubmit)}
-               className="space-y-8 w-full md:w-3/4 xl:w-[50%]"
+               className="space-y-8 w-full md:w-3/4 xl:w-[50%] px-4"
             >
                <FormField
                   control={form.control}
@@ -122,8 +121,9 @@ const LoginPage = () => {
                <Button
                   type="submit"
                   className="w-full"
+                  disabled={isSubmitting}
                >
-                  Login
+                  {isSubmitting ? "Logging in..." : "Login"}
                </Button>
             </form>
          </Form>

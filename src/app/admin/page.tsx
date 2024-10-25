@@ -24,7 +24,6 @@ export default function Home() {
       category: website.category?.name || "Uncategorized",
       addedBy: website.addedBy?.name || "Unknown",
       likes: website.likes.length,
-      dislikes: website.dislikes.length,
    }));
 
    if (isError) {

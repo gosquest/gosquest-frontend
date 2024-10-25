@@ -20,10 +20,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 .split("; ")
                 .find((row) => row.startsWith("auth-token="))
                 ?.split("=")[1];
-
+    
             if (token) {
                 const decodedToken: any = jwtDecode(token);
-                setUser({ id: decodedToken.id, fullName: decodedToken.fullName, email: decodedToken.email });
+                setUser({ id: decodedToken.id, fullName: decodedToken.fullName });
                 setRoles(decodedToken.roles);
             } else {
                 console.error("No token found.");

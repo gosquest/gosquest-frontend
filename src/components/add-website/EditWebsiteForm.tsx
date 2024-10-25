@@ -2,39 +2,43 @@
 
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addProjectSchema } from "@/schemas/addProjectSchema";
-import TeamLeaderForm from "./WebsiteUrlForm";
-import DescriptionAndLinkForm from "./DescriptionForm";
+import {  addWebsiteSchema} from "@/schemas/addWebsiteSchema";
 import LogoUploadForm from "./LogoUploadForm";
 import CoverImageUploadForm from "./CoverImageUploadForm";
 import { Button } from "@/components/ui/button";
+import { useUpdateWebsite } from "@/hooks/useWebsites";
 import { toast } from "react-toastify";
-import { useCreateWebsite } from "@/hooks/useWebsites";
-import WebsiteNameForm from "./ProjectNameForm";
 import WebsiteUrlForm from "./WebsiteUrlForm";
 import DescriptionForm from "./DescriptionForm";
+import WebsiteNameForm from "./WebsiteNameForm";
 
-export default function AddWebsiteForm() {
+interface EditWebsiteFormProps {
+   websiteData: any;
+}
+
+export default function EditWebsiteForm({ websiteData }: EditWebsiteFormProps) {
    const formMethods = useForm({
-      resolver: zodResolver(addProjectSchema),
+      resolver: zodResolver(addWebsiteSchema),
       mode: "onChange",
+      defaultValues: websiteData,
    });
 
    const { reset } = formMethods;
-   const addWebsiteMutation = useCreateWebsite();
+   const updateWebsiteMutation = useUpdateWebsite();
 
    const onSubmit = async (data: any) => {
       try {
-         const response = await addWebsiteMutation.mutateAsync(data);
+         const response = await updateWebsiteMutation.mutateAsync({
+            _id: websiteData.id,
+            formData: data,
+         });
          if (response.success) {
-            toast.success("Project added successfully!");
+            toast.success("Website updated successfully!");
             reset();
-         } else {
-            toast.error(response.error.msg);
          }
       } catch (error) {
          console.log(error);
-         toast.error("Adding project failed!");
+         toast.error("Updating website failed!");
       }
    };
 
@@ -55,10 +59,10 @@ export default function AddWebsiteForm() {
             <CoverImageUploadForm />
             <Button
                type="submit"
-               className="w-full p-6 !bg-main"
-               disabled={addWebsiteMutation.isPending}
+               className="w-full p-6"
+               disabled={updateWebsiteMutation.isPending}
             >
-               {addWebsiteMutation.isPending ? "Submitting..." : "Submit"}
+               {updateWebsiteMutation.isPending ? "Updating..." : "Update"}
             </Button>
          </form>
       </FormProvider>

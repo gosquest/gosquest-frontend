@@ -1,18 +1,17 @@
 "use client";
 
 import React from "react";
-import EditProjectForm from "@/components/add-project/EditProjectForm";
 import { useParams } from "next/navigation";
-import { useGetProjectById } from "@/hooks/useWebsites";
-import { Button } from "@/components/ui/button";
+import { useGetWebsiteById } from "@/hooks/useWebsites";
 import HandleFailed from "@/components/HandleFailed";
+import EditWebsiteForm from "@/components/add-website/EditWebsiteForm";
 
-const ProjectDetails = () => {
+const WebsiteDetails = () => {
    const params = useParams();
-   const { data, isLoading, isError } = useGetProjectById(params.slug[0]);
+   const { data, isLoading, isError } = useGetWebsiteById(params.slug[0]);
 
    if (isLoading) {
-      return <p className="text-center">Fetching project...</p>;
+      return <p className="text-center">Fetching website...</p>;
    }
 
    if (isError) {
@@ -21,10 +20,10 @@ const ProjectDetails = () => {
 
    return (
       <main>
-         <h3 className="text-center mb-8">Edit Project</h3>
-         <EditProjectForm projectData={data.project} />
+         <h3 className="text-center mb-8">Edit Website</h3>
+         <EditWebsiteForm websiteData={data.website} />
       </main>
    );
 };
 
-export default ProjectDetails;
+export default WebsiteDetails;

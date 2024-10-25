@@ -42,6 +42,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpen, onClose }) => {
                Contact
             </Link>
             <Link
+               href="/games"
+               onClick={onClose}
+            >
+               Games
+            </Link>
+            <Link
                href="/login"
                onClick={onClose}
             >
@@ -100,6 +106,12 @@ const PublicNavbar = () => {
                   className="p-4 lg:p-0"
                >
                   Contact
+               </Link>
+               <Link
+                  href="/games"
+                  className="p-4 lg:p-0"
+               >
+                 Games
                </Link>
                <Link
                   href="/login"

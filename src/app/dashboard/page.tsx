@@ -23,8 +23,6 @@ const Page = () => {
       ? useGetAllWebsites()
       : { data: null, isLoading: false, isError: false };
 
-      console.log("Nziko azampoza amarira",data);
-      
    const [searchQuery, setSearchQuery] = useState<string>("");
 
    const [shuffledWebsites, setShuffledWebsites] = useState<any[]>([]);
@@ -57,7 +55,7 @@ const Page = () => {
    }
 
    const filteredWebsites = shuffledWebsites.filter((website: any) =>
-      website.title.toLowerCase().includes(searchQuery.toLowerCase())
+      website.name.toLowerCase().includes(searchQuery.toLowerCase())
    );
 
    return (
@@ -88,11 +86,13 @@ const Page = () => {
                      >
                         <img
                            src={website.logo}
-                           alt={website.title}
+                           alt={website.name}
                            className="max-h-28 md:max-h-32 max-w-[90%]"
                         />
                      </CardContent>
-                     <p className="p-4 text-lg font-medium">{website.title}</p>
+                     <p className="p-4 text-lg font-medium text-center">
+                        {website.name}
+                     </p>
                   </Link>
                ))}
             </div>

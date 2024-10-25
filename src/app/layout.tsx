@@ -8,6 +8,7 @@ import AuthProvider from "@/providers/auth.provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NpProgress from "@/components/NpProgress";
+import StarFieldBackground from "@/components/StarField"; // Import the StarFieldBackground component
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -34,7 +35,8 @@ export default function RootLayout({
          >
             <AuthProvider>
                <ReactQueryProvider>
-                  <div className="bg-white">{children}</div>
+                  <StarFieldBackground /> {/* Add the star background here */}
+                  <div className="relative">{children}</div>
                   <NpProgress />
                </ReactQueryProvider>
             </AuthProvider>

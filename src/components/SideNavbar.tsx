@@ -65,8 +65,6 @@ export default function SideNavbar() {
             links={[
                { title: "Dashboard", href: "/admin", icon: LayoutDashboard, variant: "default" },
                { title: "Websites", href: "/admin/websites", icon: Box, variant: "ghost" },
-               { title: "Rating", href: "/admin/rating", icon: List, variant: "ghost" },
-               { title: "Feedbacks", href: "/admin/feedbacks", icon: Shield, variant: "ghost" },
                { title: "Users", href: "/admin/users", icon: UsersIcon, variant: "ghost" },
             ]}
          />

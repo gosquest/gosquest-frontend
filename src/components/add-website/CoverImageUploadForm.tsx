@@ -28,7 +28,7 @@ export default function CoverImageUploadForm() {
     try {
       const response = await uploadFile(formData);
       if (response && response.filename) {
-        const fileUrl = `/projects/cover/${response.filename}`;
+        const fileUrl = `/websites/cover/${response.filename}`;
         setValue("cover_image", fileUrl);
       }
     } catch (error) {
@@ -54,7 +54,7 @@ export default function CoverImageUploadForm() {
           <FormControl>
             <div
               {...getRootProps()}
-              className={`p-6 rounded border-dashed border-2 text-main flex flex-col items-center gap-2 ${isUploading ? "opacity-50" : ""}`}
+              className={`p-6 rounded border-dashed border-2 text-main flex flex-col items-center gap-2 cursor-pointer ${isUploading ? "opacity-50" : ""}`}
             >
               {cover_image ? (
                 // Display uploaded cover image if available
