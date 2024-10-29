@@ -12,7 +12,7 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpen, onClose }) => {
    return (
       <div
-         className={`fixed top-0 right-0 w-[80%] sm:w-[60%] bg-main text-white flex flex-col items-center p-8 z-40 transition-transform duration-300 ease-in-out md:hidden ${
+         className={`fixed top-0 right-0 w-[80%] sm:w-[60%] bg-white text-main flex flex-col items-center p-8 z-40 transition-transform duration-300 ease-in-out md:hidden ${
             menuOpen ? "translate-x-0" : "translate-x-full"
          } shadow-lg`}
       >
@@ -70,7 +70,7 @@ const PublicNavbar = () => {
    };
 
    return (
-      <div className="p-4 fixed top-0 left-0 w-full h-[100px] bg-main text-white flex items-center justify-center z-50">
+      <div className="p-4 fixed top-0 left-0 w-full h-[100px] shadow text-main flex items-center justify-center z-50 bg-white">
          <div className="container flex items-center justify-between">
             <h4 className="text-lg font-bold">GosQuest</h4>
 

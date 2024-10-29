@@ -40,5 +40,4 @@ export const useGetWebsiteById = (_id: string) =>
    useQuery<any, Error, any>({
       queryKey: ["website", _id],
       queryFn: getWebsiteById,
-      enabled: !!_id,
    });

@@ -44,7 +44,7 @@ const ContactPage = () => {
 
    return (
       <div className="flex items-center flex-col gap-4 justify-center container">
-         <h4>Contact Us</h4>
+         <h4 className="mt-6">Contact Us</h4>
          <p>Any question or remarks? Just write us a message!</p>
          <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full mt-6">
          <div className="bg-main p-4 flex flex-col gap-8 rounded-lg text-white w-5/6 md:w-[40%] min-h-[40vh] justify-between">

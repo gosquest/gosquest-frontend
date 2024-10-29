@@ -8,7 +8,7 @@ const AboutPage = () => {
    return (
       <>
          <div
-            className="bg-center bg-cover  bg-main min-h-[35vh] flex flex-col justify-center -mt-6"
+            className="bg-center bg-cover  bg-white min-h-[35vh] flex flex-col justify-center -mt-6"
             style={{
                backgroundImage: "url('/images/about.png')",
             }}

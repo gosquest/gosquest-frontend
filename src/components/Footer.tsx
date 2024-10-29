@@ -38,9 +38,9 @@ const Footer = () => {
    ];
 
    return (
-      <div className="bg-center bg-cover mt-40 h-auto bg-main">
+      <div className="bg-center bg-cover mt-40 h-auto  text-main">
          <div className="h-full py-20">
-            <div className="flex flex-col gap-4 p-8 w-11/12 bg-white/80 mx-auto rounded-md my-2 items-center text-center">
+            <div className="flex flex-col gap-4 p-8 w-11/12 bg-main mx-auto rounded-md my-2 items-center text-center text-white">
                <h3 className="py-4 text-[28px]">Ready to get started?</h3>
                <p className="text-center md:text-start md:w-4/6">
                   Create an account instantly and start accepting payments. Feel
@@ -54,13 +54,13 @@ const Footer = () => {
                   >
                      <Link href="/login">Login</Link>
                   </Button>
-                  <Button className="w-[60%] md:w-[130px] p-4">
+                  <Button className="w-[60%] md:w-[130px] p-4 bg-white text-main border hover:border-white hover:text-white ">
                      <Link href="/sign-up">Signup</Link>
                   </Button>
                </div>
             </div>
             <div className="container mx-auto px-4 border-b border-white py-6 flex flex-col md:flex-row items-center md:items-start text-white text-center md:text-left">
-               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-4 w-full justify-center">
+               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-4 w-full justify-center text-black">
                   <div className="flex flex-col items-center md:items-start">
                      <h4 className="text-lg font-bold">GosQuest</h4>
                      <p className="mt-2">
