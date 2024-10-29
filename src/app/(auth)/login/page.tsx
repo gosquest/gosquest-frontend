@@ -68,7 +68,7 @@ const LoginPage = () => {
       }
    };
    return (
-      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-main">
+      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-black">
          <Form {...form}>
             <form
                onSubmit={form.handleSubmit(onSubmit)}
@@ -131,7 +131,7 @@ const LoginPage = () => {
             <p>
                Don't have an account?
                <Link
-                  className="ml-4"
+                  className="ml-4 text-main"
                   href="/signup"
                >
                   Signup

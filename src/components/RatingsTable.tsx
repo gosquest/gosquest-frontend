@@ -7,6 +7,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { DataTable } from './DataTable';
 import clsx from 'clsx';
 
+
 type Project = {
   id: string;
   name: string;

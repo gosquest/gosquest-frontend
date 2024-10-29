@@ -2,16 +2,17 @@
 
 import PageTitle from "@/components/PageTitle";
 import Card, { CardContent } from "@/components/Card";
-import RatingsTable from "@/components/RatingsTable"; 
 import { useGetAllWebsites } from "@/hooks/useWebsites";
 import { Button } from "@/components/ui/button";
 import { Box, Shield, Star, Users } from "lucide-react";
 import { useFetchAllUsers } from "@/hooks/useAuth";
+import RecentUsers from "@/components/RecentUsers";
+import OverallLikesTable from "@/components/OverallLikesTable";
 
 export default function Home() {
    const { data, isLoading, isError } = useGetAllWebsites();
    const { data: totalUsers, isPending } = useFetchAllUsers();
-
+   
    if (isLoading || isPending) {
       return <p className="text-center">Fetching websites...</p>;
    }
@@ -42,7 +43,8 @@ export default function Home() {
       );
    }
 
-   const userCount = totalUsers?.length || 0;
+   //@ts-ignore
+   const userCount = totalUsers?.data?.length || 0;
 
    const totalWebsites = data?.websites?.length || 0;
    const totalRatings = data?.websites?.reduce(
@@ -100,12 +102,12 @@ export default function Home() {
 
          <section className="flex gap-6 flex-col md:flex-row">
             <div className="mb-2 font-medium border-[0.5px] p-4 rounded-lg space-y-3">
-               <small className="">Ratings</small>
-               {/* <RatingsTable websites={websites} /> */}
+               <small className="">Recent Users</small>
+               <RecentUsers />
             </div>
-            <div className="border-[0.5px] w-full md:w-[30%] xl:w-[35%] p-2 rounded-lg">
+            <div className="border-[0.5px] w-full md:w-[60%] xl:w-[66%] p-4 rounded-lg">
                <small>Overall Ratings</small>
-               {/* <RatingsChart /> */}
+                <OverallLikesTable websites={websites}/>
             </div>
          </section>
       </div>
