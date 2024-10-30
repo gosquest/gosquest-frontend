@@ -81,6 +81,7 @@ export const useFetchAllUsers = () =>
       queryFn: fetchAllUsers,
    });
 
+   
 export const useFetchAllAdmins = () =>
    useQuery<User[], Error>({
       queryKey: ["admins"],
