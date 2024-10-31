@@ -4,7 +4,6 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useGetAllWebsites } from "@/hooks/useWebsites";
-import Image from "next/image";
 
 const RecommendedWebsites = () => {
    const { data, isLoading, error } = useGetAllWebsites();
