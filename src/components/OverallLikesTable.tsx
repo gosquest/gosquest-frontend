@@ -7,7 +7,6 @@ import 'react-circular-progressbar/dist/styles.css';
 import { DataTable } from './DataTable';
 import clsx from 'clsx';
 
-// Define types based on your schema
 type Website = {
     id: string;
     name: string;
@@ -47,9 +46,8 @@ const getStatusStyles = (status: string) => {
     }
 };
 
-// Calculate the rating based on the number of likes
-const getAverageRating = (likes: LikeDislike[]) => {
-    if (!likes || likes.length === 0) return null;
+const getAverageRating = (likes: LikeDislike[] | undefined) => {
+    if (!Array.isArray(likes) || likes.length === 0) return null;
     const totalLikes = likes.filter((like) => like.like).length;
     return Math.round((totalLikes / likes.length) * 100);
 };
