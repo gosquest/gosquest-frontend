@@ -21,7 +21,7 @@ const InteractiveScene: React.FC = () => {
          <div className="w-full h-screen fixed top-0 left-0 -z-10 big-main">
             {/* <SceneComponents /> */}
 
-        {/* thid container contains welcome info  */}
+        {/* this container contains welcome info  */}
             <div className="fixed top-[65%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center text-main z-10 ">
                <h1 className="text-4xl font-bold">GosQuest</h1>
                <p className="text-lg mt-2">A best quiz game ever.</p>
@@ -55,13 +55,8 @@ const InteractiveScene: React.FC = () => {
                   className="md:w-[500px]"
                />
             </div>
-            {/* Recommended Gospel websites */}
             <RecommendedWebsites />
-
-            {/* Recommended Gospel Youtube channels */}
             <RecommendedYoutube />
-            {/* faq */}
-
             <Faqs />
             <Footer />
          </div>
