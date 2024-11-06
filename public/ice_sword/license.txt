@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ice Sword
+* source:	https://sketchfab.com/3d-models/ice-sword-85f4deecea8f4c66b90cb3d6a313885b
+* author:	NechoFell (https://sketchfab.com/NechoFell)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ice Sword" (https://sketchfab.com/3d-models/ice-sword-85f4deecea8f4c66b90cb3d6a313885b) by NechoFell (https://sketchfab.com/NechoFell) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

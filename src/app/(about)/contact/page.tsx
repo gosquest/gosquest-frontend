@@ -8,6 +8,7 @@ import {
    FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -44,40 +45,79 @@ const ContactPage = () => {
 
    return (
       <div className="flex items-center flex-col gap-4 justify-center container">
+         <div className="w-full overflow-hidden">
+            {/* Animated Heading 1 */}
+            <motion.div
+               initial={{ x: "100%" }}
+               animate={{ x: "-100%" }}
+               transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+               className="whitespace-nowrap"
+            >
+               <h1 className="text-6xl md:text-8xl font-bold text-center text-main">
+                  Welcome to GosQuest - Bringing People Closer to the Gospel
+               </h1>
+            </motion.div>
+
+            {/* Animated Heading 2 */}
+            <motion.div
+               initial={{ x: "100%" }}
+               animate={{ x: "-100%" }}
+               transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+               className="whitespace-nowrap mt-4"
+            >
+               <h1 className="text-4xl md:text-6xl font-bold text-center text-secondary">
+                  Join our community of faith and explore endless possibilities with GosQuest
+               </h1>
+            </motion.div>
+
+            {/* Animated Heading 3 */}
+            <motion.div
+               initial={{ x: "100%" }}
+               animate={{ x: "-100%" }}
+               transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+               className="whitespace-nowrap mt-4"
+            >
+               <h1 className="text-4xl md:text-6xl font-bold text-center text-accent">
+                  Discover more about our mission, values, and the path to spiritual growth
+               </h1>
+            </motion.div>
+         </div>
+
          <h4 className="mt-6">Contact Us</h4>
          <p>Any question or remarks? Just write us a message!</p>
+         
          <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full mt-6">
-         <div className="bg-main p-4 flex flex-col gap-8 rounded-lg text-white w-5/6 md:w-[40%] min-h-[40vh] justify-between">
-                  <div>
-                     <h5>Contact Information</h5>
-                     <p>Say something to GosQuest</p>
+            <div className="bg-main p-4 flex flex-col gap-8 rounded-lg text-white w-5/6 md:w-[40%] min-h-[40vh] justify-between">
+               <div>
+                  <h5>Contact Information</h5>
+                  <p>Say something to GosQuest</p>
+               </div>
+               <div className="flex flex-col gap-3">
+                  <div className="flex gap-3">
+                     <Phone />
+                     <span>+250780037145</span>
                   </div>
-                  <div className="flex flex-col gap-3">
-                     <div className="flex gap-3">
-                        <Phone />
-                        <span>+250780037145</span>
-                     </div>
-                     <div className="flex gap-3">
-                        <Mail />
-                        <span>gosquest@gmail.com</span>
-                     </div>
-                     <div className="flex gap-3">
-                        <LocateIcon />
-                        <span>Kigali,Rwanda</span>
-                     </div>
+                  <div className="flex gap-3">
+                     <Mail />
+                     <span>gosquest@gmail.com</span>
                   </div>
-                  <div className="flex gap-4  ">
-                     <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border ">
-                        <Facebook />
-                     </div>
-                     <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border">
-                        <Instagram />
-                     </div>
-                     <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border">
-                        <Linkedin />
-                     </div>
+                  <div className="flex gap-3">
+                     <LocateIcon />
+                     <span>Kigali, Rwanda</span>
                   </div>
                </div>
+               <div className="flex gap-4">
+                  <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border">
+                     <Facebook />
+                  </div>
+                  <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border">
+                     <Instagram />
+                  </div>
+                  <div className="p-3 flex items-center justify-center rounded-full w-10 h-10 border">
+                     <Linkedin />
+                  </div>
+               </div>
+            </div>
 
             <Form {...form}>
                <form

@@ -18,7 +18,7 @@ type GLTFResult = GLTF & {
 
 export const SwordModel = React.forwardRef<THREE.Group>((props, ref) => {
    const { nodes, materials } = useGLTF(
-      "/ice_sword.glb"
+      "/ice_sword/scene.gltf"
    ) as unknown as GLTFResult;
    return (
       <group
@@ -75,4 +75,4 @@ export const SwordModel = React.forwardRef<THREE.Group>((props, ref) => {
    );
 });
 
-useGLTF.preload("/ice_sword.glb");
+useGLTF.preload("/ice_sword/scene.gltf");
