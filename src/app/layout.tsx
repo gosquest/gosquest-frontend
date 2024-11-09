@@ -36,7 +36,7 @@ export default function RootLayout({
             <AuthProvider>
                <ReactQueryProvider>
                   <StarFieldBackground /> {/* Add the star background here */}
-                  <div className="relative">{children}</div>
+                  <div className="relative ">{children}</div>
                   <NpProgress />
                </ReactQueryProvider>
             </AuthProvider>

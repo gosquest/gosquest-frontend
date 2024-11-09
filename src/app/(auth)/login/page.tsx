@@ -68,7 +68,7 @@ const LoginPage = () => {
       }
    };
    return (
-      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-black">
+      <div className="relative w-full md:w-5/6 container flex items-center justify-center flex-col bg-paper py-10 rounded-lg shadow-lg text-black  top-0 z-[5]   bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]">
          <Form {...form}>
             <form
                onSubmit={form.handleSubmit(onSubmit)}
@@ -120,7 +120,7 @@ const LoginPage = () => {
 
                <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500"
                   disabled={isSubmitting}
                >
                   {isSubmitting ? "Logging in..." : "Login"}

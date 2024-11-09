@@ -3,7 +3,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtDecode } from "jwt-decode";
 
-const PUBLIC_PATHS = ["/", "/login", "/signup", "/about", "/contact", "/games"];
+const PUBLIC_PATHS = [
+   "/",
+   "/login",
+   "/signup",
+   "/about",
+   "/contact",
+   "/games",
+   "/yt-channels",
+   "/gospel-websites"
+];
 
 export async function middleware(request: NextRequest) {
    const token = request.cookies.get("auth-token");

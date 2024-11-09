@@ -39,6 +39,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.53.0",
+    "react-parallax-tilt": "^1.7.253",
     "react-spinners": "^0.14.1",
     "react-spring": "^9.7.4",
     "react-toastify": "^10.0.5",

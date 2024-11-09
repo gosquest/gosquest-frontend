@@ -8,6 +8,8 @@ import { useAuthStore } from "@/store/useAuthStore";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { useGetAllWebsites } from "@/hooks/useWebsites";
+import Tilt from "react-parallax-tilt";
+import { motion } from "framer-motion";
 
 const shuffleArray = (array: any[]) => {
    for (let i = array.length - 1; i > 0; i--) {
@@ -17,6 +19,14 @@ const shuffleArray = (array: any[]) => {
    return array;
 };
 
+const fadeIn = (
+   delay = 0,
+   duration = 0.75
+) => ({
+   initial: { opacity: 0, y: 20 },
+   animate: { opacity: 1, y: 0, transition: { delay, duration } },
+});
+
 const Page = () => {
    const { user } = useAuthStore();
    const { data, isLoading, isError } = user
@@ -24,7 +34,6 @@ const Page = () => {
       : { data: null, isLoading: false, isError: false };
 
    const [searchQuery, setSearchQuery] = useState<string>("");
-
    const [shuffledWebsites, setShuffledWebsites] = useState<any[]>([]);
 
    useEffect(() => {
@@ -41,13 +50,8 @@ const Page = () => {
    if (isError) {
       return (
          <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">
-               Failed to fetch websites
-            </p>
-            <Button
-               variant={"secondary"}
-               onClick={() => location.reload()}
-            >
+            <p className="text-center text-red-500 mb-3">Failed to fetch websites</p>
+            <Button variant={"secondary"} onClick={() => location.reload()}>
                Reload
             </Button>
          </main>
@@ -61,7 +65,12 @@ const Page = () => {
    return (
       <main>
          <MobileNav />
-         <div className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8">
+         <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8"
+         >
             <h4>All Websites</h4>
             <Input
                type="text"
@@ -70,30 +79,40 @@ const Page = () => {
                onChange={(e) => setSearchQuery(e.target.value)}
                className="w-full md:w-1/3 px-3 py-5 bg-input mt-4 md:mt-0 rounded outline-none"
             />
-         </div>
+         </motion.div>
 
          {filteredWebsites.length > 0 ? (
             <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 p-4 md:p-0">
-               {filteredWebsites.map((website: any) => (
-                  <Link
-                     href={`/dashboard/websites/${website.id}`}
-                     className="bg-white shadow"
+               {filteredWebsites.map((website: any, index: number) => (
+                  <motion.div
                      key={website.id}
+                     variants={fadeIn(index * 0.2, 0.75)}
+                     initial="initial"
+                     animate="animate"
                   >
-                     <CardContent
-                        key={website.id}
-                        className="flex items-center bg-slate-50 justify-center h-32 md:h-40 cursor-pointer"
-                     >
-                        <img
-                           src={website.logo}
-                           alt={website.name}
-                           className="max-h-28 md:max-h-32 max-w-[90%]"
-                        />
-                     </CardContent>
-                     <p className="p-4 text-lg font-medium text-center">
-                        {website.name}
-                     </p>
-                  </Link>
+                     <Link href={`/dashboard/websites/${website.id}`} passHref>
+                        <Tilt
+                           className="bg-white shadow-lg rounded-lg"
+                           tiltMaxAngleX={10}
+                           tiltMaxAngleY={10}
+                           scale={1.05}
+                           transitionSpeed={400}
+                        >
+                           <CardContent
+                              className="flex items-center bg-slate-50 justify-center h-32 md:h-40 cursor-pointer rounded-t-lg"
+                           >
+                              <img
+                                 src={website.logo}
+                                 alt={website.name}
+                                 className="max-h-28 md:max-h-32 max-w-[90%]"
+                              />
+                           </CardContent>
+                           <p className="p-4 text-lg font-medium text-center">
+                              {website.name}
+                           </p>
+                        </Tilt>
+                     </Link>
+                  </motion.div>
                ))}
             </div>
          ) : (
