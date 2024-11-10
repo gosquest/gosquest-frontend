@@ -37,6 +37,7 @@
     "react-confetti": "^6.1.0",
     "react-cookie": "^7.2.0",
     "react-dom": "^18",
+    "react-draggable": "^4.4.6",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.53.0",
     "react-parallax-tilt": "^1.7.253",

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Nav } from "./ui/nav";
-import Logo from "../../public/svg/logo.svg";
+import Logo from "../../public/assets/Logo.svg";
 import { ChevronRight, LogOutIcon, FolderKanban, FolderOpenDot, Globe } from "lucide-react";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useState } from "react";
@@ -31,7 +31,7 @@ export default function DashbboardNavbar() {
 
    return (
       <div
-         className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-main flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
+         className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out
          ${mobileWidth ? "hidden" : isCollapsed ? "w-[120px]" : "w-[270px]"}`}
       >
          {!mobileWidth && (
@@ -47,7 +47,7 @@ export default function DashbboardNavbar() {
          )}
 
          <div className={`flex items-center justify-center flex-col gap-2 transition-all duration-300`}>
-            {/* <Image src={Logo} alt="logo" className="rounded" /> */}
+            <Image src={Logo} alt="logo" className="rounded" />
             {!isCollapsed && <h4 className="text-center text-sm">GosQuest</h4>}
          </div>
          <Nav
@@ -68,21 +68,33 @@ export default function DashbboardNavbar() {
                   </Button>
                </DialogTrigger>
 
-               <DialogContent className="sm:max-w-[425px] bg-white">
+               <DialogContent className="w-[90%] sm:max-w-[425px] bg-white p-[2px]"  style={{
+                  backgroundImage:
+                     "linear-gradient(white, white), linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899)",
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "content-box, border-box",
+               }}>
                   <DialogHeader>
-                     <DialogTitle>Confirm Logout</DialogTitle>
-                     <DialogDescription>
+                     <DialogTitle className="text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 p-4">Confirm Logout</DialogTitle>
+                     <DialogDescription className="px-4">
                         Are you sure you want to log out? This action will end your session.
                      </DialogDescription>
                   </DialogHeader>
-                  <DialogFooter>
-                     <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-                     <Button onClick={handleLogout} className="ml-2" disabled={isLoggingOut}>
-                        {
-                           isLoggingOut ? 'loggin out....' : 'Logout'
-                        }
-                     </Button>
-                  </DialogFooter>
+                  <div className="flex items-center justify-start gap-4 p-4">
+                  <Button
+                     variant="outline"
+                     onClick={() => setIsDialogOpen(false)}
+                  >
+                     Cancel
+                  </Button>
+                  <Button
+                     onClick={handleLogout}
+                     disabled={isLoggingOut}
+                     className="bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500"
+                  >
+                     {isLoggingOut ? "Logging out..." : "Logout"}
+                  </Button>
+               </div>
                </DialogContent>
             </Dialog>
          </div>

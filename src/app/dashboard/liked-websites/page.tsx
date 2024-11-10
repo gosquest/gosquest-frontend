@@ -10,8 +10,8 @@ import { Input } from "@/components/ui/input";
 import { useLikedWebsites, useCreateLikeDislike } from "@/hooks/useRatings";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/DataTable";
-import { toast } from "react-toastify"; // Import toast
-import "react-toastify/dist/ReactToastify.css"; // Import CSS
+import { toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
     const { user } = useAuthStore();
@@ -35,10 +35,10 @@ const Page = () => {
                 like: false,
             }, {
                 onSuccess: () => {
-                    toast.success("Website disliked successfully!"); // Success toast
+                    toast.success("Website disliked successfully!"); 
                 },
                 onError: () => {
-                    toast.error("Failed to dislike website."); // Error toast
+                    toast.error("Failed to dislike website."); 
                 }
             });
         }
@@ -109,6 +109,8 @@ const Page = () => {
     return (
         <main>
             <MobileNav />
+
+            <div className="px-4 md:px-0">
             <div className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8">
                 <h4>Liked Websites</h4>
                 <Input
@@ -132,6 +134,7 @@ const Page = () => {
                     </h2>
                 </div>
             )}
+            </div>
         </main>
     );
 };

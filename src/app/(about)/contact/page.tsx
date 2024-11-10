@@ -53,7 +53,7 @@ const ContactPage = () => {
                transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                className="whitespace-nowrap"
             >
-               <h1 className="text-6xl md:text-8xl font-bold text-center text-main">
+               <h1 className="text-6xl md:text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 w-fit">
                   Welcome to GosQuest - Bringing People Closer to the Gospel
                </h1>
             </motion.div>
@@ -65,7 +65,7 @@ const ContactPage = () => {
                transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
                className="whitespace-nowrap mt-4"
             >
-               <h1 className="text-4xl md:text-6xl font-bold text-center text-secondary">
+               <h1 className="text-4xl md:text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 w-fit">
                   Join our community of faith and explore endless possibilities with GosQuest
                </h1>
             </motion.div>
@@ -77,19 +77,19 @@ const ContactPage = () => {
                transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
                className="whitespace-nowrap mt-4"
             >
-               <h1 className="text-4xl md:text-6xl font-bold text-center text-accent">
+               <h1 className="text-4xl md:text-6xl font-bold text-center text-accent  bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 w-fit">
                   Discover more about our mission, values, and the path to spiritual growth
                </h1>
             </motion.div>
          </div>
 
-         <h4 className="mt-6">Contact Us</h4>
+         <h4 className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">Contact Us</h4>
          <p>Any question or remarks? Just write us a message!</p>
          
          <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full mt-6">
             <div className="bg-main p-4 flex flex-col gap-8 rounded-lg text-white w-5/6 md:w-[40%] min-h-[40vh] justify-between bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 py-[56px]">
                <div>
-                  <h5>Contact Information</h5>
+                  <h5 className="text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">Contact Information</h5>
                   <p>Say something to GosQuest</p>
                </div>
                <div className="flex flex-col gap-3">

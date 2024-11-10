@@ -33,6 +33,11 @@
       --ring: 222.2 84% 4.9%;
 
       --radius: 0.5rem;
+
+      --chart-1: 240°, 79%, 32%;
+      --chart-2: 296°, 79%, 32%;
+      --chart-3: 296°, 0%, 4%;
+      --chart-4: 137°, 94%, 33%;
    }
 }
 
@@ -72,7 +77,7 @@
 }
 
 *::-webkit-scrollbar {
-   display: none; 
+   display: none;
    -ms-overflow-style: none;
    scrollbar-width: none;
- }
+}

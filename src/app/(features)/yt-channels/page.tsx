@@ -27,7 +27,11 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ name, link, index }) => {
          variants={fadeIn("up", "spring", index * 0.2, 0.75)}
          className="w-full sm:w-[300px]"
       >
-         <Link href={link} target="_blank" passHref>
+         <Link
+            href={link}
+            target="_blank"
+            passHref
+         >
             <Tilt
                className="rounded-2xl shadow-lg flex justify-center items-center p-[2px]"
                style={{
@@ -42,7 +46,9 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ name, link, index }) => {
                transitionSpeed={450}
             >
                <div className="flex flex-col items-center justify-center bg-tertiary rounded-2xl w-full min-h-[200px] p-5">
-                  <h3 className="text-blue-500 font-bold text-2xl mb-2 text-center">{name}</h3>
+                  <h3 className="text-blue-500 font-bold text-2xl mb-2 text-center">
+                     {name}
+                  </h3>
                   <span className="text-blue-400 underline hover:text-blue-300 text-center">
                      Visit Channel
                   </span>
@@ -64,7 +70,7 @@ const Channels = () => {
                hidden: { opacity: 0, y: 20 },
             }}
          >
-            <h2 className="text-center text-main font-bold text-4xl mb-10">
+            <h2 className="text-center text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 font-bold text-4xl mb-10">
                Gospel Channels
             </h2>
          </motion.div>

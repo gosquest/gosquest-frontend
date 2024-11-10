@@ -28,13 +28,13 @@ const DashboardNavbar = () => {
       >
          <section className="flex flex-col items-start">
             <h3 className="text-lg font-semibold">Welcome 👋,</h3>
-            <small className="text-sm">{user && user.fullName}</small>
+            <small className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">{user && user.fullName}</small>
          </section>
 
          <section className="flex gap-4 items-center justify-center">
             <Link
                href={buttonLink}
-               className="flex bg-main rounded gap-2 items-center p-2 text-white w-auto px-4"
+               className="flex bg-main rounded gap-2 items-center p-2 text-white w-auto px-4 bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500"
             >
                <Blocks className="w-4 h-4" />
                <small className="text-xs sm:text-sm">{buttonText}</small>

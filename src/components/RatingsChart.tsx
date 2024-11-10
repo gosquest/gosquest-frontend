@@ -1,192 +1,75 @@
-import * as React from "react";
-import { Pie, PieChart, Label } from "recharts";
-import { useGetAllWebsites } from "@/hooks/useWebsites";
+import { TrendingUp } from "lucide-react";
+import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
-   ChartContainer,
-   ChartTooltip,
-   ChartTooltipContent,
-   ChartConfig,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const defaultChartConfig: ChartConfig = {};
+type DaysOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 
-export function RatingsChart() {
-   const { data, isLoading, isError } = useGetAllWebsites();
+const defaultChartConfig: ChartConfig = {
+  likes: {
+    label: "Daily Website Likes",
+    color: "hsl(var(--chart-1))",
+  },
+};
 
-   if (isLoading) {
-      return <p className="text-center">Loading ratings...</p>;
-   }
+function getLikesByDay(likesArray: any[]): Record<DaysOfWeek, number> {
+  const daysOfWeek: DaysOfWeek[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const likeCounts: Record<DaysOfWeek, number> = {
+    Sunday: 0, Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0,
+  };
 
-   if (isError) {
-      return (
-         <p className="text-center text-red-500">Failed to fetch ratings</p>
-      );
-   }
+  likesArray.forEach(like => {
+    const day = daysOfWeek[new Date(like.createdAt).getDay()] as DaysOfWeek;
+    if (like.like) { 
+      likeCounts[day]++;
+    }
+  });
 
-   const ratingsCount = {
-      excellent: 0,
-      veryGood: 0,
-      good: 0,
-      bad: 0,
-   };
+  return likeCounts;
+}
 
-   let totalScore = 0;
-   let validRatingsCount = 0;
+export function RatingsChart({ websiteData }: { websiteData: any }) {
 
-   data?.projects.forEach((project: any) => {
-      if (project.Rating && project.Rating.length > 0) {
-         project.Rating.forEach((rating: any) => {
-            const { relevance, impact_to_society, performance, progress } =
-               rating;
+  const chartData = websiteData?.websites.map((website: any) => {
+    const likesByDay = getLikesByDay(website.likes || []);
+    return {
+      name: website.name,
+      ...likesByDay,
+    };
+  }) || [];
 
-            const validRatings = [
-               relevance,
-               impact_to_society,
-               performance,
-               progress,
-            ].filter(
-               (rating) =>
-                  typeof rating === "number" && rating >= 0 && rating <= 5
-            );
-
-            if (validRatings.length === 4) {
-               const averageRating =
-                  validRatings.reduce((sum, rating) => sum + rating, 0) / 4;
-
-               totalScore += averageRating;
-               validRatingsCount += 1;
-
-               if (averageRating > 4) {
-                  ratingsCount.excellent += 1;
-               } else if (averageRating > 3) {
-                  ratingsCount.veryGood += 1;
-               } else if (averageRating > 2) {
-                  ratingsCount.good += 1;
-               } else {
-                  ratingsCount.bad += 1;
-               }
-            }
-         });
-      }
-   });
-
-   const chartData =
-      validRatingsCount === 0
-         ? [{ rating: "No Ratings", value: 1, fill: "#E5EDFF" }]
-         : [
-              {
-                 rating: "Excellent",
-                 value: ratingsCount.excellent,
-                 fill: "#4caf50",
-              },
-              {
-                 rating: "Very Good",
-                 value: ratingsCount.veryGood,
-                 fill: "#ffeb3b",
-              },
-              { rating: "Good", value: ratingsCount.good, fill: "#ff9800" },
-              { rating: "Bad", value: ratingsCount.bad, fill: "#f44336" },
-           ];
-
-   const overallPercentage = validRatingsCount
-      ? Math.round((totalScore / validRatingsCount / 5) * 100)
-      : 0;
-
-   return (
-      <div className="p-4 rounded-md ">
-         <ChartContainer
-            config={defaultChartConfig}
-            className="mx-auto aspect-square max-h-[250px]"
-         >
-            <PieChart>
-               <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-               />
-               <Pie
-                  data={chartData}
-                  dataKey="value"
-                  nameKey="rating"
-                  innerRadius={60}
-                  strokeWidth={5}
-               >
-                  <Label
-                     content={({ viewBox }) => {
-                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                           return (
-                              <text
-                                 x={viewBox.cx}
-                                 y={viewBox.cy}
-                                 textAnchor="middle"
-                                 dominantBaseline="middle"
-                              >
-                                 <tspan
-                                    x={viewBox.cx}
-                                    y={viewBox.cy}
-                                    className="fill-foreground text-3xl font-bold"
-                                 >
-                                    {validRatingsCount === 0
-                                       ? "--"
-                                       : `${overallPercentage}%`}
-                                 </tspan>
-                                 <tspan
-                                    x={viewBox.cx}
-                                    y={(viewBox.cy || 0) + 24}
-                                    className="fill-muted-foreground"
-                                 >
-                                    {validRatingsCount === 0
-                                       ? "No Ratings"
-                                       : "Overall"}
-                                 </tspan>
-                              </text>
-                           );
-                        }
-                        return null;
-                     }}
-                  />
-               </Pie>
-            </PieChart>
-         </ChartContainer>
-         {validRatingsCount > 0 && (
-            <div className="mt-4 space-y-2">
-               <div className="flex items-center justify-between text-sm p-2 border-b">
-                  <div className="flex items-center space-x-2">
-                     <span style={{ color: "#4caf50" }}>●</span>
-                     <span>Excellent</span>
-                  </div>
-                  <span className="font-bold text-gray-700">
-                     {ratingsCount.excellent}
-                  </span>
-               </div>
-               <div className="flex items-center justify-between text-sm p-2 border-b">
-                  <div className="flex items-center space-x-2">
-                     <span style={{ color: "#ffeb3b" }}>●</span>
-                     <span>Very Good</span>
-                  </div>
-                  <span className="font-bold text-gray-700">
-                     {ratingsCount.veryGood}
-                  </span>
-               </div>
-               <div className="flex items-center justify-between text-sm p-2 border-b">
-                  <div className="flex items-center space-x-2">
-                     <span style={{ color: "#ff9800" }}>●</span>
-                     <span>Good</span>
-                  </div>
-                  <span className="font-bold text-gray-700">
-                     {ratingsCount.good}
-                  </span>
-               </div>
-               <div className="flex items-center justify-between text-sm p-2">
-                  <div className="flex items-center space-x-2">
-                     <span style={{ color: "#f44336" }}>●</span>
-                     <span>Bad</span>
-                  </div>
-                  <span className="font-bold text-gray-700">
-                     {ratingsCount.bad}
-                  </span>
-               </div>
-            </div>
-         )}
-      </div>
-   );
+  return (
+    <Card className="border-none shadow-none">
+      <CardHeader>
+        <CardTitle><p className="hidden">Website Likes by Day</p></CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={defaultChartConfig}>
+          <LineChart data={chartData} margin={{ left: 1, right: 12 }}>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
+            <YAxis 
+              domain={[0, 4]} 
+              tickCount={5} 
+              allowDecimals={false} 
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dashed" />} />
+            {(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as DaysOfWeek[]).map((day, index) => (
+              <Line key={day} dataKey={day} type="monotone" stroke={`hsl(var(--chart-${index + 1}))`} strokeWidth={2} dot={false} />
+            ))}
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  );
 }

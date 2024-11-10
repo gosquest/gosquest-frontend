@@ -9,15 +9,15 @@ export default function Footer() {
   return (
     <div className="pt-[80px] pb-[40px]">
       <div className="flex items-center justify-center gap-x-[12px]">
-        <Image src={Logo} alt="Logo" />
-        <p className="font-bold text-[#36485C] text-[17px]">GosQuest</p>
+        <Image src={Logo} alt="Logo" width={50} height={50}/>
+        <p className="font-bold text-transparent bg-clip-text bg-gradient-to-r  from-main via-blue-400 to-main text-[17px] ">GosQuest</p>
       </div>
 
       <ul className="flex flex-col items-center gap-y-[32px] pt-[56px] text-[#36485C] sm:flex-row sm:justify-center sm:gap-x-5 sm:pt-5">
         <li><Link href="/about">About</Link></li>
-        <li><Link href="/about">Contact</Link></li>
+        <li><Link href="/contact">Contact</Link></li>
         <li><Link href="/games">Games</Link></li>
-        <li><Link href="/about">Login</Link></li>
+        <li><Link href="/login">Login</Link></li>
        
       </ul>
 

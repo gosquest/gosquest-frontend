@@ -72,7 +72,7 @@ const AboutPage = () => {
                   OUR MISSION & VISION
                </motion.p>
                <motion.h3
-                  className="text-center text-2xl font-semibold"
+                  className="text-center text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200"
                   variants={fadeInUp}
                >
                   SPREADING THE GOSPEL TO ALL CORNERS OF THE WORLD
@@ -141,7 +141,7 @@ const AboutPage = () => {
                      variants={fadeInUp}
                   >
                      <p className="text-primary font-semibold">OUR PURPOSE</p>
-                     <h4 className="text-xl font-bold">
+                     <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
                         BUILDING A COMMUNITY OF FAITH
                      </h4>
                      <small className="text-gray-600">
@@ -156,7 +156,7 @@ const AboutPage = () => {
                      variants={fadeInUp}
                   >
                      <p className="text-primary font-semibold">WHAT WE DO</p>
-                     <h4 className="text-xl font-bold">
+                     <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
                         SPREADING JOY AND PEACE
                      </h4>
                      <small className="text-gray-600">
@@ -170,7 +170,7 @@ const AboutPage = () => {
                      variants={fadeInUp}
                   >
                      <p className="text-primary font-semibold">OUR MISSION</p>
-                     <h4 className="text-xl font-bold">LEADING WITH LOVE</h4>
+                     <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">LEADING WITH LOVE</h4>
                      <small className="text-gray-600">
                         Guided by the teachings of Christ, we lead with love and
                         compassion, offering support to those in need and
@@ -193,7 +193,7 @@ const AboutPage = () => {
                   BENEFITS
                </motion.p>
                <motion.h4
-                  className="text-center text-2xl font-semibold"
+                  className="text-center text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200"
                   variants={fadeInUp}
                >
                   DISCOVER THE BENEFITS OF JOINING OUR COMMUNITY
@@ -208,7 +208,7 @@ const AboutPage = () => {
                   transition={{ duration: 0.8 }}
                >
                   <div className="md:w-1/2 text-center md:text-left">
-                     <h5 className="mb-3 text-xl font-semibold text-primary">
+                     <h5 className="mb-3 text-xl font-semibold  text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
                         FIND JOY AND PURPOSE
                      </h5>
                      <p className="text-gray-700">
@@ -249,7 +249,7 @@ const AboutPage = () => {
                      />
                   </motion.div>
                   <div className="md:w-1/2 text-center md:text-left">
-                     <h5 className="mb-3 text-xl font-semibold text-primary">
+                     <h5 className="mb-3 text-xl font-semibold  text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
                         SHARED VALUES
                      </h5>
                      <p className="text-gray-700">
@@ -268,7 +268,7 @@ const AboutPage = () => {
                   transition={{ duration: 0.8 }}
                >
                   <div className="md:w-1/2 text-center md:text-left">
-                     <h5 className="mb-3 text-xl font-semibold text-primary">
+                     <h5 className="mb-3 text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
                         GIVING BACK
                      </h5>
                      <p className="text-gray-700">

@@ -7,6 +7,7 @@ import Check from "../../../public/assets/check.svg";
 import blueButton from "../../../public/assets/blue-button.svg";
 import greenButton from "../../../public/assets/green-button.svg";
 import pinkButton from "../../../public/assets/pink-button.svg";
+import Link from "next/link";
 
 // Define animation variants
 const fadeInUp = {
@@ -44,7 +45,7 @@ export function Features() {
         </motion.div>
         <div className="sm:w-1/2 lg:py-[56px] lg:pr-[56px]">
           <h3 className="font-medium text-[#0085FF] lg:text-[18px]">Explore Gospel Websites</h3>
-          <h1 className="pt-[12px] text-2xl font-medium text-[#172026] lg:text-[42px] lg:leading-[58px]">
+          <h1 className="pt-[12px] text-2xl font-medium text-[#172026] lg:text-[42px] lg:leading-[58px] text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">
             Discover Rich Gospel Content
           </h1>
           <p className="py-[24px] text-[#36485C] lg:text-[18px]">
@@ -58,10 +59,12 @@ export function Features() {
               </li>
             ))}
           </ul>
+          <Link href="/gospel-websites">
           <p className="flex items-center gap-x-2 pt-[24px] font-medium text-[#0085FF] lg:text-[18px]">
             Learn More
             <Image src={blueButton} alt="Learn more" />
           </p>
+          </Link>
         </div>
       </motion.div>
 
@@ -77,8 +80,8 @@ export function Features() {
           <Image src={Feature2} alt="Feature 2" layout="responsive" className="w-full h-auto" />
         </motion.div>
         <div className="sm:w-1/2 lg:py-[56px] lg:pl-[56px]">
-          <h3 className="font-medium text-main lg:text-[18px]">Gospel YouTube Channels</h3>
-          <h1 className="pt-[12px] text-2xl font-medium text-[#172026] lg:text-[42px] lg:leading-[58px]">
+          <h3 className="font-medium  lg:text-[18px]">Gospel YouTube Channels</h3>
+          <h1 className="pt-[12px] text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 lg:text-[42px] lg:leading-[58px]">
             Watch Gospel Content Anytime
           </h1>
           <p className="py-[24px] text-[#36485C] lg:text-[18px]">
@@ -92,10 +95,12 @@ export function Features() {
               </li>
             ))}
           </ul>
+          <Link href="/yt-channels">
           <p className="flex items-center gap-x-2 pt-[24px] font-medium text-main lg:text-[18px]">
             Learn More
             <Image src={greenButton} alt="Learn more" />
           </p>
+          </Link>
         </div>
       </motion.div>
 
@@ -112,7 +117,7 @@ export function Features() {
         </motion.div>
         <div className="sm:w-1/2 lg:py-[56px] lg:pr-[56px]">
           <h3 className="font-medium text-[#EB2891] lg:text-[18px]">Faith-Based Games</h3>
-          <h1 className="pt-[12px] text-2xl font-medium text-[#172026] lg:text-[42px] lg:leading-[58px]">
+          <h1 className="pt-[12px] text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200 lg:text-[42px] lg:leading-[58px]">
             Engage with Gospel Games
           </h1>
           <p className="py-[24px] text-[#36485C] lg:text-[18px]">
@@ -128,10 +133,12 @@ export function Features() {
               <p className="text-[#36485C]">Interactive Bible story games</p>
             </div>
           </div>
+          <Link href="/games">
           <p className="flex items-center gap-x-2 pt-[24px] font-medium text-[#EB2891] lg:text-[18px]">
             Learn More
             <Image src={pinkButton} alt="Learn more" />
           </p>
+          </Link>
         </div>
       </motion.div>
     </motion.div>

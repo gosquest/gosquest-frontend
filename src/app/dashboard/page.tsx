@@ -1,31 +1,19 @@
 "use client";
 
-import { CardContent } from "@/components/Card";
 import React, { useState, useEffect } from "react";
 import MobileNav from "@/components/MobileNav";
-import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/useAuthStore";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
+import PageTitle from "@/components/PageTitle";
+import Card, { CardContent } from "@/components/Card";
+import RatingsTable from "@/components/RecentWebsitesTable";
+import { RatingsChart } from "@/components/RatingsChart";
 import { useGetAllWebsites } from "@/hooks/useWebsites";
-import Tilt from "react-parallax-tilt";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useAuthStore } from "@/store/useAuthStore";
 import { motion } from "framer-motion";
-
-const shuffleArray = (array: any[]) => {
-   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-   }
-   return array;
-};
-
-const fadeIn = (
-   delay = 0,
-   duration = 0.75
-) => ({
-   initial: { opacity: 0, y: 20 },
-   animate: { opacity: 1, y: 0, transition: { delay, duration } },
-});
+import { Globe, Heart, Shield, Star } from "lucide-react";
+import RecentWebsites from "@/components/RecentWebsitesTable";
+import { useLikedWebsites } from "@/hooks/useRatings";
 
 const Page = () => {
    const { user } = useAuthStore();
@@ -33,15 +21,8 @@ const Page = () => {
       ? useGetAllWebsites()
       : { data: null, isLoading: false, isError: false };
 
+      const { data: likedWebsitesData } = useLikedWebsites(user ? user.id : "");
    const [searchQuery, setSearchQuery] = useState<string>("");
-   const [shuffledWebsites, setShuffledWebsites] = useState<any[]>([]);
-
-   useEffect(() => {
-      if (data?.websites) {
-         const shuffled = shuffleArray([...data.websites]);
-         setShuffledWebsites(shuffled);
-      }
-   }, [data]);
 
    if (isLoading) {
       return <p className="text-center">Fetching websites...</p>;
@@ -50,81 +31,88 @@ const Page = () => {
    if (isError) {
       return (
          <main className="flex flex-col justify-center">
-            <p className="text-center text-red-500 mb-3">Failed to fetch websites</p>
-            <Button variant={"secondary"} onClick={() => location.reload()}>
+            <p className="text-center text-red-500 mb-3">
+               Failed to fetch websites
+            </p>
+            <Button
+               variant={"secondary"}
+               onClick={() => location.reload()}
+            >
                Reload
             </Button>
          </main>
       );
    }
 
-   const filteredWebsites = shuffledWebsites.filter((website: any) =>
-      website.name.toLowerCase().includes(searchQuery.toLowerCase())
-   );
+
+   const cardData = [
+      {
+         icon: Globe,
+         desc: "Total Websites",
+
+         title: data?.websites?.length || 0,
+         color: "#4caf50",
+      },
+      {
+         icon: Star,
+         desc: "Total Ratings",
+         title: data?.websites?.reduce(
+            (acc: any, site: { likes: any[] }) =>
+               acc + (site.likes?.length || 0),
+            0
+         ),
+         color: "#ffeb3b",
+      },
+      {
+         icon: Shield,
+         desc: "Feedback Given",
+         title: data?.websites?.reduce(
+            (acc: any, site: { dislikes: any[] }) =>
+               acc + (site.dislikes?.length || 0),
+            0
+         ),
+         color: "#ff9800",
+      },
+      {
+         icon: Heart,
+         desc: "Total Liked Websites",
+         title: likedWebsitesData ? likedWebsitesData.data.length : 0,
+         color: "#ff00ff",
+      },
+   ];
 
    return (
       <main>
          <MobileNav />
-         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8"
-         >
-            <h4>All Websites</h4>
-            <Input
-               type="text"
-               placeholder="Search by website title..."
-               value={searchQuery}
-               onChange={(e) => setSearchQuery(e.target.value)}
-               className="w-full md:w-1/3 px-3 py-5 bg-input mt-4 md:mt-0 rounded outline-none"
-            />
-         </motion.div>
+         <div className="p-2 md:p-0">
+         <PageTitle title="Overview" />
+         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4 mb-6 mt-6 ">
+            {cardData.map((card, index) => (
+               <Card
+                  key={index}
+                  title={card.title}
+                  color={card.color}
+                  desc={card.desc}
+                  icon={card.icon}
+               />
+            ))}
+         </section>
 
-         {filteredWebsites.length > 0 ? (
-            <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 p-4 md:p-0">
-               {filteredWebsites.map((website: any, index: number) => (
-                  <motion.div
-                     key={website.id}
-                     variants={fadeIn(index * 0.2, 0.75)}
-                     initial="initial"
-                     animate="animate"
-                  >
-                     <Link href={`/dashboard/websites/${website.id}`} passHref>
-                        <Tilt
-                           className="bg-white shadow-lg rounded-lg"
-                           tiltMaxAngleX={10}
-                           tiltMaxAngleY={10}
-                           scale={1.05}
-                           transitionSpeed={400}
-                        >
-                           <CardContent
-                              className="flex items-center bg-slate-50 justify-center h-32 md:h-40 cursor-pointer rounded-t-lg"
-                           >
-                              <img
-                                 src={website.logo}
-                                 alt={website.name}
-                                 className="max-h-28 md:max-h-32 max-w-[90%]"
-                              />
-                           </CardContent>
-                           <p className="p-4 text-lg font-medium text-center">
-                              {website.name}
-                           </p>
-                        </Tilt>
-                     </Link>
-                  </motion.div>
-               ))}
+         <section className="border-[0.5px] rounded-lg p-4 mt-6 flex gap-6 flex-col md:flex-row">
+            <div className="mb-4 border p-4 rounded w-full  md:w-1/2 xl:w-[55%]">
+               <small className="mb-6">Recent Websites</small>
+               <RecentWebsites />
             </div>
-         ) : (
-            <div className="flex flex-col items-center justify-center h-[40vh]">
-               <h2 className="text-2xl font-bold text-gray-700">Not found</h2>
+            <div className=" border p-4 rounded  w-full  md:w-[40%] xl:w-[45%]">
+               <p className="font-semibold  mb-4">
+                  Websites Ratings
+               </p>
+               <div className=" mt-4">
+                  <RatingsChart websiteData={data}/>
+               </div>
             </div>
-         )}
-         {data?.websites.length <= 0 && (
-            <div className="flex flex-col items-center justify-center h-[40vh]">
-               <h2 className="text-2xl font-bold text-gray-700">No websites</h2>
-            </div>
-         )}
+         </section>
+         </div>
       </main>
    );
 };
