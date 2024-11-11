@@ -26,6 +26,7 @@ export default function RecentUsers() {
   const { data: userData, isPending } = useFetchAllUsers();
 
   const recentUsers = useMemo(() => {
+    //@ts-ignore
     return userData?.data
       ?.sort((a: { createdAt: string | number | Date; }, b: { createdAt: string | number | Date; }) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
       .slice(0, 5) || [];

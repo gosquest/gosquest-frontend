@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";

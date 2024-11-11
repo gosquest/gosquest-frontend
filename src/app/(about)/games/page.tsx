@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { Canvas, extend, ReactThreeFiber, useFrame } from "@react-three/fiber";
 import { OrbitControls, Text } from "@react-three/drei";
 import * as THREE from "three";
 import {
@@ -21,8 +21,8 @@ interface PlanetProps {
    color: string;
    name: string;
    speed: number;
-   description: string; 
-   link: string; 
+   description: string;
+   link: string;
    onClick: (planetInfo: {
       name: string;
       description: string;
@@ -50,6 +50,17 @@ const GradientMaterial = shaderMaterial(
 );
 
 extend({ GradientMaterial });
+
+declare global {
+   namespace JSX {
+      interface IntrinsicElements {
+         gradientMaterial: ReactThreeFiber.Object3DNode<
+            typeof GradientMaterial,
+            typeof GradientMaterial
+         >;
+      }
+   }
+}
 
 const GradientText: React.FC<{ position: [number, number, number] }> = ({
    position,
@@ -94,7 +105,8 @@ const GamePlanets = ({
          color: "#6086f7",
          radius: 4,
          speed: 0.004,
-         description: "Bible trivia is a fun way to challenge your knowledge of the Bible and learn new facts about this ancient text",
+         description:
+            "Bible trivia is a fun way to challenge your knowledge of the Bible and learn new facts about this ancient text",
          link: "https://www.christianity.com/trivia",
       },
       {
@@ -102,7 +114,8 @@ const GamePlanets = ({
          color: "#f760ef",
          radius: 3,
          speed: 0.006,
-         description: "It is a word connect game that you will learn Bible words, unlock Bible verses, pass Bible quiz and solve Bible puzzles with friends.",
+         description:
+            "It is a word connect game that you will learn Bible words, unlock Bible verses, pass Bible quiz and solve Bible puzzles with friends.",
          link: "https://play.google.com/store/apps/details?id=bible.wordgame.words.connect.crossword.cookies&hl=en_US",
       },
       {
@@ -110,7 +123,8 @@ const GamePlanets = ({
          color: "#060a4f",
          radius: 4,
          speed: 0.005,
-         description: "In this engaging, laughter-filled game, players take turns acting out Bible-themed prompts",
+         description:
+            "In this engaging, laughter-filled game, players take turns acting out Bible-themed prompts",
          link: "https://thegame-room.com/products/christian-charades-for-adults-church",
       },
       {
@@ -118,7 +132,8 @@ const GamePlanets = ({
          color: "#fafafc",
          radius: 5,
          speed: 0.002,
-         description: "Travel through time to ancient Israel in this compelling story-rich adventure. Explore a rich historical world as you engage with familiar events from the 1st century.",
+         description:
+            "Travel through time to ancient Israel in this compelling story-rich adventure. Explore a rich historical world as you engage with familiar events from the 1st century.",
          link: "https://gatezero.game",
       },
       {
@@ -126,7 +141,8 @@ const GamePlanets = ({
          color: "black",
          radius: 5,
          speed: 0.003,
-         description: "Jigsaw Puzzle Games: Bible App is built by programmers team Min Mana",
+         description:
+            "Jigsaw Puzzle Games: Bible App is built by programmers team Min Mana",
          link: "https://play.google.com/store/apps/details?id=com.biblestudios.jigsawpuzzle&hl=en_ZA",
       },
    ];
@@ -142,7 +158,7 @@ const GamePlanets = ({
                speed={game.speed}
                description={game.description}
                link={game.link}
-               onClick={() => onPlanetClick(game)} 
+               onClick={() => onPlanetClick(game)}
             />
          ))}
       </>
@@ -173,7 +189,6 @@ const Planet: React.FC<PlanetProps> = ({
          }
       }
    });
-
 
    return (
       <mesh
@@ -253,7 +268,10 @@ const GamesPage: React.FC = () => {
                      <p>{planetInfo.description}</p>
 
                      <Button className="bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 w-fit">
-                        <Link href={planetInfo.link} target="_blank">
+                        <Link
+                           href={planetInfo.link}
+                           target="_blank"
+                        >
                            Play {planetInfo.name}
                         </Link>
                      </Button>

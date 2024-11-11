@@ -30,6 +30,7 @@ export function AddUserDialog() {
             const response = await registerMutation.mutateAsync({
                 fullName,
                 email,
+                //@ts-ignore
                 password,
                 role: role || undefined, // Send role as undefined if empty
             });

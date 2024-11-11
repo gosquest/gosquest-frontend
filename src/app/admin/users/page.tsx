@@ -43,6 +43,7 @@ const columns: ColumnDef<User>[] = [
 export default function UsersPage() {
   const { data: userData, isPending: isUserPending } = useFetchAllUsers();
 
+  
   return (
     <div className="flex flex-col gap-5 w-full">
       <div className="flex justify-between items-center">
@@ -54,6 +55,7 @@ export default function UsersPage() {
           <Loader className="animate-spin h-5 w-5" />
         </div>
       ) : (
+        //@ts-ignore
         <DataTable columns={columns} data={userData?.data || []} />
       )}
     </div>

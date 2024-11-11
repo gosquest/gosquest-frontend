@@ -97,7 +97,7 @@ const PublicNavbar = () => {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <div className="lg:hidden cursor-pointer" onClick={toggleMenu}>
+            <div className="lg:hidden cursor-pointer " onClick={toggleMenu}>
                <Menu size={28} />
             </div>
 
