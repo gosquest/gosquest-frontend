@@ -16,7 +16,7 @@ export function Hero() {
             <p className="text-center pt-6 text-[#36485C] lg:text-[18px] lg:leading-7">
                Dive deep into gospel content that uplifts, inspires, and guides.
                Explore a vast range of resources to enrich your spiritual
-               journey. Join a community committed to sharing the truth of God's
+               journey. Join a community committed to sharing the truth of God&apos;s
                word!
             </p>
 

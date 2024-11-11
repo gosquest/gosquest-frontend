@@ -19,9 +19,7 @@ import { verses } from "@/utils/data";
 
 const Page = () => {
    const { user } = useAuthStore();
-   const { data, isLoading, isError } = user
-      ? useGetAllWebsites()
-      : { data: null, isLoading: false, isError: false };
+   const { data, isLoading, isError } = useGetAllWebsites();
 
    const { data: likedWebsitesData } = useLikedWebsites(user ? user.id : "");
    const [searchQuery, setSearchQuery] = useState<string>("");
@@ -159,10 +157,17 @@ const Page = () => {
                      {" "}
                      Verse Generator{" "}
                   </p>
-                  <p onClick={generateRandomVerse} className="cursor-pointer hover:text-blue-500">Generate </p>
+                  <p
+                     onClick={generateRandomVerse}
+                     className="cursor-pointer hover:text-blue-500"
+                  >
+                     Generate{" "}
+                  </p>
                   <div className="bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 w-fit px-4 py-2 text-white rounded-lg">
-                  <small className="font-semibold text-lg underline">{verseOfTheDay.verse}</small>
-                  <p className="italic text-lg">{verseOfTheDay.content}</p>
+                     <small className="font-semibold text-lg underline">
+                        {verseOfTheDay.verse}
+                     </small>
+                     <p className="italic text-lg">{verseOfTheDay.content}</p>
                   </div>
                </div>
             </section>

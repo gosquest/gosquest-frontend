@@ -28,9 +28,8 @@ const fadeIn = (
 
 const Page = () => {
    const { user } = useAuthStore();
-   const { data, isLoading, isError } = user
-      ? useGetAllWebsites()
-      : { data: null, isLoading: false, isError: false };
+   const { data, isLoading, isError } =  useGetAllWebsites()
+ 
 
    const [searchQuery, setSearchQuery] = useState<string>("");
    const [shuffledWebsites, setShuffledWebsites] = useState<any[]>([]);

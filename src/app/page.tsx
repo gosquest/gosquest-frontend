@@ -6,6 +6,7 @@ import { Hero } from "@/components/home/Hero";
 import { Features } from "@/components/home/Features";
 import { Cta } from "@/components/home/Cta";
 import VerseCarousel from "@/components/VerseCarousel";
+import Faqs from "@/components/Faqs";
 
 const fadeIn = {
    hidden: { opacity: 0, y: 50 },
@@ -26,6 +27,7 @@ const LandingPage: React.FC = () => {
       <div className="px-1 sm:px-[20px] lg:container lg:px-20 mx-auto">
         
          <Features/>
+         <Faqs/>
         <Cta/>
         <Footer />
       </div>

@@ -129,7 +129,7 @@ const LoginPage = () => {
          </Form>
          <div className="mt-6">
             <p>
-               Don't have an account?
+               Don&apos;t have an account?
                <Link
                   className="ml-4 text-main"
                   href="/signup"
