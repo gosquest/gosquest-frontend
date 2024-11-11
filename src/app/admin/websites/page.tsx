@@ -39,7 +39,7 @@ const Website = () => {
                   <TableRow>
                      <TableHead className="w-[30px]">No</TableHead>
                      <TableHead className="w-[100px]">Name</TableHead>
-                     <TableHead className="w-[140px]">Logo</TableHead>
+                     <TableHead className="w-[140px]">Url</TableHead>
                      <TableHead>Description</TableHead>
                      <TableHead className="text-center">Actions</TableHead>
                   </TableRow>
@@ -54,11 +54,7 @@ const Website = () => {
                            {website.name}
                         </TableCell>
                         <TableCell>
-                           <img
-                              src={website.logo}
-                              alt={website.name}
-                              className="h-24"
-                           />
+                           {website.url}
                         </TableCell>
                         <TableCell className="">
                            {website.description}

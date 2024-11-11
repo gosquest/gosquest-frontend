@@ -23,7 +23,7 @@ const LandingPage: React.FC = () => {
       <div className="mt-[100px]">
       <Hero />
       <VerseCarousel/>
-      <div className="px-[20px] lg:container lg:px-20 mx-auto">
+      <div className="px-1 sm:px-[20px] lg:container lg:px-20 mx-auto">
         
          <Features/>
         <Cta/>

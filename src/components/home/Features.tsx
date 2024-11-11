@@ -33,7 +33,7 @@ export function Features() {
       variants={staggerContainer}
     >
       {/* Feature 1 */}
-      <motion.div className="flex flex-col gap-x-6 sm:flex-row-reverse" variants={fadeInUp}>
+      <motion.div className="flex flex-col gap-x-6 sm:flex-row-reverse gap-6 md:gap-0" variants={fadeInUp}>
         <motion.div
           className="w-full sm:w-1/2 lg:w-[50%] overflow-hidden"
           variants={{
@@ -69,7 +69,7 @@ export function Features() {
       </motion.div>
 
       {/* Feature 2 */}
-      <motion.div className="flex flex-col gap-x-6 sm:flex-row" variants={fadeInUp}>
+      <motion.div className="flex flex-col gap-x-6 sm:flex-row gap-6 md:gap-0" variants={fadeInUp}>
         <motion.div
           className="w-full sm:w-1/2 lg:w-[50%] overflow-hidden"
           variants={{
@@ -105,7 +105,7 @@ export function Features() {
       </motion.div>
 
       {/* Feature 3 */}
-      <motion.div className="flex flex-col gap-x-6 sm:flex-row-reverse" variants={fadeInUp}>
+      <motion.div className="flex flex-col gap-x-6 sm:flex-row-reverse gap-6 md:gap-0" variants={fadeInUp}>
         <motion.div
           className="w-full sm:w-1/2 lg:w-[50%] overflow-hidden"
           variants={{

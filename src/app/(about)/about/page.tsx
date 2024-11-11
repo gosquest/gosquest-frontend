@@ -30,9 +30,9 @@ const zoomIn = {
 
 const AboutPage = () => {
    return (
-      <>
+      <div className="overflow-x-hidden -mt-6">
          <div
-            className="bg-center bg-cover min-h-[35vh] flex flex-col justify-center -mt-6 bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 "
+            className="bg-center bg-cover min-h-[35vh] flex flex-col justify-center bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 "
             
          >
             <div className="container mx-auto text-white text-center">
@@ -104,7 +104,7 @@ const AboutPage = () => {
                         alt="About Gosquest"
                         width={300}
                         height={400}
-                        className="rounded-lg  transform hover:scale-105 transition-transform duration-500"
+                        className="rounded-lg  transform hover:scale-105 transition-transform duration-500 "
                      />
                   </motion.div>
                   <motion.div
@@ -218,7 +218,7 @@ const AboutPage = () => {
                      </p>
                   </div>
                   <motion.div
-                     className="xl:w-1/2"
+                     className="w-[80%] md:w-1/2 xl:w-1/2"
                      variants={zoomIn}
                   >
                      <Image
@@ -238,7 +238,7 @@ const AboutPage = () => {
                   transition={{ duration: 0.8 }}
                >
                   <motion.div
-                     className="xl:w-1/2"
+                     className="w-[80%] md:w-1/2 xl:w-1/2"
                      variants={zoomIn}
                   >
                       <Image
@@ -278,7 +278,7 @@ const AboutPage = () => {
                      </p>
                   </div>
                   <motion.div
-                     className="xl:w-1/2"
+                     className="w-[80%] md:w-1/2 xl:w-1/2"
                      variants={zoomIn}
                   >
                       <Image
@@ -291,7 +291,7 @@ const AboutPage = () => {
                </motion.div>
             </motion.div>
          </motion.div>
-      </>
+      </div>
    );
 };
 

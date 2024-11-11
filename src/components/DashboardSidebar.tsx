@@ -44,7 +44,6 @@ export default function DashbboardNavbar() {
       router.push("/");
       setIsLoggingOut(false);
    };
-
    return (
       <div
          className={`sticky top-0 min-w-[80px] max-w-[240px] border-r max-h-screen px-3 pb-10 pt-6 bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 flex flex-col justify-between z-40 text-white transition-all duration-300 ease-in-out

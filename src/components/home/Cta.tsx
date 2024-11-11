@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Cta() {
    return (
-      <div className="w-full rounded-[16px] bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 py-[56px] px-[32px] text-center lg:my-[60px] lg:px-[324px] lg:py-[89px]">
+      <div className="w-full rounded-[16px] bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 py-[56px] px-2 sm:px-[32px] text-center lg:my-[60px] lg:px-[324px] lg:py-[89px]">
          <h1 className="text-white text-[32px] font-medium lg:text-[56px] leading-[64px] ">
             Enjoy Swimming in a gospel Ocean.Gosquest
          </h1>

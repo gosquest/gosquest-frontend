@@ -25,7 +25,10 @@ export function Hero() {
                   <Link href="/signup">Join the Quest</Link>
                </Button>
                <button className="w-1/2 text-[#4328EB] flex items-center justify-center gap-x-2 lg:w-fit">
-                  <Link href="/login" className="flex items-center gap-2">
+                  <Link
+                     href="/login"
+                     className="flex items-center gap-2"
+                  >
                      Login
                      <span>
                         <Image
@@ -56,9 +59,37 @@ export function Hero() {
                   />
                </Draggable>
 
-               <div className="flex w-full flex-col items-center lg:container lg:flex-row lg:justify-between lg:px-20">
+               <div className="flex w-full flex-col items-center lg:container lg:flex-row lg:justify-between lg:px-20 -mt-20 md:-mt-[400px] gap-6 mb-10">
                   <p className="text-[#FFFFFF] text-center lg:text-[18px]">
                      Join us in spreading the gospel across the world
+                  </p>
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     God’s love is unfailing and everlasting.
+                  </p>
+               </div>
+               <div className="flex w-full flex-col items-center lg:container lg:flex-row lg:justify-between lg:px-20 gap-6 mb-10 ">
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     Our God is Great and Almighty
+                  </p>
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     God’s name is Yahweh
+                  </p>
+               </div>
+               <div className="sm:flex w-full flex-col items-center lg:container lg:flex-row lg:justify-between lg:px-20 gap-6 mb-10 hidden ">
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     Embrace the light of His word
+                  </p>
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     Walk with faith and strength.
+                  </p>
+               </div>
+
+               <div className="flex w-full flex-col items-center lg:container lg:flex-row lg:justify-between lg:px-20 gap-6 mb-10">
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     Hold fast to His promises
+                  </p>
+                  <p className="text-[#FFFFFF] text-center lg:text-[18px]">
+                     His grace is boundless.
                   </p>
                </div>
             </div>

@@ -87,7 +87,7 @@ const ContactPage = () => {
          <p>Any question or remarks? Just write us a message!</p>
          
          <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full mt-6">
-            <div className="bg-main p-4 flex flex-col gap-8 rounded-lg text-white w-5/6 md:w-[40%] min-h-[40vh] justify-between bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 py-[56px]">
+            <div className="p-4 flex flex-col gap-8 rounded-lg text-white  md:w-[40%] min-h-[40vh] justify-between bg-gradient-to-br from-pink-200 via-[#64A2FF] to-blue-500 py-[56px]">
                <div>
                   <h5 className="text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">Contact Information</h5>
                   <p>Say something to GosQuest</p>
