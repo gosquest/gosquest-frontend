@@ -6,6 +6,7 @@ import { Loader } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Website } from "@/types";
 import { useGetAllWebsites } from "@/hooks/useWebsites";
+import Link from "next/link";
 
 const columns: ColumnDef<Website>[] = [
   {
@@ -15,6 +16,15 @@ const columns: ColumnDef<Website>[] = [
   {
     accessorKey: "url",
     header: "Website Url",
+    cell: ({ row }) => (
+      <Link
+        href={row.original.url}
+        target="_blank"
+        className="text-blue-500 underline"
+      >
+        {row.original.url}
+      </Link>
+    ),
   },
   {
     accessorKey: "description",

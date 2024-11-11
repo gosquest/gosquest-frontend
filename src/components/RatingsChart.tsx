@@ -1,73 +1,65 @@
-import { TrendingUp } from "lucide-react";
-import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-
-type DaysOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 const defaultChartConfig: ChartConfig = {
   likes: {
-    label: "Daily Website Likes",
+    label: "Total Website Likes",
     color: "hsl(var(--chart-1))",
   },
 };
 
-function getLikesByDay(likesArray: any[]): Record<DaysOfWeek, number> {
-  const daysOfWeek: DaysOfWeek[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const likeCounts: Record<DaysOfWeek, number> = {
-    Sunday: 0, Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0,
-  };
-
-  likesArray.forEach(like => {
-    const day = daysOfWeek[new Date(like.createdAt).getDay()] as DaysOfWeek;
-    if (like.like) { 
-      likeCounts[day]++;
-    }
-  });
-
-  return likeCounts;
-}
-
 export function RatingsChart({ websiteData }: { websiteData: any }) {
-
-  const chartData = websiteData?.websites.map((website: any) => {
-    const likesByDay = getLikesByDay(website.likes || []);
-    return {
-      name: website.name,
-      ...likesByDay,
-    };
-  }) || [];
+  const chartData =
+    websiteData?.websites
+      .map((website: any) => {
+        const totalLikes = website.likes ? website.likes.length : 0;
+        return {
+          name: website.name,
+          totalLikes,
+        };
+      })
+      .sort((a: any, b: any) => b.totalLikes - a.totalLikes)
+      .slice(0, 5) || [];
 
   return (
     <Card className="border-none shadow-none">
       <CardHeader>
-        <CardTitle><p className="hidden">Website Likes by Day</p></CardTitle>
+        <CardTitle className="text-sm hidden">Top 5 Most Liked Websites</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={defaultChartConfig}>
-          <LineChart data={chartData} margin={{ left: 1, right: 12 }}>
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
-            <YAxis 
-              domain={[0, 4]} 
-              tickCount={5} 
-              allowDecimals={false} 
+          <BarChart
+            data={chartData}
+            layout="vertical"
+            margin={{ left: 0, right: 16 }}
+          >
+            {/* Define gradient */}
+            <defs>
+              <linearGradient id="barGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#021b39" />
+                <stop offset="50%" stopColor="#ff45ff" />
+                <stop offset="100%" stopColor="#4285f4" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid horizontal={false} />
+            <YAxis
+              dataKey="name"
+              type="category"
+              tick={false}
+              tickLine={false}
+              axisLine={false}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dashed" />} />
-            {(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as DaysOfWeek[]).map((day, index) => (
-              <Line key={day} dataKey={day} type="monotone" stroke={`hsl(var(--chart-${index + 1}))`} strokeWidth={2} dot={false} />
-            ))}
-          </LineChart>
+            <XAxis type="number" allowDecimals={false} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Bar dataKey="totalLikes" fill="url(#barGradient)" radius={4} barSize={20}>
+              <LabelList dataKey="name" position="insideLeft" offset={8} fontSize={12} />
+              <LabelList dataKey="totalLikes" position="right" offset={8} fontSize={12} />
+            </Bar>
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>

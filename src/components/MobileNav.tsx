@@ -33,7 +33,7 @@ const MobileNav = () => {
 
    const handleLogout = () => {
       setIsLoggingOut(true);
-      cookies.remove("token");
+      cookies.remove("auth-token");
       router.push("/");
       setIsLoggingOut(false);
    };

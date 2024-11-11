@@ -45,19 +45,7 @@ const Page = () => {
     };
 
     const columns: ColumnDef<any>[] = [
-        {
-            accessorKey: "logo",
-            header: "Logo",
-            cell: ({ row }) => (
-                <CardContent className="flex items-center justify-center h-16 w-16">
-                    <img
-                        src={row.original.logo}
-                        alt={row.original.name}
-                        className="max-h-full max-w-full"
-                    />
-                </CardContent>
-            ),
-        },
+       
         {
             accessorKey: "name",
             header: "Website Name",
@@ -77,14 +65,21 @@ const Page = () => {
             ),
         },
         {
+            accessorKey: "description",
+            header: "Description",
+            cell: ({ row }) => (
+              <p>{row.original.description?.slice(0, 10)}...</p>
+            ),
+          },
+        {
             header: "Action",
             cell: ({ row }) => (
-                <Button
-                    variant="destructive"
+                <div
+                   className="text-destructive"
                     onClick={() => handleDislike(row.original.id)}
                 >
                     Dislike
-                </Button>
+                </div>
             ),
         },
     ];
@@ -112,7 +107,7 @@ const Page = () => {
 
             <div className="px-4 md:px-0">
             <div className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8">
-                <h4>Liked Websites</h4>
+                <h4 className="text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">Liked Websites</h4>
                 <Input
                     type="text"
                     placeholder="Search by website name..."
@@ -130,7 +125,7 @@ const Page = () => {
             ) : (
                 <div className="flex flex-col items-center justify-center h-[40vh]">
                     <h2 className="text-2xl font-bold text-gray-700">
-                        No liked websites found
+                        No websites found
                     </h2>
                 </div>
             )}

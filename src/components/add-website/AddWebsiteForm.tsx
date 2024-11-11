@@ -3,8 +3,6 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addWebsiteSchema } from "@/schemas/addWebsiteSchema";
-import LogoUploadForm from "./LogoUploadForm";
-import CoverImageUploadForm from "./CoverImageUploadForm";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { useCreateWebsite } from "@/hooks/useWebsites";
@@ -49,8 +47,6 @@ export default function AddWebsiteForm() {
             <WebsiteNameForm />
             <WebsiteUrlForm />
             <DescriptionForm />
-            <LogoUploadForm />
-            <CoverImageUploadForm />
             <Button
                type="submit"
                className="w-full p-6 !bg-main"

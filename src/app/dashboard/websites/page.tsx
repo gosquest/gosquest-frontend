@@ -1,15 +1,14 @@
 "use client";
 
-import { CardContent } from "@/components/Card";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useGetAllWebsites } from "@/hooks/useWebsites";
 import React, { useState, useEffect } from "react";
 import MobileNav from "@/components/MobileNav";
-import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/useAuthStore";
-import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { useGetAllWebsites } from "@/hooks/useWebsites";
+import { Button } from "@/components/ui/button";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const shuffleArray = (array: any[]) => {
    for (let i = array.length - 1; i > 0; i--) {
@@ -71,7 +70,7 @@ const Page = () => {
             transition={{ duration: 0.5 }}
             className="px-4 md:p-0 text-center md:flex justify-between items-center mb-6 md:mb-8"
          >
-            <h4>All Websites</h4>
+            <h4 className="text-transparent bg-clip-text bg-gradient-to-r from-main via-blue-400 to-pink-200">All Websites</h4>
             <Input
                type="text"
                placeholder="Search by website title..."
@@ -92,24 +91,27 @@ const Page = () => {
                   >
                      <Link href={`/dashboard/websites/${website.id}`} passHref>
                         <Tilt
-                           className="bg-white shadow-lg rounded-lg"
-                           tiltMaxAngleX={10}
-                           tiltMaxAngleY={10}
+                           className="rounded-2xl shadow-lg flex justify-center items-center p-[2px]"
+                           style={{
+                              backgroundImage:
+                                 "linear-gradient(white, white), linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899)",
+                              backgroundOrigin: "border-box",
+                              backgroundClip: "content-box, border-box",
+                           }}
+                           tiltMaxAngleX={15}
+                           tiltMaxAngleY={15}
                            scale={1.05}
-                           transitionSpeed={400}
+                           transitionSpeed={450}
                         >
-                           <CardContent
-                              className="flex items-center bg-slate-50 justify-center h-32 md:h-40 cursor-pointer rounded-t-lg"
-                           >
-                              <img
-                                 src={website.logo}
-                                 alt={website.name}
-                                 className="max-h-28 md:max-h-32 max-w-[90%]"
-                              />
-                           </CardContent>
-                           <p className="p-4 text-lg font-medium text-center">
-                              {website.name}
-                           </p>
+                           <div className="flex flex-col items-center justify-center bg-tertiary rounded-2xl w-full min-h-[200px] p-5">
+                              <h3 className="text-blue-500 font-bold text-2xl mb-2 text-center">
+                                 {website.name}
+                              </h3>
+                              <Link className="text-blue-400 underline hover:text-blue-300 text-center" href={website.url}>
+                        
+                                 Visit Website
+                              </Link>
+                           </div>
                         </Tilt>
                      </Link>
                   </motion.div>
@@ -117,12 +119,12 @@ const Page = () => {
             </div>
          ) : (
             <div className="flex flex-col items-center justify-center h-[40vh]">
-               <h2 className="text-2xl font-bold text-gray-700">Not found</h2>
+               <h2 className="text-2xl font-bold text-main">Not found</h2>
             </div>
          )}
          {data?.websites.length <= 0 && (
             <div className="flex flex-col items-center justify-center h-[40vh]">
-               <h2 className="text-2xl font-bold text-gray-700">No websites</h2>
+               <h2 className="text-2xl font-bold text-main">No websites</h2>
             </div>
          )}
       </main>
