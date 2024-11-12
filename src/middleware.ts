@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
          //       : NextResponse.redirect(new URL("/dashboard", request.url));
          // }
       } catch (error) {
-         console.error("Failed to decode token:", error);
+         // console.error("Failed to decode token:", error);
          const redirectUrl = new URL("/login", request.url);
          return NextResponse.redirect(redirectUrl);
       }

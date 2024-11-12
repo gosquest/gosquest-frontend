@@ -82,7 +82,6 @@ const WebsitePage: React.FC = () => {
    }
 
    if (!data?.website) {
-      console.log("No website data available.");
       router.push("/not-found");
       return null;
    }

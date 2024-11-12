@@ -75,7 +75,7 @@ const Page = () => {
             header: "Action",
             cell: ({ row }) => (
                 <div
-                   className="text-destructive"
+                   className="text-destructive cursor-pointer"
                     onClick={() => handleDislike(row.original.id)}
                 >
                     Dislike
