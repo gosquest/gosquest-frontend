@@ -3,11 +3,8 @@ import { motion } from "framer-motion";
 import Feature1 from "../../../public/assets/feature-1.svg";
 import Feature2 from "../../../public/assets/feature-2.svg";
 import Feature3 from "../../../public/assets/feature-3.svg";
-import Check from "../../../public/assets/check.svg";
-import blueButton from "../../../public/assets/blue-button.svg";
-import greenButton from "../../../public/assets/green-button.svg";
-import pinkButton from "../../../public/assets/pink-button.svg";
 import Link from "next/link";
+import { ArrowRight, CheckIcon } from "lucide-react";
 
 // Define animation variants
 const fadeInUp = {
@@ -76,10 +73,7 @@ export function Features() {
                         key={index}
                         className="flex items-center gap-x-2 text-[#36485C]"
                      >
-                        <Image
-                           src={Check}
-                           alt="Checkmark"
-                        />
+                        <CheckIcon />
                         {text}
                      </li>
                   ))}
@@ -90,10 +84,7 @@ export function Features() {
                >
                   <p className="flex items-center gap-x-2 pt-[24px] font-medium text-[#0085FF] lg:text-[18px]">
                      Learn More
-                     <Image
-                        src={blueButton}
-                        alt="Learn more"
-                     />
+                     <ArrowRight />
                   </p>
                </Link>
             </div>
@@ -143,10 +134,7 @@ export function Features() {
                         key={index}
                         className="flex items-center gap-x-2 text-[#36485C]"
                      >
-                        <Image
-                           src={Check}
-                           alt="Checkmark"
-                        />
+                        <CheckIcon />
                         {text}
                      </li>
                   ))}
@@ -157,10 +145,7 @@ export function Features() {
                >
                   <p className="flex items-center gap-x-2 pt-[24px] font-medium text-main lg:text-[18px]">
                      Learn More
-                     <Image
-                        src={greenButton}
-                        alt="Learn more"
-                     />
+                     <ArrowRight />
                   </p>
                </Link>
             </div>
@@ -222,10 +207,7 @@ export function Features() {
                >
                   <p className="flex items-center gap-x-2 pt-[24px] font-medium text-[#EB2891] lg:text-[18px]">
                      Learn More
-                     <Image
-                        src={pinkButton}
-                        alt="Learn more"
-                     />
+                     <ArrowRight />
                   </p>
                </Link>
             </div>
