@@ -6,7 +6,6 @@ import Feature3 from "../../../public/assets/feature-3.svg";
 import Link from "next/link";
 import { ArrowRight, CheckIcon } from "lucide-react";
 
-// Define animation variants
 const fadeInUp = {
    hidden: { opacity: 0, y: 50 },
    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
