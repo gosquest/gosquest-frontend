@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { Cookies } from "react-cookie";
+import Link from "next/link";
 
 const cookies = new Cookies();
 
@@ -66,11 +67,13 @@ export default function DashbboardNavbar() {
          <div
             className={`flex items-center justify-center flex-col gap-2 transition-all duration-300`}
          >
+            <Link href="/">
             <Image
                src={Logo}
                alt="logo"
                className="rounded"
             />
+            </Link>
             {!isCollapsed && <h4 className="text-center text-sm">GosQuest</h4>}
          </div>
          <Nav

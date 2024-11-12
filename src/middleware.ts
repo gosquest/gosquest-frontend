@@ -31,11 +31,12 @@ export async function middleware(request: NextRequest) {
          const userRole = decodedToken.role;
 
          // Prevent logged-in users from accessing public routes
-         if (PUBLIC_PATHS.includes(pathname)) {
-            return userRole === "admin"
-               ? NextResponse.redirect(new URL("/admin", request.url))
-               : NextResponse.redirect(new URL("/dashboard", request.url));
-         }
+         
+         // if (PUBLIC_PATHS.includes(pathname)) {
+         //    return userRole === "admin"
+         //       ? NextResponse.redirect(new URL("/admin", request.url))
+         //       : NextResponse.redirect(new URL("/dashboard", request.url));
+         // }
       } catch (error) {
          console.error("Failed to decode token:", error);
          const redirectUrl = new URL("/login", request.url);

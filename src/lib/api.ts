@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
-const API_URL = "http://localhost:4000/api/v1";
+const API_URL = "https://gosquest-backend.onrender.com/api/v1";
 
 const commonHeaders = {
    "Content-Type": "application/json",

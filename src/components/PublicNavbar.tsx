@@ -6,6 +6,7 @@ import Image from "next/image";
 import Logo from "../../public/assets/Logo.svg";
 import UserIcon from "../../public/assets/User.svg";
 import { usePathname } from "next/navigation";
+import { useAuthStore } from "@/store/useAuthStore";
 
 interface MobileMenuProps {
    menuOpen: boolean;
@@ -14,6 +15,7 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpen, onClose }) => {
    const currentPath = usePathname();
+   const { user } = useAuthStore();
 
    return (
       <div
@@ -37,9 +39,15 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpen, onClose }) => {
             <Link href="/games" onClick={onClose} className={currentPath === "/games" ? "text-blue-500 font-semibold" : "text-main"}>
                Games
             </Link>
-            <Link href="/login" onClick={onClose} className={currentPath === "/login" ? "text-blue-500 font-semibold" : "text-main"}>
-               Login
-            </Link>
+            {user ? (
+               <Link href="/dashboard" onClick={onClose} className={currentPath === "/dashboard" ? "text-blue-500 font-semibold" : "text-main"}>
+                  Dashboard
+               </Link>
+            ) : (
+               <Link href="/login" onClick={onClose} className={currentPath === "/login" ? "text-blue-500 font-semibold" : "text-main"}>
+                  Login
+               </Link>
+            )}
          </nav>
       </div>
    );
@@ -48,6 +56,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpen, onClose }) => {
 const PublicNavbar = () => {
    const [menuOpen, setMenuOpen] = useState(false);
    const currentPath = usePathname();
+   const { user } = useAuthStore();
 
    const toggleMenu = () => {
       setMenuOpen((prev) => !prev);
@@ -85,15 +94,23 @@ const PublicNavbar = () => {
             </div>
 
             <div className="hidden lg:flex items-center gap-x-10">
-               <Link href="/signup" className="text-main font-medium">
-                  Sign Up
-               </Link>
-               <div className="flex items-center gap-x-2">
-                  <Image src={UserIcon} alt="User Profile" className="w-[24px] h-auto" />
-                  <Link href="/login" className={currentPath === "/login" ? "text-blue-500 font-semibold" : "text-main font-medium"}>
-                     Sign in
+               {user ? (
+                  <Link href="/dashboard" className="text-main font-medium">
+                     Dashboard
                   </Link>
-               </div>
+               ) : (
+                  <>
+                     <Link href="/signup" className="text-main font-medium">
+                        Sign Up
+                     </Link>
+                     <div className="flex items-center gap-x-2">
+                        <Image src={UserIcon} alt="User Profile" className="w-[24px] h-auto" />
+                        <Link href="/login" className={currentPath === "/login" ? "text-blue-500 font-semibold" : "text-main font-medium"}>
+                           Sign in
+                        </Link>
+                     </div>
+                  </>
+               )}
             </div>
 
             {/* Mobile Menu Toggle */}
