@@ -14,6 +14,61 @@ export const channels = [
       name: "Tony Evans",
       link: "https://www.youtube.com/@drtonyevans",
    },
+   {
+      id: 3,
+      name: "The Ten Minute Bible Hour",
+      link: "https://www.youtube.com/@MattWhitmanTMBH",
+   },
+   {
+      id: 4,
+      name: "BibleProject",
+      link: "https://www.youtube.com/c/bibleproject",
+   },
+   {
+      id: 5,
+      name: "AoC Network",
+      link: "https://www.youtube.com/@aocnetwork",
+   },
+   {
+      id: 6,
+      name: "Truthunedited",
+      link: "https://www.youtube.com/@Truthunedited",
+   },
+   {
+      id: 7,
+      name: "Mike Winger",
+      link: "https://www.youtube.com/@MikeWinger",
+   },
+   {
+      id: 8,
+      name: "THE BEAT by Allen Parr",
+      link: "https://www.youtube.com/@thebeatagp",
+   },
+   {
+      id: 9,
+      name: "Cross Examined",
+      link: "https://www.youtube.com/@CrossExamined",
+   },
+   {
+      id: 10,
+      name: "Whaddo You Meme??",
+      link: "https://www.youtube.com/@whaddoyoumeme",
+   },
+   {
+      id: 11,
+      name: "Living Waters",
+      link: "https://www.youtube.com/@LivingWaters",
+   },
+   {
+      id: 12,
+      name: "Desiring God",
+      link: "https://www.youtube.com/@desiringGod",
+   },
+   {
+      id: 13,
+      name: "Hillsong Worship",
+      link: "https://www.youtube.com/channel/UC4q12NoPNySbVqwpw4iO5Vg",
+   },
 ];
 
 
